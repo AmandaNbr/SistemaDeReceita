@@ -1,3 +1,4 @@
+import java.util.Date;
 
 public class LivroDeReceita {
 
@@ -5,6 +6,15 @@ public class LivroDeReceita {
 	private int isbn;
 	private Receita receita;
 	private Editor editor;
+	
+	
+	//construtor
+	public LivroDeReceita(String titulo, int isbn, Receita receita, Editor editor) {
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.receita = receita;
+		this.editor = editor;
+	}
 	
 	
 	//gets e sets

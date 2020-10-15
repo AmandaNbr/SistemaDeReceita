@@ -1,8 +1,18 @@
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class Degustador {
 
 	private int qntDegustacoes;
 	private Funcionario funcionario;
+	
+	
+	//construtor
+	public Degustador(int qntDegustacoes, Funcionario funcionario) {
+		this.qntDegustacoes = qntDegustacoes;
+		this.funcionario = funcionario;
+	}
+	
 	
 	//gets e sets
 	public int getQntDegustacoes() {

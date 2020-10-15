@@ -17,6 +17,24 @@ public class Receita {
 	private int nota;
 
 	
+	//construtor
+	public Receita(String nome, int codigo, Date dataDeCriacao, int porcoesQueRende, String categoria, Ingrediente ingredientes, double quantidadeIng, String medida, String cozinheiro, int nota) {
+		this.nome = nome;
+		this.codigo = codigo;
+		this.dataDeCriacao = dataDeCriacao;
+		this.porcoesQueRende = porcoesQueRende;
+		this.categoria = categoria;
+				
+		this.ingredientes = ingredientes;
+		this.quantidadeIng = quantidadeIng;
+		this.medida = medida;
+				
+		this.cozinheiro = cozinheiro;
+				
+		this.nota = nota;
+	}
+	
+	
 	//gets e sets
 	public String getNome() {
 		return nome;

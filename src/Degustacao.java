@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Date;
 
 public class Degustacao {
@@ -7,6 +8,16 @@ public class Degustacao {
 	private Degustador degustador;
 	private Cozinheiro cozinheiro;
 	private int nota;
+	
+	
+	//construtor
+	public Degustacao(Receita receita, Date dataDegustacao, Degustador degustador, Cozinheiro cozinheiro, int nota) {
+		this.receita = receita;
+		this.dataDegustacao = dataDegustacao;
+		this.degustador = degustador;
+		this.cozinheiro = cozinheiro;
+		this.nota = nota;
+	}
 	
 	
 	//gets e sets

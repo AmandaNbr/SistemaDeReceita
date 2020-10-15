@@ -8,6 +8,15 @@ public class Ingrediente {
 	private String descricao;
 	
 	
+	//construtor
+	public Ingrediente(String nome, Date dataDeFabricacao, Date dataDeValidade, String descricao) {
+		this.nome = nome;
+		this.dataDeFabricacao = dataDeFabricacao;
+		this.dataDeValidade = dataDeValidade;
+		this.descricao = descricao;
+	}
+	
+	
 	//gets e sets
 	public String getNome() {
 		return nome;
