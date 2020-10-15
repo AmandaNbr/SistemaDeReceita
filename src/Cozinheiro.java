@@ -7,6 +7,14 @@ public class Cozinheiro {
 	private Funcionario funcionario;
 	
 	
+	//construtor
+	public Cozinheiro(String nomeChef,  Array restaurantesTrab, Funcionario funcionario) {
+		this.nomeChef = nomeChef;
+		this.restaurantesTrab = restaurantesTrab;
+		this.funcionario = funcionario;
+	}
+	
+	
 	//gets e sets
 	public String getNomeChef() {
 		return nomeChef;

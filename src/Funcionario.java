@@ -10,7 +10,18 @@ public class Funcionario {
 	private Date dataDeIngresso;
 	private BigDecimal salario;
 	
-	//classe abstrata
+	//classe abstrata não sei se está certo fazer o contrutor aqui!
+	
+	
+	//construtor
+	public Funcionario(String nome, int matricula, int rg, String sexo, Date dataDeIngresso, BigDecimal salario) {
+		this.nome = nome;
+		this.matricula = matricula;
+		this.rg = rg;
+		this.sexo = sexo;
+		this.dataDeIngresso = dataDeIngresso;
+		this.salario = salario;
+	}
 	
 	
 	//gets e sets
