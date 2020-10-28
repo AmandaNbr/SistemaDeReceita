@@ -1,20 +1,23 @@
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.util.Date;
 
-public class Cozinheiro {
+public class Cozinheiro extends Funcionario{
 
 	private String nomeChef;
 	private Array restaurantesTrab;
 	private Funcionario funcionario;
 	
-	
+
 	//construtor
-	public Cozinheiro(String nomeChef,  Array restaurantesTrab, Funcionario funcionario) {
+	public Cozinheiro(String nome, int matricula, int rg, String sexo, Date dataDeIngresso, BigDecimal salario, 
+			String nomeChef,  Array restaurantesTrab, Funcionario funcionario) {
+		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 		this.nomeChef = nomeChef;
 		this.restaurantesTrab = restaurantesTrab;
 		this.funcionario = funcionario;
 	}
-	
-	
+
 	//gets e sets
 	public String getNomeChef() {
 		return nomeChef;
