@@ -1,20 +1,22 @@
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Funcionario {
+public abstract class Funcionario {
 
 	private String nome;
-	private int matricula;
-	private int rg;
-	private String sexo;
+	private String matricula;
+	private String rg;
+	private char sexo;
 	private Date dataDeIngresso;
-	private BigDecimal salario;
-	
-	//classe abstrata não sei se está certo fazer o contrutor aqui!
-	
+	private double salario; //coloquei o salario como double pois não vou fazer operacoes, entao nao tem risco de perder valores.
 	
 	//construtor
-	public Funcionario(String nome, int matricula, int rg, String sexo, Date dataDeIngresso, BigDecimal salario) {
+	public Funcionario(String nome, 
+					   String matricula, 
+					   String rg, 
+					   char sexo, 
+					   Date dataDeIngresso, 
+					   double salario) {
 		this.nome = nome;
 		this.matricula = matricula;
 		this.rg = rg;
@@ -22,6 +24,8 @@ public class Funcionario {
 		this.dataDeIngresso = dataDeIngresso;
 		this.salario = salario;
 	}
+	
+	public Funcionario() {};
 	
 	
 	//gets e sets
@@ -33,28 +37,28 @@ public class Funcionario {
 		this.nome = nome;
 	}
 	
-	public int getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 	
-	public void setMatricula(int matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 	
-	public int getRg() {
+	public String getRg() {
 		return rg;
 	}
 	
-	public void setRg(int rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 	
-	public String getSexo() {
+	public char getSexo() {
 		return sexo;
 	}
 	
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setSexo(char sexo) {
+		this.sexo = sexo;	
 	}
 	
 	public Date getDataDeIngresso() {
@@ -62,14 +66,21 @@ public class Funcionario {
 	}
 	
 	public void setDataDeIngresso(Date dataDeIngresso) {
+		
 		this.dataDeIngresso = dataDeIngresso;
 	}
 	
-	public BigDecimal getSalario() {
+	public double getSalario() {
 		return salario;
 	}
 	
-	public void setSalario(BigDecimal salario) {
+	public void setSalario(double salario) {
 		this.salario = salario;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [nome=" + nome + ", matricula=" + matricula + ", rg=" + rg + ", sexo=" + sexo
+				+ ", dataDeIngresso=" + dataDeIngresso + ", salario=" + salario + "]";
 	}
 }

@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class Degustacao {
 
 	private Receita receita;

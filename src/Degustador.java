@@ -3,16 +3,19 @@ import java.util.Date;
 
 public class Degustador extends Funcionario{
 
-	private int qntDegustacoes;
-	private Funcionario funcionario;
-	
+	private int qntDegustacoes;	
 	
 	//construtor
-	public Degustador(String nome, int matricula, int rg, String sexo, Date dataDeIngresso, BigDecimal salario, 
-			int qntDegustacoes, Funcionario funcionario) {
+	public Degustador(String nome, 
+			          String matricula, 
+			          String rg, 
+			          char sexo, 
+			          Date dataDeIngresso, 
+			          double salario, 
+			          int qntDegustacoes, 
+			          Funcionario funcionario) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 		this.qntDegustacoes = qntDegustacoes;
-		this.funcionario = funcionario;
 	}
 	 
 	
@@ -23,13 +26,5 @@ public class Degustador extends Funcionario{
 	
 	public void setQntDegustacoes(int qntDegustacoes) {
 		this.qntDegustacoes = qntDegustacoes;
-	}
-	
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
 	}
 }

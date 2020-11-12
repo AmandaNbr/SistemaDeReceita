@@ -1,5 +1,6 @@
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class LivroDeReceita {
 
 	private String titulo;
