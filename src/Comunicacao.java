@@ -1,12 +1,13 @@
-import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
 // TODO: mudar para GUI.
 public class Comunicacao {
-	
 	Scanner ler = new Scanner(System.in);
-	String n;
 	
 	public void start() {
 		escolherOpcaoMenuPrincipal();
@@ -26,17 +27,25 @@ public class Comunicacao {
 				+ "11 - Sair.\n");
 	}
 	
-	private void escolherOpcaoMenuPrincipal() {
+	private void escolherOpcaoMenuPrincipal() {		
+		String opcao;
 		
 		do {
-			System.out.flush();
-			showMenuPrincipal();
-			n = ler.next();
+			for(Funcionario funcionario : Empresa.getAllFuncionarios()) {
+				System.out.println(funcionario.toString());
+			}
+			System.out.println("\n\n");
 			
-			switch (n) {
+			showMenuPrincipal();
+			opcao = ler.next();
+			
+			switch (opcao) {
 			case "1":
-				cadastrarCozinheiro();
-				System.out.println("c1");
+				if (cadastrarCozinheiro()) {
+					System.out.println("Cozinheiro cadastrado com sucesso!");
+				} else {
+					System.out.println("Erro ao cadastrar cozinheiro. Tente novamente com dados validos!");
+				}
 				break;
 			case "2":
 				//cadastrarDegustador();
@@ -71,24 +80,24 @@ public class Comunicacao {
 				System.out.println("c10");
 				break;
 			case "11":
-				n = "invalid";
+				opcao = "invalid";
 				break;
 			default:
 				System.out.println("Opção invalida. Escolha uma opção valida!");
 			}
 			
-		} while(!n.equals("invalid"));
+		} while(!opcao.equals("invalid"));
 		
 	}
 	
-	private void cadastrarCozinheiro() {
-		System.out.flush();
-		
+	private boolean cadastrarCozinheiro() {		
 		System.out.print("Nome do cozinheiro: ");
-		String nome = ler.next();
+		ler = new Scanner(System.in);
+		String nome = ler.nextLine();
 		// TODO: criar validacao do nome.
 		
 		System.out.print("Matricula: ");
+		ler = new Scanner(System.in);
 		String matricula = ler.next();
 		// TODO: criar validacao da matricula.
 		
@@ -100,9 +109,15 @@ public class Comunicacao {
 		char sexo = ler.next().charAt(0);
 		// TODO: criar validacao sexo.
 		
-		System.out.print("Data de Ingresso na Empresa: ");
+		System.out.print("Data de Ingresso na Empresa (no formato dd/mm/aaaa): ");
 		String dataDeIngresso = ler.next();
-		// TODO: criar validacao data.
+		Date formatedDataDeIngresso;
+		try {
+			formatedDataDeIngresso = new SimpleDateFormat("dd/MM/yyyy").parse(dataDeIngresso);
+		} catch (ParseException e) {
+			// TODO: criar validacao data.
+			return false;
+		}
 		
 		System.out.print("Salario: ");
 		double salario = ler.nextDouble();
@@ -111,23 +126,41 @@ public class Comunicacao {
 		System.out.println("Deseja ser chamado de Chef? (s/n)");
 		char r1 = ler.next().charAt(0);
 		if(r1 == 's') {
-			nome += "Chef";
-			System.out.println("Ok, Chef " + nome);
+			nome = "Chef " + nome;
 		} else if (r1 == 'n') {
-			System.out.println("(:");
+			// Nada a fazer 
+		} else {
+			System.out.println("erro");
+			return false;
 		}
 		// TODO: validar respostas
 		
 		System.out.println("Deseja informar os restaurantes em que trabalhou? (s/n)");
 		char r2 = ler.next().charAt(0);
+		String restaurantes = "";
 		if(r2 == 's') {
-			//ler aqui os restaurantes
+			System.out.println("Digite todos os restaurantes separados por vírgula, aperte ENTER quando finalizar: ");
+			ler = new Scanner(System.in);
+			restaurantes = ler.nextLine();
 		} else if (r2 == 'n') {
-			System.out.println("aa");
+			// Nada a fazer
+		} else {
+			System.out.println("erro");
+			return false;
 		}
-		// TODO: armazenar lista de restaurantes
+	
+		Cozinheiro cozinheiro = new Cozinheiro(nome,
+											   matricula,
+											   rg,
+											   sexo,
+											   formatedDataDeIngresso, 
+											   salario, 
+											   new ArrayList<String>(Arrays.asList(restaurantes.split(",")))
+											   );
 		
-//nome, matricula, rg, sexo, dataDeIngresso, salario, nomeChef, restaurantesTrab;
+		Empresa.addNovoFuncionario(cozinheiro);
+		
+		return true;
 	}
 	
 	

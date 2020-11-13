@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Empresa {
 
-	private static ArrayList<Funcionario> funcionarios;
-	private static ArrayList<LivroDeReceita> livrosDeReceita; 
+	private static ArrayList<Funcionario> funcionarios = new ArrayList<>();
+	private static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
 	
 	public static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {

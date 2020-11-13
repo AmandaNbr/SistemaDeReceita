@@ -1,11 +1,9 @@
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Cozinheiro extends Funcionario{
 
-	private String nomeChef;
-	private Array restaurantesTrab;	
+	private ArrayList<String> restaurantesTrab;	
 
 	//construtor
 	public Cozinheiro(String nome, 
@@ -13,29 +11,18 @@ public class Cozinheiro extends Funcionario{
 				      String rg, 
 				      char sexo, 
 				      Date dataDeIngresso, 
-				      double salario, 
-			          String nomeChef,  
-			          Array restaurantesTrab, 
-			          Funcionario funcionario) {
+				      double salario,  
+				      ArrayList<String> restaurantesTrab) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
-		this.nomeChef = nomeChef;
 		this.restaurantesTrab = restaurantesTrab;
 	}
 
 	//gets e sets
-	public String getNomeChef() {
-		return nomeChef;
-	}
-	
-	public void setNomeChef(String nomeChef) {
-		this.nomeChef = nomeChef;
-	}
-	
-	public Array getRestaurantesTrab() {
+	public ArrayList<String> getRestaurantesTrab() {
 		return restaurantesTrab;
 	}
 	
-	public void setRestaurantesTrab(Array restaurantesTrab) {
+	public void setRestaurantesTrab(ArrayList<String> restaurantesTrab) {
 		this.restaurantesTrab = restaurantesTrab;
 	}
 }
