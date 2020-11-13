@@ -4,7 +4,8 @@ public class Empresa {
 
 	private static ArrayList<Funcionario> funcionarios = new ArrayList<>();
 	private static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
-	public static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+	private static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+	private static ArrayList<Receita> receitas = new ArrayList<>(); 
 	
 	public static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {
@@ -24,6 +25,24 @@ public class Empresa {
 		}
 	}
 
+	public static void addIngrediente(Ingrediente ingrediente) {
+		if(ingredientes == null) {
+			ingredientes = new ArrayList<>();
+			ingredientes.add(ingrediente);
+		} else {
+			ingredientes.add(ingrediente);
+		}
+	}
+	
+	public static void addReceita(Receita receita) {
+		if(receitas == null) {
+			receitas= new ArrayList<>();
+			receitas.add(receita);
+		} else {
+			receitas.add(receita);
+		}
+	}
+	
 	public static ArrayList<Funcionario> getAllFuncionarios() {
 		return funcionarios;
 	}
@@ -44,17 +63,11 @@ public class Empresa {
 		return funcionariosPorCargo;
 	}
 	
-	public static void addIngrediente(Ingrediente ingrediente) {
-		if(ingredientes == null) {
-			ingredientes = new ArrayList<>();
-			ingredientes.add(ingrediente);
-		} else {
-			ingredientes.add(ingrediente);
-		}
-	}
-	
 	public static ArrayList<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
 	
+	public static ArrayList<Receita> getReceitas() {
+		return receitas;
+	}
 }

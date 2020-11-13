@@ -34,9 +34,9 @@ public class Comunicacao {
 //			for(Funcionario funcionario : Empresa.getAllFuncionarios()) {
 //				System.out.println(funcionario.toString());
 //			}
-			for(Ingrediente ingrediente : Empresa.getIngredientes()) {
-				System.out.println(ingrediente.toString());
-			}
+//			for(Ingrediente ingrediente : Empresa.getIngredientes()) {
+//				System.out.println(ingrediente.toString());
+//			}
 			System.out.println("\n\n");
 			
 			showMenuPrincipal();
@@ -68,8 +68,11 @@ public class Comunicacao {
 				}
 				break;
 			case "5":
-				// TODO: cadastrarReceita();
-				System.out.println("c1");
+				if (cadastrarReceita()) {
+					System.out.println("Receita cadastrado com sucesso!");
+				} else {
+					System.out.println("Erro ao cadastrar receita. Tente novamente com dados validos!");
+				};
 				break;
 			case "6":
 				if (cadastrarFuncionario("degustador")) {
@@ -203,11 +206,11 @@ public class Comunicacao {
 	
 	private boolean cadastrarIngrediente() {
 		
-		System.out.println("Nome: ");
+		System.out.print("Nome: ");
 		ler = new Scanner(System.in);
 		String nome = ler.nextLine();
 		
-		System.out.println("Data de fabricacao: ");
+		System.out.print("Data de fabricacao: ");
 		ler = new Scanner(System.in);
 		String dataDeFabricacao = ler.next();
 		Date formatedDataDeFabricacao;
@@ -218,7 +221,7 @@ public class Comunicacao {
 			return false;
 		}
 		
-		System.out.println("Data de validade: ");
+		System.out.print("Data de validade: ");
 		String dataDeValidade = ler.next();
 		Date formatedDataDeValidade;
 		try {
@@ -228,7 +231,7 @@ public class Comunicacao {
 			return false;
 		}
 		
-		System.out.println("Descricao: ");
+		System.out.print("Descricao: ");
 		ler = new Scanner(System.in);
 		String descricao = ler.nextLine();
 		
@@ -241,13 +244,118 @@ public class Comunicacao {
 		return true;
 	}
 	
+	private boolean cadastrarReceita() {
+		
+		System.out.print("Nome: ");
+		ler = new Scanner(System.in);
+		String nome = ler.nextLine();
+		
+		System.out.print("Codigo; ");
+		ler = new Scanner(System.in);
+		String codigo = ler.next();
+		
+		System.out.print("Data de criacao: ");
+		String dataDeCriacao = ler.next();
+		Date formatedDataDeCriacao;
+		try {
+			formatedDataDeCriacao = new SimpleDateFormat("dd/MM/yyyy").parse(dataDeCriacao);
+		} catch (ParseException e) {
+			// TODO: criar validacao data
+			return false;
+		}
+		
+		System.out.print("Porcoes que rende: ");
+		int porcoesQueRende = ler.nextInt();
+		
+		System.out.print("Categoria: ");
+		String categoria = ler.next();
+		// TODO: implementar lista de categorias
+		
+		System.out.println("Ingredientes: ");
+		
+		char respostaNovoIngrediente; 
+		ArrayList<IngredienteDaReceita> ingredientesDaReceita = new ArrayList<>();
+		
+		do {
+			//instancia idr
+			System.out.println("Nome do ingrediente: ");
+			ler = new Scanner(System.in);
+			String nomeIngrediente = ler.nextLine();
+			
+			Ingrediente ingrediente = findIngrediente(nomeIngrediente);
+			
+			if(ingrediente == null) {
+				return false;
+			}
+			
+			System.out.println("Quantidade: ");
+			ler = new Scanner(System.in);
+			double quantidadeIng = ler.nextDouble();
+			
+			System.out.println("Medida: (Caso não exista, aperte ENTER)");
+			ler = new Scanner(System.in);
+			String medidaIng = ler.nextLine();
+			
+			ingredientesDaReceita.add(new IngredienteDaReceita(ingrediente, 
+															   quantidadeIng, 
+															   medidaIng));
+			
+			
+			System.out.println("Deseja adicionar um novo ingrediente? (s/n)");
+			respostaNovoIngrediente = ler.next().charAt(0);
+		} while(respostaNovoIngrediente == 's');
+		
+		System.out.println("Cozinheiro: ");
+		System.out.println("Matricula do cozinheiro: ");
+		ler = new Scanner(System.in);
+		String matriculaCozinheiro = ler.nextLine();
+		
+		Funcionario cozinheiro = findCozinheiro(matriculaCozinheiro);
+		
+		if(cozinheiro == null) {
+			return false;
+		}
+		
+		Empresa.addReceita(new Receita(nome, 
+				                       codigo, 
+				                       formatedDataDeCriacao, 
+				                       porcoesQueRende, 
+				                       categoria, 
+				                       cozinheiro.getMatricula(), 
+				                       -1, 
+				                       ingredientesDaReceita));
+		return true;
+	}
+	
+	private Ingrediente findIngrediente(String nomeIngrediente) {
+		
+		for(Ingrediente ingrediente : Empresa.getIngredientes()) {
+			if (ingrediente.getNome().equals(nomeIngrediente)) {
+				return ingrediente;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Funcionario findCozinheiro(String matriculaCozinheiro) {
+		
+		for(Funcionario cozinheiro : Empresa.getFuncionariosPorCargo(Cozinheiro.class)) {
+			if (cozinheiro.getMatricula().equals(matriculaCozinheiro)) {
+				return cozinheiro;
+			}
+		}
+		
+		return null;
+	}
+	
 	//menu precisa ter:
 	
 	//cadastrar cozinheiro, degustador, editor -> belesa
 	
-	//cadastrar ingredientes
+	//cadastrar ingredientes -> belesa
 	
-	//cadastrar receita(se tiver cozinheiro)
+	//cadastrar receita 
 	
 	//fazer degustacao
 	

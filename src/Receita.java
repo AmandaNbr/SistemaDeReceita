@@ -1,41 +1,43 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Receita {
 
 	private String nome;
-	private int codigo;
+	private String codigo;
 	private Date dataDeCriacao;
 	private int porcoesQueRende;
 	private String categoria;
 	
-	private Ingrediente ingredientes;
-	private double quantidadeIng;
-	private String medida;
+	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
 	
 	private String cozinheiro;
 	
 	private int nota;
-
 	
-	//construtor
-	public Receita(String nome, int codigo, Date dataDeCriacao, int porcoesQueRende, String categoria, Ingrediente ingredientes, double quantidadeIng, String medida, String cozinheiro, int nota) {
+
+	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, String categoria,
+			String cozinheiro, int nota, ArrayList<IngredienteDaReceita> ingredientesDaReceita) {
+		super();
 		this.nome = nome;
 		this.codigo = codigo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.porcoesQueRende = porcoesQueRende;
 		this.categoria = categoria;
-				
-		this.ingredientes = ingredientes;
-		this.quantidadeIng = quantidadeIng;
-		this.medida = medida;
-				
 		this.cozinheiro = cozinheiro;
-				
 		this.nota = nota;
+		this.ingredientesDaReceita = ingredientesDaReceita;
 	}
+
+	public Receita() {};
 	
-	
-	//gets e sets
+	@Override
+	public String toString() {
+		return "Receita [nome=" + nome + ", codigo=" + codigo + ", dataDeCriacao=" + dataDeCriacao
+				+ ", porcoesQueRende=" + porcoesQueRende + ", categoria=" + categoria + ", cozinheiro=" + cozinheiro
+				+ ", nota=" + nota + ", ingredientesDaReceita=" + ingredientesDaReceita + "]";
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -44,11 +46,11 @@ public class Receita {
 		this.nome = nome;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -76,30 +78,6 @@ public class Receita {
 		this.categoria = categoria;
 	}
 
-	public Ingrediente getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(Ingrediente ingredientes) {
-		this.ingredientes = ingredientes;
-	}
-
-	public double getQuantidadeIng() {
-		return quantidadeIng;
-	}
-
-	public void setQuantidadeIng(double quantidadeIng) {
-		this.quantidadeIng = quantidadeIng;
-	}
-
-	public String getMedida() {
-		return medida;
-	}
-
-	public void setMedida(String medida) {
-		this.medida = medida;
-	}
-
 	public String getCozinheiro() {
 		return cozinheiro;
 	}
@@ -114,5 +92,13 @@ public class Receita {
 
 	public void setNota(int nota) {
 		this.nota = nota;
+	}
+
+	public ArrayList<IngredienteDaReceita> getIngredientesDaReceita() {
+		return ingredientesDaReceita;
+	}
+
+	public void setIngredientesDaReceita(ArrayList<IngredienteDaReceita> ingredientesDaReceita) {
+		this.ingredientesDaReceita = ingredientesDaReceita;
 	}
 }
