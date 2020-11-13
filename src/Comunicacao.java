@@ -41,19 +41,21 @@ public class Comunicacao {
 			
 			switch (opcao) {
 			case "1":
-				if (cadastrarCozinheiro()) {
+				if (cadastrarFuncionario("cozinheiro")) {
 					System.out.println("Cozinheiro cadastrado com sucesso!");
 				} else {
 					System.out.println("Erro ao cadastrar cozinheiro. Tente novamente com dados validos!");
 				}
 				break;
 			case "2":
-				//cadastrarDegustador();
-				System.out.println("c1");
+				System.out.println("O cadastro de degustadores é feito na degustação");
 				break;
 			case "3":
-				//cadastrarEditor();
-				System.out.println("c1");
+				if (cadastrarFuncionario("editor")) {
+					System.out.println("Editor cadastrado com sucesso!");
+				} else {
+					System.out.println("Erro ao cadastrar editor. Tente novamente com dados validos!");
+				}
 				break;
 			case "4":
 				//cadastrarIngredientes();
@@ -64,8 +66,12 @@ public class Comunicacao {
 				System.out.println("c1");
 				break;
 			case "6":
-				//realizarDegustacao();
-				System.out.println("c1");
+				if (cadastrarFuncionario("degustador")) {
+					System.out.println("Degustador cadastrado com sucesso!");
+				} else {
+					System.out.println("Erro ao cadastrar degustador. Tente novamente com dados validos!");
+				};
+				// TODO: Implementar a degustacao
 				break;
 			case "7":
 				System.out.println("c1");
@@ -90,8 +96,8 @@ public class Comunicacao {
 		
 	}
 	
-	private boolean cadastrarCozinheiro() {		
-		System.out.print("Nome do cozinheiro: ");
+	private boolean cadastrarFuncionario(String tipoFuncionario) {
+		System.out.print("Nome: ");
 		ler = new Scanner(System.in);
 		String nome = ler.nextLine();
 		// TODO: criar validacao do nome.
@@ -123,56 +129,78 @@ public class Comunicacao {
 		double salario = ler.nextDouble();
 		// TODO: criar validacao salario.
 		
-		System.out.println("Deseja ser chamado de Chef? (s/n)");
-		char r1 = ler.next().charAt(0);
-		if(r1 == 's') {
-			nome = "Chef " + nome;
-		} else if (r1 == 'n') {
-			// Nada a fazer 
+		if (tipoFuncionario.equals("cozinheiro")) {
+			
+			System.out.println("Deseja ser chamado de Chef? (s/n)");
+			char r1 = ler.next().charAt(0);
+			if(r1 == 's') {
+				nome = "Chef " + nome;
+			} else if (r1 == 'n') {
+				// Nada a fazer 
+			} else {
+				System.out.println("erro");
+				return false;
+			}
+			// TODO: validar respostas
+			
+			System.out.println("Deseja informar os restaurantes em que trabalhou? (s/n)");
+			char r2 = ler.next().charAt(0);
+			String restaurantes = "";
+			if(r2 == 's') {
+				System.out.println("Digite todos os restaurantes separados por vírgula, aperte ENTER quando finalizar: ");
+				ler = new Scanner(System.in);
+				restaurantes = ler.nextLine();
+			} else if (r2 == 'n') {
+				// Nada a fazer
+			} else {
+				System.out.println("erro");
+				return false;
+			}
+		
+			Cozinheiro cozinheiro = new Cozinheiro(nome,
+												   matricula,
+												   rg,
+												   sexo,
+												   formatedDataDeIngresso, 
+												   salario, 
+												   new ArrayList<String>(Arrays.asList(restaurantes.split(",")))
+												   );
+			
+			Empresa.addNovoFuncionario(cozinheiro);
+			
+			return true;
+		} else if (tipoFuncionario.equals("degustador")) {
+			
+			Degustador degustador = new Degustador(nome, 
+												   matricula, 
+												   rg, 
+												   sexo, 
+												   formatedDataDeIngresso, 
+												   salario, 
+												   1);
+			
+			Empresa.addNovoFuncionario(degustador);
+			
+			return true;
+		} else if (tipoFuncionario.equals("editor")) {			
+			Editor editor = new Editor();
+			Empresa.addNovoFuncionario(editor);
+			
+			return true;
 		} else {
-			System.out.println("erro");
 			return false;
 		}
-		// TODO: validar respostas
-		
-		System.out.println("Deseja informar os restaurantes em que trabalhou? (s/n)");
-		char r2 = ler.next().charAt(0);
-		String restaurantes = "";
-		if(r2 == 's') {
-			System.out.println("Digite todos os restaurantes separados por vírgula, aperte ENTER quando finalizar: ");
-			ler = new Scanner(System.in);
-			restaurantes = ler.nextLine();
-		} else if (r2 == 'n') {
-			// Nada a fazer
-		} else {
-			System.out.println("erro");
-			return false;
-		}
-	
-		Cozinheiro cozinheiro = new Cozinheiro(nome,
-											   matricula,
-											   rg,
-											   sexo,
-											   formatedDataDeIngresso, 
-											   salario, 
-											   new ArrayList<String>(Arrays.asList(restaurantes.split(",")))
-											   );
-		
-		Empresa.addNovoFuncionario(cozinheiro);
-		
-		return true;
 	}
-	
 	
 	//menu precisa ter:
 	
-	//cadastrar cozinheiro, degustador, editor
+	//cadastrar cozinheiro, degustador, editor -> belesa
 	
 	//cadastrar ingredientes
 	
 	//cadastrar receita(se tiver cozinheiro)
 	
-	//degustacao
+	//fazer degustacao
 	
 	//montar livro
 	

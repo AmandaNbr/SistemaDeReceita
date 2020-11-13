@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Degustador extends Funcionario{
@@ -12,8 +11,7 @@ public class Degustador extends Funcionario{
 			          char sexo, 
 			          Date dataDeIngresso, 
 			          double salario, 
-			          int qntDegustacoes, 
-			          Funcionario funcionario) {
+			          int qntDegustacoes) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 		this.qntDegustacoes = qntDegustacoes;
 	}
