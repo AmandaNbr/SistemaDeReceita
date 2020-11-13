@@ -4,6 +4,7 @@ public class Empresa {
 
 	private static ArrayList<Funcionario> funcionarios = new ArrayList<>();
 	private static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
+	public static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 	
 	public static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {
@@ -42,4 +43,18 @@ public class Empresa {
 		
 		return funcionariosPorCargo;
 	}
+	
+	public static void addIngrediente(Ingrediente ingrediente) {
+		if(ingredientes == null) {
+			ingredientes = new ArrayList<>();
+			ingredientes.add(ingrediente);
+		} else {
+			ingredientes.add(ingrediente);
+		}
+	}
+	
+	public static ArrayList<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+	
 }

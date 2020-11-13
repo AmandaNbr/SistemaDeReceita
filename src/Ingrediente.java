@@ -8,6 +8,8 @@ public class Ingrediente {
 	private String descricao;
 	
 	
+
+
 	//construtor
 	public Ingrediente(String nome, Date dataDeFabricacao, Date dataDeValidade, String descricao) {
 		this.nome = nome;
@@ -16,6 +18,11 @@ public class Ingrediente {
 		this.descricao = descricao;
 	}
 	
+	@Override
+	public String toString() {
+		return "Ingrediente [nome=" + nome + ", dataDeFabricacao=" + dataDeFabricacao + ", dataDeValidade="
+				+ dataDeValidade + ", descricao=" + descricao + "]";
+	}
 	
 	//gets e sets
 	public String getNome() {

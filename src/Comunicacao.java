@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
-// TODO: mudar para GUI.
+// TODO: mudar para GUI. (:
 public class Comunicacao {
 	Scanner ler = new Scanner(System.in);
 	
@@ -17,7 +17,7 @@ public class Comunicacao {
 		System.out.println("1 - Cadastrar cozinheiro.\n"
 				+ "2 - Cadastrar degustador.\n"
 				+ "3 - Cadastrar editor.\n"
-				+ "4 - Cadastrar ingredientes.\n"
+				+ "4 - Cadastrar ingrediente.\n"
 				+ "5 - Cadastrar receita.\n"
 				+ "6 - Realizar degustacao.\n"
 				+ "7 - Adicionar receitas ao livro.\n"
@@ -31,8 +31,11 @@ public class Comunicacao {
 		String opcao;
 		
 		do {
-			for(Funcionario funcionario : Empresa.getAllFuncionarios()) {
-				System.out.println(funcionario.toString());
+//			for(Funcionario funcionario : Empresa.getAllFuncionarios()) {
+//				System.out.println(funcionario.toString());
+//			}
+			for(Ingrediente ingrediente : Empresa.getIngredientes()) {
+				System.out.println(ingrediente.toString());
 			}
 			System.out.println("\n\n");
 			
@@ -58,11 +61,14 @@ public class Comunicacao {
 				}
 				break;
 			case "4":
-				//cadastrarIngredientes();
-				System.out.println("c1");
+				if (cadastrarIngrediente()) {
+					System.out.println("Ingrediente cadastrado com sucesso!");
+				} else {
+					System.out.println("Erro ao cadastrar ingrediente. Tente novamente com dados validos!");
+				}
 				break;
 			case "5":
-				//cadastrarReceita();
+				// TODO: cadastrarReceita();
 				System.out.println("c1");
 				break;
 			case "6":
@@ -74,16 +80,16 @@ public class Comunicacao {
 				// TODO: Implementar a degustacao
 				break;
 			case "7":
-				System.out.println("c1");
+				// TODO: Implementar a adicao de receitas ao livro
 				break;
 			case "8":
-				System.out.println("c1");
+				// TODO: Relação das receitas publicadas
 				break;
 			case "9":
-				System.out.println("c1");
+				// TODO: Relação de receitas por chefes
 				break;
 			case "10":
-				System.out.println("c10");
+				// TODO: Imprimir livro de receitas
 				break;
 			case "11":
 				opcao = "invalid";
@@ -97,8 +103,9 @@ public class Comunicacao {
 	}
 	
 	private boolean cadastrarFuncionario(String tipoFuncionario) {
+		
 		System.out.print("Nome: ");
-		ler = new Scanner(System.in);
+		ler = new Scanner(System.in); // Repeti pois estava dando erro na hora de usar o NextLine
 		String nome = ler.nextLine();
 		// TODO: criar validacao do nome.
 		
@@ -182,14 +189,56 @@ public class Comunicacao {
 			Empresa.addNovoFuncionario(degustador);
 			
 			return true;
-		} else if (tipoFuncionario.equals("editor")) {			
+		} else if (tipoFuncionario.equals("editor")) {	
+			
 			Editor editor = new Editor();
+			
 			Empresa.addNovoFuncionario(editor);
 			
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	private boolean cadastrarIngrediente() {
+		
+		System.out.println("Nome: ");
+		ler = new Scanner(System.in);
+		String nome = ler.nextLine();
+		
+		System.out.println("Data de fabricacao: ");
+		ler = new Scanner(System.in);
+		String dataDeFabricacao = ler.next();
+		Date formatedDataDeFabricacao;
+		try {
+			formatedDataDeFabricacao = new SimpleDateFormat("dd/MM/yyyy").parse(dataDeFabricacao);
+		} catch (ParseException e) {
+			// TODO: criar validacao data.
+			return false;
+		}
+		
+		System.out.println("Data de validade: ");
+		String dataDeValidade = ler.next();
+		Date formatedDataDeValidade;
+		try {
+			formatedDataDeValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataDeValidade);
+		} catch (ParseException e) {
+			// TODO: criar validacao data e data de validade.
+			return false;
+		}
+		
+		System.out.println("Descricao: ");
+		ler = new Scanner(System.in);
+		String descricao = ler.nextLine();
+		
+		Ingrediente ingrediente = new Ingrediente(nome, 
+												  formatedDataDeFabricacao, 
+												  formatedDataDeValidade, 
+												  descricao);
+		
+		Empresa.addIngrediente(ingrediente);
+		return true;
 	}
 	
 	//menu precisa ter:
