@@ -1,9 +1,19 @@
+package view;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
+
+import model.Cozinheiro;
+import model.Degustador;
+import model.Editor;
+import model.Empresa;
+import model.Funcionario;
+import model.Ingrediente;
+import model.IngredienteDaReceita;
+import model.Receita;
 
 // TODO: mudar para GUI. (:
 public class Comunicacao {
@@ -310,11 +320,13 @@ public class Comunicacao {
 		ler = new Scanner(System.in);
 		String matriculaCozinheiro = ler.nextLine();
 		
-		Funcionario cozinheiro = findCozinheiro(matriculaCozinheiro);
+		Cozinheiro cozinheiro = findCozinheiro(matriculaCozinheiro);
 		
 		if(cozinheiro == null) {
 			return false;
 		}
+		
+		System.out.println(cozinheiro.toString());
 		
 		Empresa.addReceita(new Receita(nome, 
 				                       codigo, 
@@ -338,11 +350,11 @@ public class Comunicacao {
 		return null;
 	}
 	
-	private Funcionario findCozinheiro(String matriculaCozinheiro) {
+	private Cozinheiro findCozinheiro(String matriculaCozinheiro) {
 		
 		for(Funcionario cozinheiro : Empresa.getFuncionariosPorCargo(Cozinheiro.class)) {
 			if (cozinheiro.getMatricula().equals(matriculaCozinheiro)) {
-				return cozinheiro;
+				return (Cozinheiro) cozinheiro;
 			}
 		}
 		

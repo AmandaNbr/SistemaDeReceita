@@ -1,4 +1,4 @@
-
+package model;
 public class IngredienteDaReceita {
 	
 	private Ingrediente ingrediente;

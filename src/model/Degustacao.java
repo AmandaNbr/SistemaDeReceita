@@ -1,8 +1,8 @@
-import java.lang.reflect.Array;
+package model;
 import java.util.Date;
 
-@SuppressWarnings("unused")
 public class Degustacao {
+
 
 	private Receita receita;
 	private Date dataDegustacao;
@@ -10,9 +10,7 @@ public class Degustacao {
 	private Cozinheiro cozinheiro;
 	private int nota;
 	
-	
-	//construtor
-	public Degustacao(Receita receita, Date dataDegustacao, Degustador degustador, Cozinheiro cozinheiro, int nota) {
+		public Degustacao(Receita receita, Date dataDegustacao, Degustador degustador, Cozinheiro cozinheiro, int nota) {
 		this.receita = receita;
 		this.dataDegustacao = dataDegustacao;
 		this.degustador = degustador;
@@ -20,6 +18,11 @@ public class Degustacao {
 		this.nota = nota;
 	}
 	
+	@Override
+	public String toString() {
+		return "Degustacao [receita=" + receita + ", dataDegustacao=" + dataDegustacao + ", degustador=" + degustador
+				+ ", cozinheiro=" + cozinheiro + ", nota=" + nota + "]";
+	}
 	
 	//gets e sets
 	public Receita getReceita() {

@@ -1,3 +1,4 @@
+package model;
 import java.util.Date;
 
 public class Ingrediente {
@@ -7,10 +8,6 @@ public class Ingrediente {
 	private Date dataDeValidade;
 	private String descricao;
 	
-	
-
-
-	//construtor
 	public Ingrediente(String nome, Date dataDeFabricacao, Date dataDeValidade, String descricao) {
 		this.nome = nome;
 		this.dataDeFabricacao = dataDeFabricacao;

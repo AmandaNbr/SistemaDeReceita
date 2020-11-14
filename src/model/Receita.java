@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ public class Receita {
 	
 	private int nota;
 	
+	public Receita() {};
 
 	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, String categoria,
 			String cozinheiro, int nota, ArrayList<IngredienteDaReceita> ingredientesDaReceita) {
@@ -29,8 +31,6 @@ public class Receita {
 		this.ingredientesDaReceita = ingredientesDaReceita;
 	}
 
-	public Receita() {};
-	
 	@Override
 	public String toString() {
 		return "Receita [nome=" + nome + ", codigo=" + codigo + ", dataDeCriacao=" + dataDeCriacao

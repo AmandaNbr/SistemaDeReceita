@@ -1,10 +1,10 @@
+package model;
 import java.util.Date;
 
 public class Degustador extends Funcionario{
 
 	private int qntDegustacoes;	
 	
-	//construtor
 	public Degustador(String nome, 
 			          String matricula, 
 			          String rg, 
@@ -16,7 +16,11 @@ public class Degustador extends Funcionario{
 		this.qntDegustacoes = qntDegustacoes;
 	}
 	 
-	
+	@Override
+	public String toString() {
+		return "Degustador [qntDegustacoes=" + qntDegustacoes + "]";
+	}
+
 	//gets e sets
 	public int getQntDegustacoes() {
 		return qntDegustacoes;

@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 
 public class Empresa {
@@ -6,6 +7,8 @@ public class Empresa {
 	private static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
 	private static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 	private static ArrayList<Receita> receitas = new ArrayList<>(); 
+	
+	
 	
 	public static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {

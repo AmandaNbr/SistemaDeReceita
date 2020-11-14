@@ -1,9 +1,8 @@
+package model;
 import java.util.Date;
 
 public class Editor extends Funcionario {
-	
-	//construtor
-	
+		
 	public Editor() {};
 	
 	public Editor(String nome, 
@@ -14,4 +13,6 @@ public class Editor extends Funcionario {
 			      double salario) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 	}
+	
+	
 }

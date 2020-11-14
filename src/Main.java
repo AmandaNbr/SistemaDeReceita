@@ -1,3 +1,4 @@
+import view.Comunicacao;
 
 public class Main {
 
