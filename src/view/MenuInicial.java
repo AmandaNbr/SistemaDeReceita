@@ -13,7 +13,17 @@ import java.awt.event.ActionEvent;
 
 public class MenuInicial {
 
-	private JFrame frame;
+	protected JFrame frame;
+	private JLabel lblTitulo;
+	private JButton btnCadastraCozinheiro;
+	private JButton btnCadastraDegustador;
+	private JButton btnCadastraEditor;
+	private JButton btnCadastraIngrediente;
+	private JButton btnCadastraReceita;
+	private JButton btnDegustacao;
+	private JButton btnCriarLivro;
+	private JButton btnImprimirLivro;
+	private JButton btnAcessaReceitas;
 
 	/**
 	 * Launch the application.
@@ -23,6 +33,7 @@ public class MenuInicial {
 			public void run() {
 				try {
 					MenuInicial window = new MenuInicial();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,15 +54,15 @@ public class MenuInicial {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 740, 495);
+		frame.setBounds(100, 100, 745, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Sistema de Receitas");
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bem vindo ao Sistema de Receitas!");
-		lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
-		lblNewLabel.setBounds(38, 35, 474, 70);
-		frame.getContentPane().add(lblNewLabel);
+		lblTitulo = new JLabel("Bem vindo ao Sistema de Receitas!");
+		lblTitulo.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
+		lblTitulo.setBounds(38, 35, 474, 70);
+		frame.getContentPane().add(lblTitulo);
 		
 		initializeButtons();
 	
@@ -59,16 +70,19 @@ public class MenuInicial {
 	
 	private void initializeButtons() {
 		
-		JButton btnCadastraCozinheiro = new JButton("Cadastrar Cozinheiro");
+		btnCadastraCozinheiro = new JButton("Cadastrar Cozinheiro");
 		btnCadastraCozinheiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CadastraCozinheiro cadastraCozinheiro = new CadastraCozinheiro();
+				cadastraCozinheiro.startCadastraCozinheiro();
 			}
 		});
 		btnCadastraCozinheiro.setBounds(38, 172, 195, 45);
 		frame.getContentPane().add(btnCadastraCozinheiro);
 		
 		
-		JButton btnCadastraDegustador = new JButton("Cadastrar Degustador");
+		btnCadastraDegustador = new JButton("Cadastrar Degustador");
 		btnCadastraDegustador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "  O cadastro de degustadores  \n  é feito durante a degustação!  ");
@@ -78,7 +92,7 @@ public class MenuInicial {
 		frame.getContentPane().add(btnCadastraDegustador);
 		
 		
-		JButton btnCadastraEditor = new JButton("Cadastrar Editor");
+		btnCadastraEditor = new JButton("Cadastrar Editor");
 		btnCadastraEditor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -87,7 +101,7 @@ public class MenuInicial {
 		frame.getContentPane().add(btnCadastraEditor);
 		
 		
-		JButton btnCadastraIngrediente = new JButton("Cadastrar Ingrediente");
+		btnCadastraIngrediente = new JButton("Cadastrar Ingrediente");
 		btnCadastraIngrediente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -96,7 +110,7 @@ public class MenuInicial {
 		frame.getContentPane().add(btnCadastraIngrediente);
 		
 		
-		JButton btnCadastraReceita = new JButton("Cadastrar Receita");
+		btnCadastraReceita = new JButton("Cadastrar Receita");
 		btnCadastraReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -105,7 +119,7 @@ public class MenuInicial {
 		frame.getContentPane().add(btnCadastraReceita);
 		
 		
-		JButton btnDegustacao = new JButton("Realizar Degustacao");
+		btnDegustacao = new JButton("Realizar Degustacao");
 		btnDegustacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -114,16 +128,16 @@ public class MenuInicial {
 		frame.getContentPane().add(btnDegustacao);
 		
 		
-		JButton btnEditarLivro = new JButton("Editar livro");
-		btnEditarLivro.addActionListener(new ActionListener() {
+		btnCriarLivro = new JButton("Criar livro");
+		btnCriarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnEditarLivro.setBounds(38, 371, 195, 45);
-		frame.getContentPane().add(btnEditarLivro);
+		btnCriarLivro.setBounds(38, 371, 195, 45);
+		frame.getContentPane().add(btnCriarLivro);
 		
 		
-		JButton btnImprimirLivro = new JButton("Imprimir livro");
+		btnImprimirLivro = new JButton("Imprimir livro");
 		btnImprimirLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -132,7 +146,7 @@ public class MenuInicial {
 		frame.getContentPane().add(btnImprimirLivro);
 		
 		
-		JButton btnAcessaReceitas = new JButton("Acessar receitas");
+		btnAcessaReceitas = new JButton("Acessar receitas");
 		btnAcessaReceitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
