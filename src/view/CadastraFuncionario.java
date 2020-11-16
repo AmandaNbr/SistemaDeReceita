@@ -173,12 +173,9 @@ public class CadastraFuncionario extends JFrame {
 				if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
 					TelaDegustacao telaDegustacao = new TelaDegustacao();
 					telaDegustacao.startTelaDegustacao();
-					telaDegustacao.setLocationRelativeTo(null);
-					telaDegustacao.setVisible(true);
 				} else {				
 					MenuInicial menuInicial = new MenuInicial();
-					menuInicial.frame.setLocationRelativeTo(null);
-					menuInicial.frame.setVisible(true);
+					menuInicial.startApplication();
 				}
 			}
 		});

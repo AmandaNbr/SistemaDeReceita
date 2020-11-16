@@ -85,7 +85,7 @@ public class MenuInicial {
 		btnCadastraCozinheiro.setBounds(38, 172, 195, 45);
 		frame.getContentPane().add(btnCadastraCozinheiro);
 		
-		
+		// DEGUSTADOR
 		btnCadastraDegustador = new JButton("Cadastrar Degustador");
 		btnCadastraDegustador.setFocusable(false);
 		btnCadastraDegustador.addActionListener(new ActionListener() {
@@ -96,7 +96,7 @@ public class MenuInicial {
 		btnCadastraDegustador.setBounds(273, 172, 195, 45);
 		frame.getContentPane().add(btnCadastraDegustador);
 		
-		
+		// EDITOR
 		btnCadastraEditor = new JButton("Cadastrar Editor");
 		btnCadastraEditor.setFocusable(false);
 		btnCadastraEditor.addActionListener(new ActionListener() {
@@ -109,21 +109,27 @@ public class MenuInicial {
 		btnCadastraEditor.setBounds(508, 172, 195, 45);
 		frame.getContentPane().add(btnCadastraEditor);
 		
-		
+		// INGREDIENTE
 		btnCadastraIngrediente = new JButton("Cadastrar Ingrediente");
 		btnCadastraIngrediente.setFocusable(false);
 		btnCadastraIngrediente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CadastraIngrediente cadastraIngrediente = new CadastraIngrediente();
+				cadastraIngrediente.startCadastraIngrediente();
 			}
 		});
 		btnCadastraIngrediente.setBounds(38, 275, 195, 45);
 		frame.getContentPane().add(btnCadastraIngrediente);
 		
-		
+		// RECEITA
 		btnCadastraReceita = new JButton("Cadastrar Receita");
 		btnCadastraReceita.setFocusable(false);
 		btnCadastraReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CadastraReceita cadastraReceita = new CadastraReceita();
+				cadastraReceita.startCadastraReceita();
 			}
 		});
 		btnCadastraReceita.setBounds(273, 275, 195, 45);

@@ -121,7 +121,8 @@ public class TelaDegustacao extends JFrame {
 		comboBoxDegustador.setBounds(64, 57, 139, 24);
 		contentPane.add(comboBoxDegustador);
 		// TODO: aparecer opcoes do nome do degustador
-		comboBoxDegustador.add(degustadorController.getName);
+		//for (degustador : degustadores)
+		//comboBoxDegustador.add(degustadorController.getName)
 		
 		lblDegustador = new JLabel("Degustador");
 		lblDegustador.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -204,7 +205,6 @@ public class TelaDegustacao extends JFrame {
 				formattedTextFieldData.setVisible(false);		
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

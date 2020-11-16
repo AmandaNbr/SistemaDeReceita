@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class Empresa {
 
-	private static ArrayList<Funcionario> funcionarios = new ArrayList<>();
-	private static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
-	private static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
-	private static ArrayList<Receita> receitas = new ArrayList<>(); 
+	protected static ArrayList<Funcionario> funcionarios = new ArrayList<>();
+	protected static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
+	protected static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+	protected static ArrayList<Receita> receitas = new ArrayList<>(); 
 	
 	
 	
