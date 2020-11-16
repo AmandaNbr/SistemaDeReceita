@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,12 +10,8 @@ import javax.swing.text.NumberFormatter;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -27,9 +22,11 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
+import javax.swing.JScrollBar;
 
-public class CadastraCozinheiro extends JFrame {
+public class CadastraFuncionario extends JFrame {
 
+	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
 	private JTextField textFieldNome;
@@ -47,17 +44,20 @@ public class CadastraCozinheiro extends JFrame {
 	private JCheckBox chckbxTtuloDechef;
 	private JTextField textFieldRestaurantesTrabalhados;
 	private JButton btnVoltar;
+	private JLabel lblnomeDosRestaurantes;
+	
 	
 	/**
 	 * Launch the application.
 	 */
-	public void startCadastraCozinheiro() {
+	public void startCadastraFuncionario(String tipoFuncionario) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastraCozinheiro frame = new CadastraCozinheiro();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
+					setTipoFuncionario(tipoFuncionario);
+					criarTela();
+					setLocationRelativeTo(null);
+					setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,7 +68,7 @@ public class CadastraCozinheiro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastraCozinheiro() {
+	public void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 490);
 		contentPane = new JPanel();
@@ -96,6 +96,8 @@ public class CadastraCozinheiro extends JFrame {
 		campoRestaurantes();
 	}
 	
+	public CadastraFuncionario() {}
+
 	private void initializeButtons() {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -231,16 +233,25 @@ public class CadastraCozinheiro extends JFrame {
 	}
 	
 	private void campoRestaurantes() {
-		lblRestaurantesTrabalhados = new JLabel("Restaurantes trabalhados");
+		lblRestaurantesTrabalhados = new JLabel("Restaurantes trabalhados (opcional)");
 		lblRestaurantesTrabalhados.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblRestaurantesTrabalhados.setToolTipText("");
-		lblRestaurantesTrabalhados.setBounds(45, 305, 218, 15);
+		lblRestaurantesTrabalhados.setBounds(45, 305, 340, 15);
 		contentPane.add(lblRestaurantesTrabalhados);
 		
 		textFieldRestaurantesTrabalhados = new JTextField();
 		textFieldRestaurantesTrabalhados.setBounds(45, 332, 429, 25);
 		contentPane.add(textFieldRestaurantesTrabalhados);
 		textFieldRestaurantesTrabalhados.setColumns(10);
+		
+		lblnomeDosRestaurantes = new JLabel("*nome dos restaurantes separado por virgula");
+		lblnomeDosRestaurantes.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblnomeDosRestaurantes.setBounds(45, 358, 376, 15);
+		contentPane.add(lblnomeDosRestaurantes);
 
+	}
+
+	public void setTipoFuncionario(String tipoFuncionario) {
+		this.tipoFuncionario = tipoFuncionario;
 	}
 }

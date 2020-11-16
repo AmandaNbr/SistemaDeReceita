@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import model.TipoFuncionario;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -75,8 +77,8 @@ public class MenuInicial {
 		btnCadastraCozinheiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				CadastraCozinheiro cadastraCozinheiro = new CadastraCozinheiro();
-				cadastraCozinheiro.startCadastraCozinheiro();
+				CadastraFuncionario cadastraFuncionario = new CadastraFuncionario();
+				cadastraFuncionario.startCadastraFuncionario(TipoFuncionario.COZINHEIRO.getTipo());
 			}
 		});
 		btnCadastraCozinheiro.setBounds(38, 172, 195, 45);
