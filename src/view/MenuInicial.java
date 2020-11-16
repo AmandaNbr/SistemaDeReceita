@@ -77,8 +77,8 @@ public class MenuInicial {
 		btnCadastraCozinheiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				CadastraFuncionario cadastraFuncionario = new CadastraFuncionario();
-				cadastraFuncionario.startCadastraFuncionario(TipoFuncionario.COZINHEIRO.getTipo());
+				CadastraFuncionario cadastraFuncionario = new CadastraFuncionario(TipoFuncionario.COZINHEIRO.getTipo());
+				cadastraFuncionario.startCadastraFuncionario();
 			}
 		});
 		btnCadastraCozinheiro.setBounds(38, 172, 195, 45);
@@ -100,6 +100,9 @@ public class MenuInicial {
 		btnCadastraEditor.setFocusable(false);
 		btnCadastraEditor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CadastraFuncionario cadastraFuncionario = new CadastraFuncionario(TipoFuncionario.EDITOR.getTipo());
+				cadastraFuncionario.startCadastraFuncionario();
 			}
 		});
 		btnCadastraEditor.setBounds(508, 172, 195, 45);
@@ -130,6 +133,9 @@ public class MenuInicial {
 		btnDegustacao.setFocusable(false);
 		btnDegustacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				TelaDegustacao telaDegustacao = new TelaDegustacao();
+				telaDegustacao.startTelaDegustacao();
 			}
 		});
 		btnDegustacao.setBounds(508, 275, 195, 45);

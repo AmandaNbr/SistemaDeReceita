@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+
+import model.TipoFuncionario;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -25,7 +28,6 @@ import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 
 public class CadastraFuncionario extends JFrame {
-
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -46,16 +48,18 @@ public class CadastraFuncionario extends JFrame {
 	private JButton btnVoltar;
 	private JLabel lblnomeDosRestaurantes;
 	
+	public CadastraFuncionario(String tipoFuncionario) {
+		this.tipoFuncionario = tipoFuncionario;
+		criarTela();
+	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public void startCadastraFuncionario(String tipoFuncionario) {
+	public void startCadastraFuncionario() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					setTipoFuncionario(tipoFuncionario);
-					criarTela();
 					setLocationRelativeTo(null);
 					setVisible(true);
 				} catch (Exception e) {
@@ -91,12 +95,12 @@ public class CadastraFuncionario extends JFrame {
 		
 		campoSalario();	
 		
-		campoNomeChef();
-		
-		campoRestaurantes();
+		if (tipoFuncionario == TipoFuncionario.COZINHEIRO.getTipo()) {
+			campoNomeChef();
+			
+			campoRestaurantes();
+		}
 	}
-	
-	public CadastraFuncionario() {}
 
 	private void initializeButtons() {
 		btnCadastrar = new JButton("Cadastrar");
