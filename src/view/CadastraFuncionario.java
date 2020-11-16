@@ -80,7 +80,7 @@ public class CadastraFuncionario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setTitle("Cadastro de Cozinheiro");
+		setTitle("Cadastro de Funcionario");
 		
 		initializeButtons();
 		
@@ -107,12 +107,19 @@ public class CadastraFuncionario extends JFrame {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(formattedTextFieldSalario.getText());
-				System.out.println(formattedTextFieldSalario.getText().replace(".", "").replace("R$ ", "").replace(",", "."));
+				//System.out.println(formattedTextFieldSalario.getText());
+				//System.out.println(formattedTextFieldSalario.getText().replace(".", "").replace("R$ ", "").replace(",", "."));
 				dispose();
-				MenuInicial menuInicial = new MenuInicial();
-				menuInicial.frame.setLocationRelativeTo(null);
-				menuInicial.frame.setVisible(true);
+				if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
+					TelaDegustacao telaDegustacao = new TelaDegustacao();
+					telaDegustacao.startTelaDegustacao();
+					telaDegustacao.setLocationRelativeTo(null);
+					telaDegustacao.setVisible(true);
+				} else {				
+					MenuInicial menuInicial = new MenuInicial();
+					menuInicial.frame.setLocationRelativeTo(null);
+					menuInicial.frame.setVisible(true);
+				}
 			}
 		});
 		btnCadastrar.setBounds(278, 385, 160, 45);

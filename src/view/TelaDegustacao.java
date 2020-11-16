@@ -56,6 +56,7 @@ public class TelaDegustacao extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setTitle("Degustacao");
 		contentPane.setLayout(null);
 		
 		initializeButtons();
@@ -104,8 +105,10 @@ public class TelaDegustacao extends JFrame {
 	}
 	
 	private void campoDegustador() {
-		JComboBox comboBoxDegustador = new JComboBox();
+		JComboBox<String> comboBoxDegustador = new JComboBox<String>();
 		comboBoxDegustador.setBounds(64, 57, 139, 24);
+		comboBoxDegustador.addItem("");
+		comboBoxDegustador.addItem("amcssdsax");
 		contentPane.add(comboBoxDegustador);
 		
 		lblDegustador = new JLabel("Degustador");
@@ -121,7 +124,7 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(lblReceita);
 		lblReceita.setVisible(false);
 		
-		JComboBox comboBoxReceita = new JComboBox();
+		JComboBox<String> comboBoxReceita = new JComboBox<String>();
 		comboBoxReceita.setBounds(64, 158, 139, 24);
 		contentPane.add(comboBoxReceita);
 		comboBoxReceita.setVisible(false);
