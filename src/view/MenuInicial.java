@@ -71,6 +71,7 @@ public class MenuInicial {
 	private void initializeButtons() {
 		
 		btnCadastraCozinheiro = new JButton("Cadastrar Cozinheiro");
+		btnCadastraCozinheiro.setFocusable(false);
 		btnCadastraCozinheiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -83,6 +84,7 @@ public class MenuInicial {
 		
 		
 		btnCadastraDegustador = new JButton("Cadastrar Degustador");
+		btnCadastraDegustador.setFocusable(false);
 		btnCadastraDegustador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "  O cadastro de degustadores  \n  é feito durante a degustação!  ");
@@ -93,6 +95,7 @@ public class MenuInicial {
 		
 		
 		btnCadastraEditor = new JButton("Cadastrar Editor");
+		btnCadastraEditor.setFocusable(false);
 		btnCadastraEditor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -102,6 +105,7 @@ public class MenuInicial {
 		
 		
 		btnCadastraIngrediente = new JButton("Cadastrar Ingrediente");
+		btnCadastraIngrediente.setFocusable(false);
 		btnCadastraIngrediente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -111,6 +115,7 @@ public class MenuInicial {
 		
 		
 		btnCadastraReceita = new JButton("Cadastrar Receita");
+		btnCadastraReceita.setFocusable(false);
 		btnCadastraReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -120,6 +125,7 @@ public class MenuInicial {
 		
 		
 		btnDegustacao = new JButton("Realizar Degustacao");
+		btnDegustacao.setFocusable(false);
 		btnDegustacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -129,6 +135,7 @@ public class MenuInicial {
 		
 		
 		btnCriarLivro = new JButton("Criar livro");
+		btnCriarLivro.setFocusable(false);
 		btnCriarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -138,6 +145,7 @@ public class MenuInicial {
 		
 		
 		btnImprimirLivro = new JButton("Imprimir livro");
+		btnImprimirLivro.setFocusable(false);
 		btnImprimirLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -147,6 +155,7 @@ public class MenuInicial {
 		
 		
 		btnAcessaReceitas = new JButton("Acessar receitas");
+		btnAcessaReceitas.setFocusable(false);
 		btnAcessaReceitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

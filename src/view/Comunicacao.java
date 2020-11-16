@@ -118,7 +118,7 @@ public class Comunicacao {
 	private boolean cadastrarFuncionario(String tipoFuncionario) {
 		
 		System.out.print("Nome: ");
-		ler = new Scanner(System.in); // Repeti pois estava dando erro na hora de usar o NextLine
+		ler = new Scanner(System.in); 
 		String nome = ler.nextLine();
 		// TODO: criar validacao do nome.
 		
