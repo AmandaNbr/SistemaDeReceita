@@ -36,7 +36,6 @@ public class CadastraFuncionario extends JFrame {
 	private FuncionarioController funcionarioController = new FuncionarioController();
 	private EditorController editorController = new EditorController();
 	private CozinheiroController cozinheiroController = new CozinheiroController();
-	private DegustadorController degustadorController = new DegustadorController();
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -123,14 +122,14 @@ public class CadastraFuncionario extends JFrame {
 				if (camposValidos) {
 					dispose();
 					if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
-						JOptionPane.showMessageDialog(null, "  O degustador só será cadastrado  \n  após o termino da degustacao!  ");
-						degustadorController.cadastraDegustador(textFieldNome.getText(),
-								                                textFieldMatricula.getText(),
-								                                formattedTextFieldRG.getText(),
-								                                getRbtSelecionado(),
-								                                formattedTextFieldData.getText(),
-								                                formattedTextFieldSalario.getText());
+						JOptionPane.showMessageDialog(null, "  O degustador só será cadastrado  \n  após o termino da degustacao    \n   realizada obrigatoriamente por ele!   ");
 						TelaDegustacao telaDegustacao = new TelaDegustacao();
+						telaDegustacao.degustacaoObrigatoria(textFieldNome.getText(),
+															 textFieldMatricula.getText(),
+															 formattedTextFieldRG.getText(),
+															 getRbtSelecionado(),
+															 formattedTextFieldData.getText(),
+															 formattedTextFieldSalario.getText());
 						telaDegustacao.startTelaDegustacao();
 						telaDegustacao.setLocationRelativeTo(null);
 						telaDegustacao.setVisible(true);

@@ -18,4 +18,9 @@ public class Degustador extends Funcionario{
 	public void cadastrarDegustador(Degustador degustador) {
 		Empresa.addNovoFuncionario(degustador);		
 	}
+
+	@Override
+	public String toString() {
+		return getNome() + " - " + getMatricula();
+	}
 }
