@@ -37,4 +37,8 @@ public class Cozinheiro extends Funcionario{
 	public ArrayList<Funcionario> getAllCozinheiros() {
 		return Empresa.getFuncionariosPorCargo(Cozinheiro.class);
 	}
+	
+	public void cadastrarCozinheiro(Cozinheiro cozinheiro) {
+		Empresa.addNovoFuncionario(cozinheiro);
+	}
 }

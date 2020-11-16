@@ -11,16 +11,16 @@ import model.Funcionario;
 
 public class FuncionarioController {
 	
-	private Cozinheiro cozinheiro = new Cozinheiro();
-	private Degustador degustador = new Degustador();
-	private Editor editor = new Editor();
+	private Cozinheiro cozinheiroModel = new Cozinheiro();
+	private Degustador degustadorModel = new Degustador();
+	private Editor editorModel = new Editor();
 
 	
 	public FuncionarioController() {
 	}
 	
 	public boolean validarNome(String nome) {
-		if (!nome.isEmpty()) {
+		if (!nome.trim().isEmpty()) {
 			return true;
 		} else {
 			return false;
@@ -28,7 +28,7 @@ public class FuncionarioController {
 	}
 	
 	public boolean validarMatriculaVazia(String matricula) {
-		if (!matricula.isEmpty()) {
+		if (!matricula.trim().isEmpty()) {
 			return true;
 		} else {
 			return false;
@@ -36,20 +36,20 @@ public class FuncionarioController {
 	}
 	
 	public boolean validarMatriculaRepetida(String matricula) {		
-		for (Funcionario cozinheiroAtual : cozinheiro.getAllCozinheiros()) {
-			if(cozinheiroAtual.getMatricula().equals(matricula)) {
+		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
+			if(cozinheiroAtual.getMatricula().equals(matricula.trim())) {
 				return false;
 			}
 		}
 		
-		for (Funcionario degustadorAtual : degustador.getAllDegustadores()) {
-			if(degustadorAtual.getMatricula().equals(matricula)) {
+		for (Funcionario degustadorAtual : degustadorModel.getAllDegustadores()) {
+			if(degustadorAtual.getMatricula().equals(matricula.trim())) {
 				return false;
 			}
 		}
 		
-		for (Funcionario editorAtual : editor.getAllEditores()) {
-			if(editorAtual.getMatricula().equals(matricula)) {
+		for (Funcionario editorAtual : editorModel.getAllEditores()) {
+			if(editorAtual.getMatricula().equals(matricula.trim())) {
 				return false;
 			}
 		}
@@ -57,19 +57,19 @@ public class FuncionarioController {
 	}
 	
 	public boolean validarRG(String rg) {
-		for (Funcionario cozinheiroAtual : cozinheiro.getAllCozinheiros()) {
+		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
 			if(cozinheiroAtual.getRg().equals(rg)) {
 				return false;
 			}
 		}
 		
-		for (Funcionario degustadorAtual : degustador.getAllDegustadores()) {
+		for (Funcionario degustadorAtual : degustadorModel.getAllDegustadores()) {
 			if(degustadorAtual.getRg().equals(rg)) {
 				return false;
 			}
 		}
 		
-		for (Funcionario editorAtual : editor.getAllEditores()) {
+		for (Funcionario editorAtual : editorModel.getAllEditores()) {
 			if(editorAtual.getRg().equals(rg)) {
 				return false;
 			}
@@ -98,5 +98,4 @@ public class FuncionarioController {
 		}
 		return true;
 	}
-	
 }

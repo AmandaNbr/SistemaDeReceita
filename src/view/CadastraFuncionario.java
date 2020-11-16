@@ -8,12 +8,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import controller.CozinheiroController;
+import controller.EditorController;
 import controller.FuncionarioController;
 import model.TipoFuncionario;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.security.acl.Group;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -29,7 +32,9 @@ import javax.swing.JScrollBar;
 
 public class CadastraFuncionario extends JFrame {
 	
-	private FuncionarioController funcionarioController = new FuncionarioController();;
+	private FuncionarioController funcionarioController = new FuncionarioController();
+	private EditorController editorController = new EditorController();
+	private CozinheiroController cozinheiroController = new CozinheiroController();
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -49,6 +54,9 @@ public class CadastraFuncionario extends JFrame {
 	private JTextField textFieldRestaurantesTrabalhados;
 	private JButton btnVoltar;
 	private JLabel lblnomeDosRestaurantes;
+	private ButtonGroup group;
+	JRadioButton rdbtnMasculino;
+	JRadioButton rdbtnFeminino;
 	
 	public CadastraFuncionario(String tipoFuncionario) {
 		this.tipoFuncionario = tipoFuncionario;
@@ -108,20 +116,36 @@ public class CadastraFuncionario extends JFrame {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(formattedTextFieldSalario.getText());
-				//System.out.println(formattedTextFieldSalario.getText().replace(".", "").replace("R$ ", "").replace(",", "."));
 				boolean camposValidos = checarCampos();
 				
 				if (camposValidos) {
 					dispose();
 					if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
-						// aviso de cadastro na degustacao
+						JOptionPane.showMessageDialog(null, "  O degustador só será cadastrado  \n  após o termino da degustacao!  ");
 						TelaDegustacao telaDegustacao = new TelaDegustacao();
 						telaDegustacao.startTelaDegustacao();
 						telaDegustacao.setLocationRelativeTo(null);
 						telaDegustacao.setVisible(true);
-					} else {		
-						// cadastrado ok
+					} else if (tipoFuncionario == TipoFuncionario.EDITOR.getTipo()) {	
+						editorController.cadastraEditor(textFieldNome.getText(),
+								                        textFieldMatricula.getText(),
+								                        formattedTextFieldRG.getText(),
+								                        getRbtSelecionado(),
+								                        formattedTextFieldData.getText(),
+								                        formattedTextFieldSalario.getText());
+						JOptionPane.showMessageDialog(null, "  Editor cadastrado com sucesso!  ");
+						MenuInicial menuInicial = new MenuInicial();
+						menuInicial.frame.setLocationRelativeTo(null);
+						menuInicial.frame.setVisible(true);
+					} else if (tipoFuncionario == TipoFuncionario.COZINHEIRO.getTipo()) {	
+						cozinheiroController.cadastraCozinheiro(textFieldNome.getText(),
+																 textFieldMatricula.getText(),
+		                                                         formattedTextFieldRG.getText(),
+		                                                         getRbtSelecionado(),
+		                                                         formattedTextFieldData.getText(),
+		                                                         formattedTextFieldSalario.getText(),
+		                                                         textFieldRestaurantesTrabalhados.getText());
+						JOptionPane.showMessageDialog(null, "  Cozinheiro cadastrado com sucesso!  ");
 						MenuInicial menuInicial = new MenuInicial();
 						menuInicial.frame.setLocationRelativeTo(null);
 						menuInicial.frame.setVisible(true);
@@ -243,19 +267,27 @@ public class CadastraFuncionario extends JFrame {
 		lblSexo.setBounds(294, 122, 70, 15);
 		contentPane.add(lblSexo);
 		
-		JRadioButton rdbtnMasculno = new JRadioButton("Masculino");
-		rdbtnMasculno.setBounds(278, 150, 107, 23);
-		contentPane.add(rdbtnMasculno);
-		rdbtnMasculno.setSelected(true);
+		rdbtnMasculino = new JRadioButton("Masculino");
+		rdbtnMasculino.setBounds(278, 150, 107, 23);
+		contentPane.add(rdbtnMasculino);
+		rdbtnMasculino.setSelected(true);
 		
-		JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
+		rdbtnFeminino = new JRadioButton("Feminino");
 		rdbtnFeminino.setBounds(394, 150, 149, 23);
 		contentPane.add(rdbtnFeminino);
 				
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 		group.add(rdbtnFeminino);
-		group.add(rdbtnMasculno);
+		group.add(rdbtnMasculino);
 		
+	}
+	
+	private char getRbtSelecionado() {
+		if(rdbtnMasculino.isSelected()) {
+			return 'M';
+		} else {
+			return 'F';
+		}
 	}
 	
 	private void campoDataDeIngresso() {
