@@ -6,30 +6,44 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 import model.TipoFuncionario;
 
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class TelaDegustacao extends JFrame {
 
 	private JButton btnCadastraDegustador;
 	private JPanel contentPane;
-	private JTextField textFieldNota;
-	private JTextField textFieldData;
+	private JFormattedTextField formattedTextFieldNota;
+	private JFormattedTextField formattedTextFieldData;
 	private JLabel lblDegustador;
 	private JLabel lblReceita;
 	private JButton btnVoltar;
 	private JButton btnRealizaDegustacao;
 	private JLabel lblNota;
 	private JLabel lblData;
+	private JComboBox<String> comboBoxReceita;
+	private JComboBox<String> comboBoxDegustador;
 
+	public TelaDegustacao() {
+		criarTela();
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +51,6 @@ public class TelaDegustacao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaDegustacao frame = new TelaDegustacao();
 					setLocationRelativeTo(null);
 					setVisible(true);
 				} catch (Exception e) {
@@ -50,7 +63,7 @@ public class TelaDegustacao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaDegustacao() {
+	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
@@ -67,7 +80,7 @@ public class TelaDegustacao extends JFrame {
 		
 		campoNota();
 		
-		campoData();	
+		campoData();
 	}
 	
 	private void initializeButtons(){		
@@ -105,10 +118,8 @@ public class TelaDegustacao extends JFrame {
 	}
 	
 	private void campoDegustador() {
-		JComboBox<String> comboBoxDegustador = new JComboBox<String>();
+		comboBoxDegustador = new JComboBox<String>();
 		comboBoxDegustador.setBounds(64, 57, 139, 24);
-		comboBoxDegustador.addItem("");
-		comboBoxDegustador.addItem("amcssdsax");
 		contentPane.add(comboBoxDegustador);
 		
 		lblDegustador = new JLabel("Degustador");
@@ -124,7 +135,7 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(lblReceita);
 		lblReceita.setVisible(false);
 		
-		JComboBox<String> comboBoxReceita = new JComboBox<String>();
+		comboBoxReceita = new JComboBox<String>();
 		comboBoxReceita.setBounds(64, 158, 139, 24);
 		contentPane.add(comboBoxReceita);
 		comboBoxReceita.setVisible(false);
@@ -137,11 +148,20 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(lblNota);
 		lblNota.setVisible(false);
 		
-		textFieldNota = new JTextField();
-		textFieldNota.setBounds(297, 157, 64, 27);
-		contentPane.add(textFieldNota);
-		textFieldNota.setColumns(10);
-		textFieldNota.setVisible(false);
+		NumberFormat format = NumberFormat.getIntegerInstance();
+		format.setMaximumFractionDigits(0);
+		NumberFormatter formatter = new NumberFormatter(format);
+		formatter.setMinimum(0);
+		formatter.setMaximum(10);
+		formatter.setAllowsInvalid(false);
+		formatter.setOverwriteMode(true);	
+		
+		formattedTextFieldNota = new JFormattedTextField(formatter);
+		formattedTextFieldNota.setBounds(297, 157, 64, 27);
+		contentPane.add(formattedTextFieldNota);
+		formattedTextFieldNota.setToolTipText("Selecione o numero para modifica-lo.");
+		formattedTextFieldNota.setColumns(10);
+		formattedTextFieldNota.setVisible(false);
 	}
 	
 	private void campoData() {
@@ -151,10 +171,15 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(lblData);
 		lblData.setVisible(false);
 		
-		textFieldData = new JTextField();
-		textFieldData.setBounds(64, 248, 139, 24);
-		contentPane.add(textFieldData);
-		textFieldData.setColumns(10);
-		textFieldData.setVisible(false);
+		try {
+			formattedTextFieldData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			formattedTextFieldData.setBounds(64, 248, 139, 24);
+			contentPane.add(formattedTextFieldData);
+			formattedTextFieldData.setValue("01/01/2001");
+			formattedTextFieldData.setVisible(false);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

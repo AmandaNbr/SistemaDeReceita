@@ -72,6 +72,7 @@ public class MenuInicial {
 	
 	private void initializeButtons() {
 		
+		// COZINHEIRO
 		btnCadastraCozinheiro = new JButton("Cadastrar Cozinheiro");
 		btnCadastraCozinheiro.setFocusable(false);
 		btnCadastraCozinheiro.addActionListener(new ActionListener() {

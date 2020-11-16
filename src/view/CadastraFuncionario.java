@@ -153,8 +153,8 @@ public class CadastraFuncionario extends JFrame {
 		
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(45, 57, 130, 25);
-		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
+		contentPane.add(textFieldNome);
 	}
 	
 	private void campoMatricula() {
