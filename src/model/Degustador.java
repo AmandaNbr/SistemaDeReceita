@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Degustador extends Funcionario{
@@ -16,6 +17,9 @@ public class Degustador extends Funcionario{
 		this.qntDegustacoes = qntDegustacoes;
 	}
 	 
+	public Degustador() {
+	}
+
 	@Override
 	public String toString() {
 		return "Degustador [qntDegustacoes=" + qntDegustacoes + "]";
@@ -28,5 +32,9 @@ public class Degustador extends Funcionario{
 	
 	public void setQntDegustacoes(int qntDegustacoes) {
 		this.qntDegustacoes = qntDegustacoes;
+	}
+	
+	public ArrayList<Funcionario> getAllDegustadores() {
+		return Empresa.getFuncionariosPorCargo(Degustador.class);
 	}
 }

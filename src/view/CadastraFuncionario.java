@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import controller.FuncionarioController;
 import model.TipoFuncionario;
 
 import javax.swing.ButtonGroup;
@@ -17,18 +18,18 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 
 public class CadastraFuncionario extends JFrame {
 	
+	private FuncionarioController funcionarioController = new FuncionarioController();;
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -109,16 +110,24 @@ public class CadastraFuncionario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(formattedTextFieldSalario.getText());
 				//System.out.println(formattedTextFieldSalario.getText().replace(".", "").replace("R$ ", "").replace(",", "."));
-				dispose();
-				if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
-					TelaDegustacao telaDegustacao = new TelaDegustacao();
-					telaDegustacao.startTelaDegustacao();
-					telaDegustacao.setLocationRelativeTo(null);
-					telaDegustacao.setVisible(true);
-				} else {				
-					MenuInicial menuInicial = new MenuInicial();
-					menuInicial.frame.setLocationRelativeTo(null);
-					menuInicial.frame.setVisible(true);
+				boolean camposValidos = checarCampos();
+				
+				if (camposValidos) {
+					dispose();
+					if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
+						// aviso de cadastro na degustacao
+						TelaDegustacao telaDegustacao = new TelaDegustacao();
+						telaDegustacao.startTelaDegustacao();
+						telaDegustacao.setLocationRelativeTo(null);
+						telaDegustacao.setVisible(true);
+					} else {		
+						// cadastrado ok
+						MenuInicial menuInicial = new MenuInicial();
+						menuInicial.frame.setLocationRelativeTo(null);
+						menuInicial.frame.setVisible(true);
+					}
+				} else {
+						// Nada a fazer
 				}
 			}
 		});
@@ -143,6 +152,48 @@ public class CadastraFuncionario extends JFrame {
 		});
 		btnVoltar.setBounds(70, 385, 160, 45);
 		contentPane.add(btnVoltar);
+	}
+	
+	private boolean checarCampos() {
+		
+		boolean camposValidos = funcionarioController.validarNome(textFieldNome.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um nome!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = funcionarioController.validarMatriculaVazia(textFieldMatricula.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma matricula!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = funcionarioController.validarMatriculaRepetida(textFieldMatricula.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Matricula já cadastrada!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = funcionarioController.validarRG(formattedTextFieldRG.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  RG já cadastrado!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = funcionarioController.validarData(formattedTextFieldData.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Data invalida!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = funcionarioController.validarSalario(formattedTextFieldSalario.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um salario maior que o salario minimo atual!  \n  (R$ 1045.00)  ");
+			return camposValidos;
+		}
+		
+
+		return camposValidos;
 	}
 	
 	private void campoNome() {
@@ -217,7 +268,7 @@ public class CadastraFuncionario extends JFrame {
 			formattedTextFieldData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 			formattedTextFieldData.setBounds(45, 245, 130, 25);
 			contentPane.add(formattedTextFieldData);
-			formattedTextFieldData.setValue("01/01/2001");
+			formattedTextFieldData.setValue("00/00/0000");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

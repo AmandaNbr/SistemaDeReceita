@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Editor extends Funcionario {
@@ -14,5 +15,7 @@ public class Editor extends Funcionario {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 	}
 	
-	
+	public ArrayList<Funcionario> getAllEditores() {
+		return Empresa.getFuncionariosPorCargo(Editor.class);
+	}
 }

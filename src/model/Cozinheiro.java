@@ -17,6 +17,9 @@ public class Cozinheiro extends Funcionario{
 		this.restaurantesTrab = restaurantesTrab;
 	}
 	
+	public Cozinheiro() {
+	}
+
 	@Override
 	public String toString() {
 		return "Cozinheiro [restaurantesTrab=" + restaurantesTrab + "]";
@@ -29,5 +32,9 @@ public class Cozinheiro extends Funcionario{
 	
 	public void setRestaurantesTrab(ArrayList<String> restaurantesTrab) {
 		this.restaurantesTrab = restaurantesTrab;
+	}
+	
+	public ArrayList<Funcionario> getAllCozinheiros() {
+		return Empresa.getFuncionariosPorCargo(Cozinheiro.class);
 	}
 }
