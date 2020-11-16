@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaDegustacao extends JFrame {
 
+	private JButton btnCadastraDegustador;
 	private JPanel contentPane;
 	private JTextField textFieldNota;
 	private JTextField textFieldData;
@@ -69,7 +70,7 @@ public class TelaDegustacao extends JFrame {
 	}
 	
 	private void initializeButtons(){		
-		JButton btnCadastraDegustador = new JButton("Cadastrar Degustador");
+		btnCadastraDegustador = new JButton("Cadastrar Degustador");
 		btnCadastraDegustador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -79,16 +80,21 @@ public class TelaDegustacao extends JFrame {
 		});
 		btnCadastraDegustador.setBounds(273, 36, 193, 45);
 		contentPane.add(btnCadastraDegustador);
+		btnCadastraDegustador.setFocusable(false);
 		
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MenuInicial menuInicial = new MenuInicial();
+				menuInicial.frame.setLocationRelativeTo(null);
+				menuInicial.frame.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(53, 302, 183, 45);
 		contentPane.add(btnVoltar);
 		
 		btnRealizaDegustacao = new JButton("Finalizar degustacao");
+		btnRealizaDegustacao.setVisible(false);
 		btnRealizaDegustacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -112,11 +118,13 @@ public class TelaDegustacao extends JFrame {
 		lblReceita = new JLabel("Receita");
 		lblReceita.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblReceita.setBounds(64, 137, 95, 15);
-		contentPane.add(lblReceita);	
+		contentPane.add(lblReceita);
+		lblReceita.setVisible(false);
 		
 		JComboBox comboBoxReceita = new JComboBox();
 		comboBoxReceita.setBounds(64, 158, 139, 24);
 		contentPane.add(comboBoxReceita);
+		comboBoxReceita.setVisible(false);
 	}
 	
 	private void campoNota() {
@@ -124,11 +132,13 @@ public class TelaDegustacao extends JFrame {
 		lblNota.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNota.setBounds(297, 137, 70, 15);
 		contentPane.add(lblNota);
+		lblNota.setVisible(false);
 		
 		textFieldNota = new JTextField();
 		textFieldNota.setBounds(297, 157, 64, 27);
 		contentPane.add(textFieldNota);
 		textFieldNota.setColumns(10);
+		textFieldNota.setVisible(false);
 	}
 	
 	private void campoData() {
@@ -136,10 +146,12 @@ public class TelaDegustacao extends JFrame {
 		lblData.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblData.setBounds(64, 226, 70, 15);
 		contentPane.add(lblData);
+		lblData.setVisible(false);
 		
 		textFieldData = new JTextField();
 		textFieldData.setBounds(64, 248, 139, 24);
 		contentPane.add(textFieldData);
 		textFieldData.setColumns(10);
+		textFieldData.setVisible(false);
 	}
 }

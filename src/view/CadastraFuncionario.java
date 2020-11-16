@@ -28,6 +28,7 @@ import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 
 public class CadastraFuncionario extends JFrame {
+	
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -120,10 +121,17 @@ public class CadastraFuncionario extends JFrame {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				MenuInicial menuInicial = new MenuInicial();
-				menuInicial.frame.setLocationRelativeTo(null);
-				menuInicial.frame.setVisible(true);
+				dispose();				
+				if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
+					TelaDegustacao telaDegustacao = new TelaDegustacao();
+					telaDegustacao.startTelaDegustacao();
+					telaDegustacao.setLocationRelativeTo(null);
+					telaDegustacao.setVisible(true);
+				} else {				
+					MenuInicial menuInicial = new MenuInicial();
+					menuInicial.frame.setLocationRelativeTo(null);
+					menuInicial.frame.setVisible(true);
+				}
 			}
 		});
 		btnVoltar.setBounds(70, 385, 160, 45);
