@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import controller.DegustacaoController;
+import model.Degustacao;
 import model.TipoFuncionario;
 
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaDegustacao extends JFrame {
 
+	private DegustacaoController degustacaoController = new DegustacaoController();
 	private JButton btnCadastraDegustador;
 	private JPanel contentPane;
 	private JFormattedTextField formattedTextFieldNota;
@@ -117,6 +120,8 @@ public class TelaDegustacao extends JFrame {
 		comboBoxDegustador = new JComboBox<String>();
 		comboBoxDegustador.setBounds(64, 57, 139, 24);
 		contentPane.add(comboBoxDegustador);
+		// TODO: aparecer opcoes do nome do degustador
+		comboBoxDegustador.add(degustadorController.getName);
 		
 		lblDegustador = new JLabel("Degustador");
 		lblDegustador.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -129,12 +134,21 @@ public class TelaDegustacao extends JFrame {
 		lblReceita.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblReceita.setBounds(64, 137, 95, 15);
 		contentPane.add(lblReceita);
-		lblReceita.setVisible(false);
+		if(degustacaoController.validarDegustadorVazio()) {			
+			lblReceita.setVisible(true);		
+		} else {
+			lblReceita.setVisible(false);
+		}
+		
 		
 		comboBoxReceita = new JComboBox<String>();
 		comboBoxReceita.setBounds(64, 158, 139, 24);
 		contentPane.add(comboBoxReceita);
-		comboBoxReceita.setVisible(false);
+		if(degustacaoController.validarDegustadorVazio()) {			
+			comboBoxReceita.setVisible(true);		
+		} else {
+			comboBoxReceita.setVisible(false);		
+		}
 	}
 	
 	private void campoNota() {
@@ -142,7 +156,11 @@ public class TelaDegustacao extends JFrame {
 		lblNota.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNota.setBounds(297, 137, 70, 15);
 		contentPane.add(lblNota);
-		lblNota.setVisible(false);
+		if(degustacaoController.validarDegustadorVazio()) {			
+			lblNota.setVisible(true);		
+		} else {
+			lblNota.setVisible(false);		
+		}
 		
 		NumberFormat format = NumberFormat.getIntegerInstance();
 		format.setMaximumFractionDigits(0);
@@ -157,7 +175,11 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(formattedTextFieldNota);
 		formattedTextFieldNota.setToolTipText("Selecione o numero para modifica-lo.");
 		formattedTextFieldNota.setColumns(10);
-		formattedTextFieldNota.setVisible(false);
+		if(degustacaoController.validarDegustadorVazio()) {			
+			formattedTextFieldNota.setVisible(true);		
+		} else {
+			formattedTextFieldNota.setVisible(false);		
+		}
 	}
 	
 	private void campoData() {
@@ -165,14 +187,22 @@ public class TelaDegustacao extends JFrame {
 		lblData.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblData.setBounds(64, 226, 70, 15);
 		contentPane.add(lblData);
-		lblData.setVisible(false);
+		if(degustacaoController.validarDegustadorVazio()) {			
+			lblData.setVisible(true);		
+		} else {
+			lblData.setVisible(false);		
+		}
 		
 		try {
 			formattedTextFieldData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 			formattedTextFieldData.setBounds(64, 248, 139, 24);
 			contentPane.add(formattedTextFieldData);
 			formattedTextFieldData.setValue("01/01/2001");
-			formattedTextFieldData.setVisible(false);
+			if(degustacaoController.validarDegustadorVazio()) {			
+				formattedTextFieldData.setVisible(true);		
+			} else {
+				formattedTextFieldData.setVisible(false);		
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

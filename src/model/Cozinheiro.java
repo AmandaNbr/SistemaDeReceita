@@ -5,6 +5,8 @@ import java.util.Date;
 public class Cozinheiro extends Funcionario{
 
 	private ArrayList<String> restaurantesTrab;	
+	
+	public Cozinheiro() {}
 
 	public Cozinheiro(String nome, 
 				      String matricula, 
@@ -17,8 +19,6 @@ public class Cozinheiro extends Funcionario{
 		this.restaurantesTrab = restaurantesTrab;
 	}
 	
-	public Cozinheiro() {
-	}
 
 	@Override
 	public String toString() {

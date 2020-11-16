@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Editor extends Funcionario {
 		
-	public Editor() {};
+	public Editor() {}
 	
 	public Editor(String nome, 
 			      String matricula, 
@@ -17,5 +17,9 @@ public class Editor extends Funcionario {
 	
 	public ArrayList<Funcionario> getAllEditores() {
 		return Empresa.getFuncionariosPorCargo(Editor.class);
+	}
+	
+	public void cadastrarEditor(Editor editor) {
+		Empresa.addNovoFuncionario(editor);
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
 import controller.CozinheiroController;
+import controller.DegustadorController;
 import controller.EditorController;
 import controller.FuncionarioController;
 import model.TipoFuncionario;
@@ -35,6 +36,7 @@ public class CadastraFuncionario extends JFrame {
 	private FuncionarioController funcionarioController = new FuncionarioController();
 	private EditorController editorController = new EditorController();
 	private CozinheiroController cozinheiroController = new CozinheiroController();
+	private DegustadorController degustadorController = new DegustadorController();
 	private String tipoFuncionario;
 	private JPanel contentPane;
 	private JButton btnCadastrar;
@@ -122,6 +124,12 @@ public class CadastraFuncionario extends JFrame {
 					dispose();
 					if (tipoFuncionario == TipoFuncionario.DEGUSTADOR.getTipo()) {
 						JOptionPane.showMessageDialog(null, "  O degustador só será cadastrado  \n  após o termino da degustacao!  ");
+						degustadorController.cadastraDegustador(textFieldNome.getText(),
+								                                textFieldMatricula.getText(),
+								                                formattedTextFieldRG.getText(),
+								                                getRbtSelecionado(),
+								                                formattedTextFieldData.getText(),
+								                                formattedTextFieldSalario.getText());
 						TelaDegustacao telaDegustacao = new TelaDegustacao();
 						telaDegustacao.startTelaDegustacao();
 						telaDegustacao.setLocationRelativeTo(null);
