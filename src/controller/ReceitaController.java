@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import model.Cozinheiro;
-import model.Funcionario;
-import model.Ingrediente;
 import model.IngredienteDaReceita;
 import model.Receita;
 import model.ReceitaCategorias;
 import utils.DataUtils;
+import utils.StringUtils;
 
 public class ReceitaController {
 
 	private Receita receitaModel = new Receita();
 	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
-	private CozinheiroController cozinheiroController = new CozinheiroController();
-	
 	public ReceitaController() {}
 	
 	public boolean validarNomeVazio(String nome) {
@@ -30,8 +27,8 @@ public class ReceitaController {
 	public boolean validarNomeRepetido(String nomeDaReceita, Cozinheiro cozinheiro) {
 		
 		for (Receita receitaAtual : getAllReceitas()) {
-			if (receitaAtual.getNome().equals(nomeDaReceita.trim())) {
-				if (receitaAtual.getMatriculaCozinheiro().equals(cozinheiro.getMatricula())){
+			if (StringUtils.comparaStrings(receitaAtual.getNome(), nomeDaReceita)) {
+				if (StringUtils.comparaStrings(receitaAtual.getMatriculaCozinheiro(), cozinheiro.getMatricula())){
 					return false;
 				}
 			}
@@ -50,7 +47,7 @@ public class ReceitaController {
 	
 	public boolean validarCodigoRepetido(String codigo) {		
 		for (Receita receitaAtual : receitaModel.getAllReceitas()) {
-			if(receitaAtual.getCodigo().equals(codigo.trim())) {
+			if(StringUtils.comparaStrings(receitaAtual.getCodigo(), codigo)) {
 				return false;
 			}	
 		}

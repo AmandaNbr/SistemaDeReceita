@@ -9,7 +9,6 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
 import controller.CozinheiroController;
-import controller.DegustadorController;
 import controller.EditorController;
 import controller.FuncionarioController;
 import model.TipoFuncionario;
@@ -18,7 +17,6 @@ import utils.DataUtils;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.security.acl.Group;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -30,7 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JScrollBar;
 
 public class CadastraFuncionario extends JFrame {
 	

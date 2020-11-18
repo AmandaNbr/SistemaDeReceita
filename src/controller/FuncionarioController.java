@@ -4,6 +4,7 @@ import model.Cozinheiro;
 import model.Degustador;
 import model.Editor;
 import model.Funcionario;
+import utils.StringUtils;
 
 public class FuncionarioController {
 	
@@ -33,19 +34,19 @@ public class FuncionarioController {
 	
 	public boolean validarMatriculaRepetida(String matricula) {		
 		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
-			if(cozinheiroAtual.getMatricula().equals(matricula.trim())) {
+			if(StringUtils.comparaStrings(cozinheiroAtual.getMatricula(), matricula)) {
 				return false;
 			}
 		}
 		
 		for (Funcionario degustadorAtual : degustadorModel.getAllDegustadores()) {
-			if(degustadorAtual.getMatricula().equals(matricula.trim())) {
+			if(StringUtils.comparaStrings(degustadorAtual.getMatricula(), matricula)) {
 				return false;
 			}
 		}
 		
 		for (Funcionario editorAtual : editorModel.getAllEditores()) {
-			if(editorAtual.getMatricula().equals(matricula.trim())) {
+			if(StringUtils.comparaStrings(editorAtual.getMatricula(), matricula)) {
 				return false;
 			}
 		}
@@ -54,19 +55,19 @@ public class FuncionarioController {
 	
 	public boolean validarRG(String rg) {
 		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
-			if(cozinheiroAtual.getRg().equals(rg)) {
+			if(StringUtils.comparaStrings(cozinheiroAtual.getRg(), rg)) {
 				return false;
 			}
 		}
 		
 		for (Funcionario degustadorAtual : degustadorModel.getAllDegustadores()) {
-			if(degustadorAtual.getRg().equals(rg)) {
+			if(StringUtils.comparaStrings(degustadorAtual.getRg(), rg)) {
 				return false;
 			}
 		}
 		
 		for (Funcionario editorAtual : editorModel.getAllEditores()) {
-			if(editorAtual.getRg().equals(rg)) {
+			if(StringUtils.comparaStrings(editorAtual.getRg(), rg)) {
 				return false;
 			}
 		}

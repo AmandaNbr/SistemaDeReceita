@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import model.Ingrediente;
 import utils.DataUtils;
+import utils.StringUtils;
 
 public class IngredienteController {
 	
@@ -21,7 +22,7 @@ public class IngredienteController {
 	
 	public boolean validarNomeRepetido(String nome) {		
 		for (Ingrediente ingredienteAtual : ingredienteModel.getAllIngredientes()) {
-			if(ingredienteAtual.getNome().equals(nome.trim())) {
+			if(StringUtils.comparaStrings(ingredienteAtual.getNome(), nome)) {
 				return false;
 			}	
 		}

@@ -140,7 +140,7 @@ public class CadastraReceita extends JFrame {
 		camposValidos = receitaController.validarNomeRepetido(textFieldNome.getText(),
 															  (Cozinheiro )comboBoxCozinheiro.getSelectedItem());
 		if(!camposValidos) {
-			JOptionPane.showMessageDialog(null, "  Um cozinheiro nao pode ter receitas com o mesmo nome!  ");
+			JOptionPane.showMessageDialog(null, "  O cozinheiro nao pode ter receitas com o mesmo nome!  ");
 			return camposValidos;
 		}
 		
@@ -164,7 +164,7 @@ public class CadastraReceita extends JFrame {
 	
 		camposValidos = receitaController.validarCodigoRepetido(textFieldCodigo.getText());
 		if(!camposValidos) {
-			JOptionPane.showMessageDialog(null, "  Esse codigo ja existe!  ");
+			JOptionPane.showMessageDialog(null, "  Codigo repetido. O codigo deve ser unico!  ");
 			return camposValidos;
 		}
 		

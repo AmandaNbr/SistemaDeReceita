@@ -1,5 +1,8 @@
 package model;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import utils.DataUtils;
 
 public class Empresa {
 
@@ -70,5 +73,37 @@ public class Empresa {
 	
 	protected static ArrayList<Receita> getReceitas() {
 		return receitas;
+	}
+	
+	// 
+	public static void popularDadosParaTestar () {
+		Ingrediente ingrediente1 = new Ingrediente();
+		ingrediente1.setNome("Ovo");
+		ingrediente1.setDescricao("Médio");
+		ingrediente1.setDataDeFabricacao(DataUtils.converteData("01/01/2000"));
+		ingrediente1.setDataDeValidade(DataUtils.converteData("01/01/2021"));
+		ingredientes.add(ingrediente1);
+		Ingrediente ingrediente2 = new Ingrediente();
+		ingrediente2.setNome("Sal");
+		ingrediente2.setDescricao("Do mar.");
+		ingrediente2.setDataDeFabricacao(DataUtils.converteData("01/01/2000"));
+		ingrediente2.setDataDeValidade(DataUtils.converteData("01/01/2021"));
+		ingredientes.add(ingrediente2);
+		Ingrediente ingrediente3 = new Ingrediente();
+		ingrediente3.setNome("Manteiga");
+		ingrediente3.setDescricao("Extraído da banha do porco na fazenda do Sr. Raimundo.");
+		ingrediente3.setDataDeFabricacao(DataUtils.converteData("01/01/2000"));
+		ingrediente3.setDataDeValidade(DataUtils.converteData("01/01/2021"));
+		ingredientes.add(ingrediente3);
+		
+		Cozinheiro cozinheiro1 = new Cozinheiro();
+		cozinheiro1.setNome("Chef Robson Arnaldo da Silva Matos");
+		cozinheiro1.setRg("3.456.889");
+		cozinheiro1.setMatricula("1aB");
+		cozinheiro1.setSalario(2300.00);
+		cozinheiro1.setSexo('M');
+		cozinheiro1.setDataDeIngresso(DataUtils.converteData("01/01/2019"));
+		cozinheiro1.setRestaurantesTrab(new ArrayList<String>(Arrays.asList("Rattatoule", "Restaurante da Esquina", "Hamburgueria Carne Boa")));
+		funcionarios.add(cozinheiro1);
 	}
 }
