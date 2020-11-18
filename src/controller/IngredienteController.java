@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Date;
-
 import model.Ingrediente;
 import utils.DataUtils;
 
@@ -17,6 +16,16 @@ public class IngredienteController {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean validarNomeRepetido(String nome) {		
+		for (Ingrediente ingredienteAtual : ingredienteModel.getAllIngredientes()) {
+			if(ingredienteAtual.getNome().equals(nome.trim())) {
+				return false;
+			}	
+		}
+		
+		return true;
 	}
 	
 	public boolean validarDescricao(String descricao) {
@@ -54,8 +63,8 @@ public class IngredienteController {
 									String dataDeFabricacao,
 									String dataDeValidade) {
 		
-		Ingrediente ingrediente = new Ingrediente(nome,
-				 								  descricao,
+		Ingrediente ingrediente = new Ingrediente(nome.trim(),
+				 								  descricao.trim(),
 				 								  DataUtils.converteData(dataDeFabricacao),
 				 								  DataUtils.converteData(dataDeValidade));
 		

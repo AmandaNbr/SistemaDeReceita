@@ -86,6 +86,12 @@ public class CadastraIngrediente extends JFrame {
 			return camposValidos;
 		}
 		
+		camposValidos = ingredienteController.validarNomeRepetido(textFieldNome.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Ingrediente já cadastrado!  ");
+			return camposValidos;
+		}
+		
 		camposValidos = ingredienteController.validarDescricao(textFieldDescricao.getText());
 		if(!camposValidos) {
 			JOptionPane.showMessageDialog(null, "  Informe uma descricao!  ");
@@ -124,6 +130,7 @@ public class CadastraIngrediente extends JFrame {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				MenuInicial menuInicial = new MenuInicial();
 				menuInicial.startApplication();
 			}

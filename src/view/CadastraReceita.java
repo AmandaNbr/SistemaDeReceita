@@ -1,26 +1,50 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JSpinner;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
-import javax.swing.JScrollBar;
+import java.awt.ScrollPane;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.awt.event.ActionEvent;
 
 public class CadastraReceita extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNome;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textFieldCodigo;
+	private JButton btnCadastrarReceita;
+	private JButton btnVoltar;
+	private JLabel lblNome;
+	private JLabel lblCodigo;
+	private JLabel lblCozinheiro;
+	private JComboBox comboBoxCozinheiro;
+	private JLabel lblDataDeCriacao;
+	private JLabel lblPorcoesQueRende;
+	private JButton btnAddIngrediente;
+	private JLabel lblModoDePreparo;
+	private JEditorPane editorPaneModoDePreparo;
+	private JScrollPane scrollPaneModoDePreparo;
+	private JEditorPane editorPaneIngredientes;
+	private JScrollPane scrollPaneIngredientes;
+	private JLabel lblIngredientes;
+	private JFormattedTextField formattedTextFieldDataDeCriacao;
+	private JFormattedTextField formattedTextFieldPorcoesQueRende;
+	private JComboBox comboBox;
+	private JLabel lblCategoria;
 
 	public CadastraReceita() {
 		criarTela();
@@ -43,25 +67,68 @@ public class CadastraReceita extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
-	
+	 */	
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 630, 660);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCadastrarReceita = new JButton("Cadastrar receita");
-		btnCadastrarReceita.setBounds(265, 387, 198, 45);
-		contentPane.add(btnCadastrarReceita);
+		initializeButtons();
 		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(24, 387, 198, 45);
+		campoNome();
+		
+		campoCodigo();
+		
+		campoCozinheiro();
+
+		campoDataDeCriacao();
+		
+		campoPorcoesQueRende();
+		
+		campoCategoria();
+		
+		campoModoDePreparo();
+		
+		campoIngredientes();
+	}
+	
+	private void initializeButtons() {
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MenuInicial menuInicial = new MenuInicial();
+				menuInicial.startApplication();
+			}
+		});
+		btnVoltar.setBounds(68, 554, 198, 45);
 		contentPane.add(btnVoltar);
 		
-		JLabel lblNome = new JLabel("Nome");
+		btnCadastrarReceita = new JButton("Cadastrar receita");
+		btnCadastrarReceita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MenuInicial menuInicial = new MenuInicial();
+				menuInicial.startApplication();
+			}
+		});
+		btnCadastrarReceita.setBounds(360, 554, 198, 45);
+		contentPane.add(btnCadastrarReceita);
+		
+		btnAddIngrediente = new JButton("Add ingrediente");
+		btnAddIngrediente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAddIngrediente.setBounds(416, 194, 179, 35);
+		contentPane.add(btnAddIngrediente);
+	}
+	
+	private void campoNome() {
+		lblNome = new JLabel("Nome");
 		lblNome.setBounds(43, 24, 70, 15);
 		contentPane.add(lblNome);
 		
@@ -69,50 +136,93 @@ public class CadastraReceita extends JFrame {
 		textFieldNome.setBounds(40, 44, 114, 24);
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
-		
-		JLabel lblCodigo = new JLabel("Codigo");
-		lblCodigo.setBounds(265, 24, 70, 15);
+	}
+	
+	private void campoCodigo() {
+		lblCodigo = new JLabel("Codigo");
+		lblCodigo.setBounds(222, 24, 70, 15);
 		contentPane.add(lblCodigo);
 		
-		textField = new JTextField();
-		textField.setBounds(265, 44, 114, 24);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblCozinheiro = new JLabel("Cozinheiro");
-		lblCozinheiro.setBounds(43, 99, 111, 15);
+		textFieldCodigo = new JTextField();
+		textFieldCodigo.setBounds(220, 44, 114, 24);
+		contentPane.add(textFieldCodigo);
+		textFieldCodigo.setColumns(10);
+	}
+	
+	private void campoCozinheiro() {
+		lblCozinheiro = new JLabel("Cozinheiro");
+		lblCozinheiro.setBounds(412, 24, 111, 15);
 		contentPane.add(lblCozinheiro);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(43, 126, 135, 24);
-		contentPane.add(comboBox);
-		
-		JLabel lblDataDeCriacao = new JLabel("Data de criacao");
-		lblDataDeCriacao.setBounds(265, 99, 114, 15);
+		comboBoxCozinheiro = new JComboBox();
+		comboBoxCozinheiro.setBounds(412, 43, 183, 24);
+		contentPane.add(comboBoxCozinheiro);
+	}
+	
+	private void campoDataDeCriacao() {
+		lblDataDeCriacao = new JLabel("Data de criacao");
+		lblDataDeCriacao.setBounds(222, 96, 114, 15);
 		contentPane.add(lblDataDeCriacao);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(265, 127, 114, 24);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblPorcoesQueRende = new JLabel("Porcoes que rende");
-		lblPorcoesQueRende.setBounds(43, 182, 152, 15);
+		try {
+			formattedTextFieldDataDeCriacao = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			formattedTextFieldDataDeCriacao.setBounds(220, 115, 114, 24);
+			contentPane.add(formattedTextFieldDataDeCriacao);
+			formattedTextFieldDataDeCriacao.setValue("00/00/0000");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void campoPorcoesQueRende() {
+		lblPorcoesQueRende = new JLabel("Porcoes que rende");
+		lblPorcoesQueRende.setBounds(43, 96, 152, 15);
 		contentPane.add(lblPorcoesQueRende);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(43, 204, 60, 24);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		NumberFormat format = NumberFormat.getIntegerInstance();
+		format.setMaximumFractionDigits(0);
+		NumberFormatter formatter = new NumberFormatter(format);
+		formatter.setMinimum(1);
+		formatter.setMaximum(10000);
+		formatter.setAllowsInvalid(false);
+		formatter.setOverwriteMode(true);	
+				
+		formattedTextFieldPorcoesQueRende = new JFormattedTextField(formatter);
+		formattedTextFieldPorcoesQueRende.setBounds(43, 115, 50, 24);
+		contentPane.add(formattedTextFieldPorcoesQueRende);
+		formattedTextFieldPorcoesQueRende.setToolTipText("Selecione o numero para modifica-lo.");
+	}
+	
+	private void campoCategoria() {
+		comboBox = new JComboBox();
+		comboBox.setBounds(416, 114, 179, 24);
+		contentPane.add(comboBox);
 		
-		JButton btnNewButton = new JButton("Add ingrediente");
-		btnNewButton.setBounds(254, 182, 179, 45);
-		contentPane.add(btnNewButton);
+		lblCategoria = new JLabel("Categoria");
+		lblCategoria.setBounds(416, 96, 70, 15);
+		contentPane.add(lblCategoria);
+	}
+	
+	private void campoModoDePreparo() {
+		lblModoDePreparo = new JLabel("Modo de preparo");
+		lblModoDePreparo.setBounds(43, 171, 142, 15);
+		contentPane.add(lblModoDePreparo);
 		
-		JLabel lblNewLabel = new JLabel("Modo de preparo");
-		lblNewLabel.setBounds(43, 253, 142, 15);
-		contentPane.add(lblNewLabel);
+		editorPaneModoDePreparo = new JEditorPane();
+		scrollPaneModoDePreparo = new JScrollPane(editorPaneModoDePreparo, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneModoDePreparo.setBounds(43, 198, 339, 329);
+		contentPane.add(scrollPaneModoDePreparo);
+	}
+	
+	private void campoIngredientes() {
+		editorPaneIngredientes = new JEditorPane();
+		editorPaneIngredientes.setEditable(false);
+		scrollPaneIngredientes = new JScrollPane(editorPaneIngredientes, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneIngredientes.setBounds(412, 268, 183, 258);
+		contentPane.add(scrollPaneIngredientes);
 		
-		//buttons
+		lblIngredientes = new JLabel("Ingredientes");
+		lblIngredientes.setBounds(412, 241, 119, 15);
+		contentPane.add(lblIngredientes);
 	}
 }

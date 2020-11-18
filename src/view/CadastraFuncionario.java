@@ -118,7 +118,6 @@ public class CadastraFuncionario extends JFrame {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DataUtils.dataAtual();
 				boolean camposValidos = checarCampos();
 				
 				if (camposValidos) {

@@ -1,13 +1,7 @@
 package controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
-import model.Cozinheiro;
 import model.Degustador;
-import model.Empresa;
 import model.Funcionario;
 import utils.DataUtils;
 

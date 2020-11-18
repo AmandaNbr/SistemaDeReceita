@@ -58,7 +58,7 @@ public class Ingrediente {
 		this.descricao = descricao;
 	}
 	
-	public ArrayList<Ingrediente> getIngrediente() {
+	public ArrayList<Ingrediente> getAllIngredientes() {
 		return Empresa.getIngredientes();
 	}
 	

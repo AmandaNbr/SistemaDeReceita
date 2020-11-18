@@ -8,9 +8,7 @@ public class Empresa {
 	protected static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 	protected static ArrayList<Receita> receitas = new ArrayList<>(); 
 	
-	
-	
-	public static void addNovoFuncionario(Funcionario funcionario) {
+	protected static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {
 			funcionarios = new ArrayList<>();
 			funcionarios.add(funcionario);
@@ -19,7 +17,7 @@ public class Empresa {
 		}
 	}
 	
-	public static void addNovoLivroDeReceita(LivroDeReceita livroDeReceita) {
+	protected static void addNovoLivroDeReceita(LivroDeReceita livroDeReceita) {
 		if(livrosDeReceita == null) {
 			livrosDeReceita = new ArrayList<>();
 			livrosDeReceita.add(livroDeReceita);
@@ -28,7 +26,7 @@ public class Empresa {
 		}
 	}
 
-	public static void addIngrediente(Ingrediente ingrediente) {
+	protected static void addIngrediente(Ingrediente ingrediente) {
 		if(ingredientes == null) {
 			ingredientes = new ArrayList<>();
 			ingredientes.add(ingrediente);
@@ -37,7 +35,7 @@ public class Empresa {
 		}
 	}
 	
-	public static void addReceita(Receita receita) {
+	protected static void addReceita(Receita receita) {
 		if(receitas == null) {
 			receitas= new ArrayList<>();
 			receitas.add(receita);
@@ -46,15 +44,15 @@ public class Empresa {
 		}
 	}
 	
-	public static ArrayList<Funcionario> getAllFuncionarios() {
+	protected static ArrayList<Funcionario> getAllFuncionarios() {
 		return funcionarios;
 	}
 
-	public static ArrayList<LivroDeReceita> getLivrosDeReceita() {
+	protected static ArrayList<LivroDeReceita> getLivrosDeReceita() {
 		return livrosDeReceita;
 	}
 	
-	public static ArrayList<Funcionario> getFuncionariosPorCargo(Object cargoClass) {
+	protected static ArrayList<Funcionario> getFuncionariosPorCargo(Object cargoClass) {
 		ArrayList<Funcionario> funcionariosPorCargo = new ArrayList<>();
 		
 		for(Funcionario funcionario : funcionarios) {
@@ -66,11 +64,11 @@ public class Empresa {
 		return funcionariosPorCargo;
 	}
 	
-	public static ArrayList<Ingrediente> getIngredientes() {
+	protected static ArrayList<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
 	
-	public static ArrayList<Receita> getReceitas() {
+	protected static ArrayList<Receita> getReceitas() {
 		return receitas;
 	}
 }

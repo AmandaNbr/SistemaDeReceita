@@ -9,33 +9,27 @@ public class Receita {
 	private Date dataDeCriacao;
 	private int porcoesQueRende;
 	private String categoria;
-	
 	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
-	
-	private String cozinheiro;
-	
-	private int nota;
+	private String matriculaCozinheiro;
+	private ArrayList<Integer> notas;
 	
 	public Receita() {};
 
 	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, String categoria,
-			String cozinheiro, int nota, ArrayList<IngredienteDaReceita> ingredientesDaReceita) {
+			ArrayList<IngredienteDaReceita> ingredientesDaReceita, String matriculaCozinheiro) {
 		super();
 		this.nome = nome;
 		this.codigo = codigo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.porcoesQueRende = porcoesQueRende;
 		this.categoria = categoria;
-		this.cozinheiro = cozinheiro;
-		this.nota = nota;
 		this.ingredientesDaReceita = ingredientesDaReceita;
+		this.matriculaCozinheiro = matriculaCozinheiro;
 	}
 
 	@Override
 	public String toString() {
-		return "Receita [nome=" + nome + ", codigo=" + codigo + ", dataDeCriacao=" + dataDeCriacao
-				+ ", porcoesQueRende=" + porcoesQueRende + ", categoria=" + categoria + ", cozinheiro=" + cozinheiro
-				+ ", nota=" + nota + ", ingredientesDaReceita=" + ingredientesDaReceita + "]";
+		return nome + " - " + codigo;
 	}
 
 	public String getNome() {
@@ -78,20 +72,20 @@ public class Receita {
 		this.categoria = categoria;
 	}
 
-	public String getCozinheiro() {
-		return cozinheiro;
+	public String getMatriculaCozinheiro() {
+		return matriculaCozinheiro;
 	}
 
-	public void setCozinheiro(String cozinheiro) {
-		this.cozinheiro = cozinheiro;
+	public void setMatriculaCozinheiro(String matriculaCozinheiro) {
+		this.matriculaCozinheiro = matriculaCozinheiro;
 	}
 
-	public int getNota() {
-		return nota;
+	public ArrayList<Integer> getNotas() {
+		return notas;
 	}
 
-	public void setNota(int nota) {
-		this.nota = nota;
+	public void setNotas(ArrayList<Integer> notas) {
+		this.notas = notas;
 	}
 
 	public ArrayList<IngredienteDaReceita> getIngredientesDaReceita() {
@@ -100,5 +94,13 @@ public class Receita {
 
 	public void setIngredientesDaReceita(ArrayList<IngredienteDaReceita> ingredientesDaReceita) {
 		this.ingredientesDaReceita = ingredientesDaReceita;
+	}
+	
+	public ArrayList<Receita> getAllReceitas(){
+		return Empresa.getReceitas();
+	}
+	
+	public void cadastraReceita(Receita receita) {
+		Empresa.addReceita(receita);
 	}
 }
