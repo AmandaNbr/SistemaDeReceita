@@ -13,11 +13,13 @@ import javax.swing.text.NumberFormatter;
 import controller.CozinheiroController;
 import controller.IngredienteController;
 import controller.IngredienteDaReceitaController;
+import controller.ReceitaController;
 import model.Cozinheiro;
 import model.Funcionario;
 import model.Ingrediente;
 import model.IngredienteDaReceita;
 import model.ReceitaCategorias;
+import utils.DataUtils;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,6 +36,7 @@ import java.awt.event.ActionEvent;
 
 public class CadastraReceita extends JFrame {
 
+	private ReceitaController receitaController = new ReceitaController();
 	private CozinheiroController cozinheiroController = new CozinheiroController();
 	private IngredienteController ingredienteController = new IngredienteController();
 	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
@@ -92,7 +95,7 @@ public class CadastraReceita extends JFrame {
 	 */	
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 630, 660);
+		setBounds(100, 100, 720, 660);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -126,6 +129,45 @@ public class CadastraReceita extends JFrame {
 		}		
 	}
 	
+	private boolean checarCampos() {
+		
+		boolean camposValidos = receitaController.validarNomeVazio(textFieldNome.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um nome!  ");
+			return camposValidos;
+		}
+		
+		//msm nome msm cozinheiro
+		
+		camposValidos = receitaController.validarCodigoVazio(textFieldCodigo.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um codigo!  ");
+			return camposValidos;
+		}
+	
+		camposValidos = DataUtils.validarData(formattedTextFieldDataDeCriacao.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma data de criacao!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = receitaController.validarCodigoVazio(textFieldCodigo.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Codigo repetido!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = receitaController.validarModoDePreparoVazio(editorPaneModoDePreparo.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe o modo de preparo!  ");
+			return camposValidos;
+		}
+		
+		//add msm ingrediente
+		
+		return camposValidos;
+	}
+	
 	private void initializeButtons() {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -141,12 +183,16 @@ public class CadastraReceita extends JFrame {
 		btnCadastrarReceita = new JButton("Cadastrar receita");
 		btnCadastrarReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				MenuInicial menuInicial = new MenuInicial();
-				menuInicial.startApplication();
+				boolean camposValidos = checarCampos();
+				
+				if(camposValidos) {
+					dispose();
+					MenuInicial menuInicial = new MenuInicial();
+					menuInicial.startApplication();
+				}
 			}
 		});
-		btnCadastrarReceita.setBounds(360, 554, 198, 45);
+		btnCadastrarReceita.setBounds(429, 554, 198, 45);
 		contentPane.add(btnCadastrarReceita);
 		
 		btnAddIngrediente = new JButton("Add ingrediente");
@@ -155,7 +201,7 @@ public class CadastraReceita extends JFrame {
 				criarPopUp();
 			}
 		});
-		btnAddIngrediente.setBounds(416, 194, 179, 35);
+		btnAddIngrediente.setBounds(448, 194, 179, 35);
 		contentPane.add(btnAddIngrediente);
 	}
 	
@@ -225,29 +271,29 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(lblNome);
 		
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(40, 44, 114, 24);
+		textFieldNome.setBounds(43, 44, 280, 24);
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
 	}
 	
 	private void campoCodigo() {
 		lblCodigo = new JLabel("Codigo");
-		lblCodigo.setBounds(222, 24, 70, 15);
+		lblCodigo.setBounds(547, 96, 70, 15);
 		contentPane.add(lblCodigo);
 		
 		textFieldCodigo = new JTextField();
-		textFieldCodigo.setBounds(220, 44, 114, 24);
+		textFieldCodigo.setBounds(547, 115, 114, 24);
 		contentPane.add(textFieldCodigo);
 		textFieldCodigo.setColumns(10);
 	}
 	
 	private void campoCozinheiro() {
 		lblCozinheiro = new JLabel("Cozinheiro");
-		lblCozinheiro.setBounds(412, 24, 111, 15);
+		lblCozinheiro.setBounds(366, 24, 111, 15);
 		contentPane.add(lblCozinheiro);
 
 		comboBoxCozinheiro = new JComboBox<Cozinheiro>();
-		comboBoxCozinheiro.setBounds(412, 43, 183, 24);
+		comboBoxCozinheiro.setBounds(366, 43, 295, 24);
 		
 		for (Funcionario cozinheiro : cozinheiroController.getAllCozinheiros()) {
 			comboBoxCozinheiro.addItem(((Cozinheiro) cozinheiro));
@@ -258,12 +304,12 @@ public class CadastraReceita extends JFrame {
 	
 	private void campoDataDeCriacao() {
 		lblDataDeCriacao = new JLabel("Data de criacao");
-		lblDataDeCriacao.setBounds(222, 96, 114, 15);
+		lblDataDeCriacao.setBounds(209, 96, 114, 15);
 		contentPane.add(lblDataDeCriacao);
 		
 		try {
 			formattedTextFieldDataDeCriacao = new JFormattedTextField(new MaskFormatter("##/##/####"));
-			formattedTextFieldDataDeCriacao.setBounds(220, 115, 114, 24);
+			formattedTextFieldDataDeCriacao.setBounds(209, 115, 114, 24);
 			contentPane.add(formattedTextFieldDataDeCriacao);
 			formattedTextFieldDataDeCriacao.setValue("00/00/0000");
 		} catch (ParseException e) {
@@ -285,6 +331,7 @@ public class CadastraReceita extends JFrame {
 		formatter.setOverwriteMode(true);	
 	
 		formattedTextFieldPorcoesQueRende = new JFormattedTextField(formatter);
+		formattedTextFieldPorcoesQueRende.setValue(1);
 		formattedTextFieldPorcoesQueRende.setBounds(43, 115, 70, 24);
 		contentPane.add(formattedTextFieldPorcoesQueRende);
 		formattedTextFieldPorcoesQueRende.setToolTipText("Selecione o numero para modifica-lo.");
@@ -292,11 +339,11 @@ public class CadastraReceita extends JFrame {
 	
 	private void campoCategoria() {
 		comboBoxCategoria = new JComboBox<ReceitaCategorias>(ReceitaCategorias.values());
-		comboBoxCategoria.setBounds(416, 114, 179, 24);
+		comboBoxCategoria.setBounds(366, 114, 142, 24);
 		contentPane.add(comboBoxCategoria);
 		
 		lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(416, 96, 70, 15);
+		lblCategoria.setBounds(366, 96, 70, 15);
 		contentPane.add(lblCategoria);
 	}
 	
@@ -315,7 +362,7 @@ public class CadastraReceita extends JFrame {
 		editorPaneIngredientes = new JEditorPane();
 		editorPaneIngredientes.setEditable(false);
 		scrollPaneIngredientes = new JScrollPane(editorPaneIngredientes, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneIngredientes.setBounds(412, 268, 183, 258);
+		scrollPaneIngredientes.setBounds(412, 268, 261, 258);
 		contentPane.add(scrollPaneIngredientes);
 		
 		lblIngredientes = new JLabel("Ingredientes");
