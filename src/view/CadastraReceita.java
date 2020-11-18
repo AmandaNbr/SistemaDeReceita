@@ -12,9 +12,11 @@ import javax.swing.text.NumberFormatter;
 
 import controller.CozinheiroController;
 import controller.IngredienteController;
+import controller.IngredienteDaReceitaController;
 import model.Cozinheiro;
 import model.Funcionario;
 import model.Ingrediente;
+import model.IngredienteDaReceita;
 import model.ReceitaCategorias;
 
 import javax.swing.JButton;
@@ -27,12 +29,15 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class CadastraReceita extends JFrame {
 
 	private CozinheiroController cozinheiroController = new CozinheiroController();
 	private IngredienteController ingredienteController = new IngredienteController();
+	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
+	private ArrayList<IngredienteDaReceita> ingredientesDaReceita = new ArrayList<IngredienteDaReceita>();
 	private JPanel contentPane;
 	private JTextField textFieldNome;
 	private JTextField textFieldCodigo;
@@ -166,7 +171,11 @@ public class CadastraReceita extends JFrame {
 		int resultado = JOptionPane.showConfirmDialog(null, popUpIngrediente, "Adicionar Ingrediente",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if (resultado == JOptionPane.OK_OPTION) {
-			// Guardar valores
+			ingredientesDaReceita.add(ingredienteDaReceitaController.montarIngredienteDaReceita((Ingrediente) comboBoxNome.getSelectedItem(),
+				    																			formattedFieldQuantidade.getText(),
+				    																			textFieldMedida.getText()));
+
+			editorPaneIngredientes.setText(ingredienteDaReceitaController.montarListaDeIngredienteDaReceita(ingredientesDaReceita));
 		} else {
 			// Nada a fazer
 		}
@@ -192,13 +201,13 @@ public class CadastraReceita extends JFrame {
 		format.setMaximumFractionDigits(1);
 		format.setMinimumFractionDigits(1);
 		NumberFormatter formatter = new NumberFormatter(format);
-		formatter.setMinimum(1.0);
+		formatter.setMinimum(0.5);
 		formatter.setMaximum(10000.0);
 		formatter.setAllowsInvalid(false);
 		formatter.setOverwriteMode(false);
 		
 		formattedFieldQuantidade = new JFormattedTextField(formatter);
-		formattedFieldQuantidade.setValue(0.0);
+		formattedFieldQuantidade.setValue(1.0);
 		formattedFieldQuantidade.setToolTipText("Selecione o numero para modifica-lo.");
 		popUpIngrediente.add(formattedFieldQuantidade);
 	}
