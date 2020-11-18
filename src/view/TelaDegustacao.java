@@ -241,7 +241,7 @@ public class TelaDegustacao extends JFrame {
 			formattedTextFieldData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 			formattedTextFieldData.setBounds(64, 248, 139, 24);
 			contentPane.add(formattedTextFieldData);
-			formattedTextFieldData.setValue("01/01/2001");
+			formattedTextFieldData.setValue("00/00/0000");
 			formattedTextFieldData.setVisible(false);		
 		} catch (ParseException e) {
 			e.printStackTrace();

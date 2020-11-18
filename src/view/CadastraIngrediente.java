@@ -6,19 +6,35 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
+import controller.IngredienteController;
+import utils.DataUtils;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class CadastraIngrediente extends JFrame {
 
+	private IngredienteController ingredienteController = new IngredienteController();
 	private JPanel contentPane;
 	private JTextField textFieldNome;
 	private JTextField textFieldDescricao;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JButton btnVoltar;
+	private JButton btnCadastrarIngrediente;
+	private JLabel lblNome;
+	private JLabel lblDescricao;
+	private JLabel lblDataDeFabricacao;
+	private JLabel lblDataDeValidade;
+	private JFormattedTextField formattedTextFieldDataDeFabricacao;
+	private JFormattedTextField formattedTextFieldDataDeValidade;
 
 	public CadastraIngrediente() {
 		criarTela();	
@@ -62,8 +78,50 @@ public class CadastraIngrediente extends JFrame {
 		campoDataDeValidade();
 	}
 	
+	private boolean checarCampos() {
+		
+		boolean camposValidos = ingredienteController.validarNome(textFieldNome.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um nome!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = ingredienteController.validarDescricao(textFieldDescricao.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma descricao!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = DataUtils.validarData(formattedTextFieldDataDeFabricacao.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma data de fabricacao!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = DataUtils.validarData(formattedTextFieldDataDeValidade.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma data de validade!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = ingredienteController.validarVencimento(formattedTextFieldDataDeValidade.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Não é possivel cadastrar ingrediente vencido!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = ingredienteController.validarFabricacao(formattedTextFieldDataDeFabricacao.getText(),
+																formattedTextFieldDataDeValidade.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  A data de fabricacao deve ser antes da data de\n vencimento e do dia atual!  ");
+			return camposValidos;
+		}
+				
+		return camposValidos;
+	}
+	
 	private void inicializeButtons() {
-		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuInicial menuInicial = new MenuInicial();
@@ -73,12 +131,21 @@ public class CadastraIngrediente extends JFrame {
 		btnVoltar.setBounds(30, 291, 198, 45);
 		contentPane.add(btnVoltar);
 		
-		JButton btnCadastrarIngrediente = new JButton("Cadastrar ingrediente");
+		btnCadastrarIngrediente = new JButton("Cadastrar ingrediente");
 		btnCadastrarIngrediente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: cadastrar
-				MenuInicial menuInicial = new MenuInicial();
-				menuInicial.startApplication();
+				boolean camposValidos = checarCampos();
+
+				if(camposValidos) {
+					dispose();
+					ingredienteController.cadastraIngrediente(textFieldNome.getText(), 
+							                                  textFieldDescricao.getText(), 
+							                                  formattedTextFieldDataDeFabricacao.getText(), 
+							                                  formattedTextFieldDataDeValidade.getText());
+					JOptionPane.showMessageDialog(null, "  Ingrediente cadastrado com sucesso!  ");
+					MenuInicial menuInicial = new MenuInicial();
+					menuInicial.startApplication();
+				}
 			}
 		});
 		btnCadastrarIngrediente.setBounds(264, 291, 198, 45);
@@ -86,7 +153,7 @@ public class CadastraIngrediente extends JFrame {
 	}
 	
 	private void campoNome() {
-		JLabel lblNome = new JLabel("Nome");
+		lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 40, 70, 15);
 		contentPane.add(lblNome);
 		
@@ -97,7 +164,7 @@ public class CadastraIngrediente extends JFrame {
 	}
 	
 	private void campoDescricao() {
-		JLabel lblDescricao = new JLabel("Descricao");
+		lblDescricao = new JLabel("Descricao");
 		lblDescricao.setBounds(264, 40, 70, 15);
 		contentPane.add(lblDescricao);
 		
@@ -108,24 +175,32 @@ public class CadastraIngrediente extends JFrame {
 	}
 	
 	private void campoDataDeFabricacao() {
-		JLabel lblDataDeFabricacao = new JLabel("Data de fabricacao");
+		lblDataDeFabricacao = new JLabel("Data de fabricacao");
 		lblDataDeFabricacao.setBounds(50, 158, 160, 15);
 		contentPane.add(lblDataDeFabricacao);
 		
-		textField = new JTextField();
-		textField.setBounds(50, 190, 114, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		try {
+			formattedTextFieldDataDeFabricacao = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			formattedTextFieldDataDeFabricacao.setBounds(50, 190, 114, 26);
+			contentPane.add(formattedTextFieldDataDeFabricacao);
+			formattedTextFieldDataDeFabricacao.setValue("00/00/0000");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void campoDataDeValidade() {
 		JLabel lblDataDeValidade = new JLabel("Data de validade");
 		lblDataDeValidade.setBounds(264, 158, 128, 15);
 		contentPane.add(lblDataDeValidade);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(264, 190, 114, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+
+		try {
+			formattedTextFieldDataDeValidade = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			formattedTextFieldDataDeValidade.setBounds(264, 190, 114, 26);
+			contentPane.add(formattedTextFieldDataDeValidade);
+			formattedTextFieldDataDeValidade.setValue("00/00/0000");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }

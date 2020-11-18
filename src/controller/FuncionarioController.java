@@ -86,18 +86,6 @@ public class FuncionarioController {
 		}
 	}
 	
-	public boolean validarData(String data) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		simpleDateFormat.setLenient(false);
-		Date dataDeIngressoFormatada;
-		try {
-			dataDeIngressoFormatada = simpleDateFormat.parse(data);
-		} catch (ParseException e) {
-			return false;
-		}
-		return true;
-	}
-	
 	public double converterSalario(String salarioRecebido) {
 		String salarioFormatado = salarioRecebido.replace(".", "").replace("R$ ", "").replace(",", ".");
 		return Double.parseDouble(salarioFormatado);

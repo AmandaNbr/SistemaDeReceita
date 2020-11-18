@@ -13,6 +13,7 @@ import controller.DegustadorController;
 import controller.EditorController;
 import controller.FuncionarioController;
 import model.TipoFuncionario;
+import utils.DataUtils;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -117,6 +118,7 @@ public class CadastraFuncionario extends JFrame {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DataUtils.dataAtual();
 				boolean camposValidos = checarCampos();
 				
 				if (camposValidos) {
@@ -131,8 +133,6 @@ public class CadastraFuncionario extends JFrame {
 															 formattedTextFieldData.getText(),
 															 formattedTextFieldSalario.getText());
 						telaDegustacao.startTelaDegustacao();
-						telaDegustacao.setLocationRelativeTo(null);
-						telaDegustacao.setVisible(true);
 					} else if (tipoFuncionario == TipoFuncionario.EDITOR.getTipo()) {	
 						editorController.cadastraEditor(textFieldNome.getText(),
 								                        textFieldMatricula.getText(),
@@ -142,8 +142,7 @@ public class CadastraFuncionario extends JFrame {
 								                        formattedTextFieldSalario.getText());
 						JOptionPane.showMessageDialog(null, "  Editor cadastrado com sucesso!  ");
 						MenuInicial menuInicial = new MenuInicial();
-						menuInicial.frame.setLocationRelativeTo(null);
-						menuInicial.frame.setVisible(true);
+						menuInicial.startApplication();
 					} else if (tipoFuncionario == TipoFuncionario.COZINHEIRO.getTipo()) {	
 						cozinheiroController.cadastraCozinheiro(textFieldNome.getText(),
 																 textFieldMatricula.getText(),
@@ -155,8 +154,7 @@ public class CadastraFuncionario extends JFrame {
 		                                                         chckbxTituloDechef.isSelected());
 						JOptionPane.showMessageDialog(null, "  Cozinheiro cadastrado com sucesso!  ");
 						MenuInicial menuInicial = new MenuInicial();
-						menuInicial.frame.setLocationRelativeTo(null);
-						menuInicial.frame.setVisible(true);
+						menuInicial.startApplication();
 					}
 				} else {
 						// Nada a fazer
@@ -209,7 +207,7 @@ public class CadastraFuncionario extends JFrame {
 			return camposValidos;
 		}
 		
-		camposValidos = funcionarioController.validarData(formattedTextFieldData.getText());
+		camposValidos = DataUtils.validarData(formattedTextFieldData.getText());
 		if (!camposValidos) {
 			JOptionPane.showMessageDialog(null, "  Data invalida!  ");
 			return camposValidos;

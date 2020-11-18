@@ -20,4 +20,20 @@ public class DataUtils {
 		
 		return dataFormatada;
 	}
+	
+	public static boolean validarData(String data) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		simpleDateFormat.setLenient(false);
+		Date dataFormatada;
+		try {
+			dataFormatada = simpleDateFormat.parse(data);
+		} catch (ParseException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static Date dataAtual() {
+		return new Date(System.currentTimeMillis());
+	}
 }
