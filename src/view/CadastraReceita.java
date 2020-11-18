@@ -137,7 +137,24 @@ public class CadastraReceita extends JFrame {
 			return camposValidos;
 		}
 		
-		//msm nome msm cozinheiro
+		camposValidos = receitaController.validarNomeRepetido(textFieldNome.getText(),
+															  (Cozinheiro )comboBoxCozinheiro.getSelectedItem());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Um cozinheiro nao pode ter receitas com o mesmo nome!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = DataUtils.validarData(formattedTextFieldDataDeCriacao.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe uma data de criacao!  ");
+			return camposValidos;
+		}
+		
+		camposValidos = receitaController.validarDataDeCriacao(formattedTextFieldDataDeCriacao.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "   A data de criacao deve ser igual  \n  ou antes da data atual!  ");
+			return camposValidos;
+		}
 		
 		camposValidos = receitaController.validarCodigoVazio(textFieldCodigo.getText());
 		if(!camposValidos) {
@@ -145,15 +162,9 @@ public class CadastraReceita extends JFrame {
 			return camposValidos;
 		}
 	
-		camposValidos = DataUtils.validarData(formattedTextFieldDataDeCriacao.getText());
+		camposValidos = receitaController.validarCodigoRepetido(textFieldCodigo.getText());
 		if(!camposValidos) {
-			JOptionPane.showMessageDialog(null, "  Informe uma data de criacao!  ");
-			return camposValidos;
-		}
-		
-		camposValidos = receitaController.validarCodigoVazio(textFieldCodigo.getText());
-		if(!camposValidos) {
-			JOptionPane.showMessageDialog(null, "  Codigo repetido!  ");
+			JOptionPane.showMessageDialog(null, "  Esse codigo ja existe!  ");
 			return camposValidos;
 		}
 		
@@ -163,7 +174,11 @@ public class CadastraReceita extends JFrame {
 			return camposValidos;
 		}
 		
-		//add msm ingrediente
+		camposValidos = receitaController.validarIngredienteVazio(editorPaneIngredientes.getText());
+		if(!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Adicione um ingrediente!  ");
+			return camposValidos;
+		}
 		
 		return camposValidos;
 	}
@@ -187,6 +202,13 @@ public class CadastraReceita extends JFrame {
 				
 				if(camposValidos) {
 					dispose();
+					receitaController.CadastraReceita(textFieldNome.getText(),
+													  textFieldCodigo.getText(),
+													  formattedTextFieldDataDeCriacao.getText(),
+													  formattedTextFieldPorcoesQueRende.getText(),
+													  (ReceitaCategorias) comboBoxCategoria.getSelectedItem(),
+													  ingredientesDaReceita,
+													  (Cozinheiro) comboBoxCozinheiro.getSelectedItem());
 					MenuInicial menuInicial = new MenuInicial();
 					menuInicial.startApplication();
 				}

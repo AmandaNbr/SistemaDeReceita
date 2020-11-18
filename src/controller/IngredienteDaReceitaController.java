@@ -36,4 +36,9 @@ public class IngredienteDaReceitaController {
 		
 		return listaFormatada;
 	}
+
+	public int converterPorcoesQueRende(String porcoesQueRendeRecebida) {
+		return Integer.parseInt(porcoesQueRendeRecebida.replace(".", ""));
+	}
+	
 }

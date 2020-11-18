@@ -1,8 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import model.Cozinheiro;
+import model.Funcionario;
 import model.Ingrediente;
+import model.IngredienteDaReceita;
 import model.Receita;
 import model.ReceitaCategorias;
 import utils.DataUtils;
@@ -10,6 +14,8 @@ import utils.DataUtils;
 public class ReceitaController {
 
 	private Receita receitaModel = new Receita();
+	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
+	private CozinheiroController cozinheiroController = new CozinheiroController();
 	
 	public ReceitaController() {}
 	
@@ -21,7 +27,18 @@ public class ReceitaController {
 		}
 	}
 	
-	// TODO: validar se o chef cadastrou receita com o mesmo nome
+	public boolean validarNomeRepetido(String nomeDaReceita, Cozinheiro cozinheiro) {
+		
+		for (Receita receitaAtual : getAllReceitas()) {
+			if (receitaAtual.getNome().equals(nomeDaReceita.trim())) {
+				if (receitaAtual.getMatriculaCozinheiro().equals(cozinheiro.getMatricula())){
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 	
 	public boolean validarCodigoVazio(String codigo) {
 		if (!codigo.trim().isEmpty()) {
@@ -49,21 +66,44 @@ public class ReceitaController {
 		}
 	}
 	
+	public boolean validarIngredienteVazio(String listaDeIngredientes) {
+		if(!listaDeIngredientes.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean validarDataDeCriacao(String dataDeCriacao) {
+		Date dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
+
+		if(dataDeCriacaoFormatada.before(DataUtils.dataAtual())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void CadastraReceita(String nome,
 			                    String codigo,
 			                    String dataDeCriacao,
-			                    int porcoesQueRende,
+			                    String porcoesQueRende,
 			                    ReceitaCategorias categoria,
-			                    ArrayList<String> ingredienteDaReceita,
-			                    String matriculaCozinheiro) {
-//		Receita receita = new Receita(nome,
-//									  codigo,
-//									  DataUtils.converteData(dataDeCriacao),
-//									  porcoesQueRende,
-//									  categoria,
-//									  ingredienteDaReceita,
-//									  matriculaCozinheiro);
+			                    ArrayList<IngredienteDaReceita> ingredientesDaReceita,
+			                    Cozinheiro matriculaCozinheiro) {
 		
-//		receitaModel.cadastraReceita(receita);
+		Receita receita = new Receita(nome.trim(),
+									  codigo.trim(),
+									  DataUtils.converteData(dataDeCriacao),
+									  ingredienteDaReceitaController.converterPorcoesQueRende(porcoesQueRende),
+									  categoria,
+									  ingredientesDaReceita,
+									  matriculaCozinheiro.getMatricula());
+		
+		receitaModel.cadastraReceita(receita);
+	}
+	
+	public ArrayList<Receita> getAllReceitas(){
+		return receitaModel.getAllReceitas();
 	}
 }
