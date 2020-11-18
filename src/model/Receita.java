@@ -8,14 +8,14 @@ public class Receita {
 	private String codigo;
 	private Date dataDeCriacao;
 	private int porcoesQueRende;
-	private String categoria;
+	private ReceitaCategorias categoria;
 	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
 	private String matriculaCozinheiro;
 	private ArrayList<Integer> notas;
 	
 	public Receita() {};
 
-	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, String categoria,
+	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, ReceitaCategorias categoria,
 			ArrayList<IngredienteDaReceita> ingredientesDaReceita, String matriculaCozinheiro) {
 		super();
 		this.nome = nome;
@@ -64,11 +64,11 @@ public class Receita {
 		this.porcoesQueRende = porcoesQueRende;
 	}
 
-	public String getCategoria() {
+	public ReceitaCategorias getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(ReceitaCategorias categoria) {
 		this.categoria = categoria;
 	}
 

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import model.Ingrediente;
 import utils.DataUtils;
@@ -56,6 +57,18 @@ public class IngredienteController {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean validarIngredienteVazio() {
+		if(ingredienteModel.getAllIngredientes().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public ArrayList<Ingrediente> getAllIngredientes(){
+		return ingredienteModel.getAllIngredientes();
 	}
 
 	public void cadastraIngrediente(String nome,

@@ -21,8 +21,7 @@ public class Ingrediente {
 
 	@Override
 	public String toString() {
-		return "Ingrediente [nome=" + nome + ", dataDeFabricacao=" + dataDeFabricacao + ", dataDeValidade="
-				+ dataDeValidade + ", descricao=" + descricao + "]";
+		return nome;
 	}
 	
 	//gets e sets

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Ingrediente;
 import model.Receita;
+import model.ReceitaCategorias;
 import utils.DataUtils;
 
 public class ReceitaController {
@@ -52,7 +53,7 @@ public class ReceitaController {
 			                    String codigo,
 			                    String dataDeCriacao,
 			                    int porcoesQueRende,
-			                    String categoria,
+			                    ReceitaCategorias categoria,
 			                    ArrayList<String> ingredienteDaReceita,
 			                    String matriculaCozinheiro) {
 //		Receita receita = new Receita(nome,

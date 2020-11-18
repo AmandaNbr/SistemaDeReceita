@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import model.Cozinheiro;
+import model.Funcionario;
 import utils.DataUtils;
 
 public class CozinheiroController {
@@ -39,5 +40,17 @@ public class CozinheiroController {
 		}
 		
 		return restaurantesFormatados;
+	}
+	
+	public boolean validarCozinheiroVazio() {
+		if(cozinheiroModel.getAllCozinheiros().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public ArrayList<Funcionario> getAllCozinheiros() {
+		return cozinheiroModel.getAllCozinheiros();
 	}
 }

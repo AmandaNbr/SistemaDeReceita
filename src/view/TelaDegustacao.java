@@ -227,7 +227,7 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(formattedTextFieldNota);
 		formattedTextFieldNota.setToolTipText("Selecione o numero para modifica-lo.");
 		formattedTextFieldNota.setColumns(10);
-		formattedTextFieldNota.setVisible(false);		
+		formattedTextFieldNota.setVisible(false);
 	}
 	
 	private void campoData() {

@@ -22,7 +22,7 @@ public class Cozinheiro extends Funcionario{
 
 	@Override
 	public String toString() {
-		return "Cozinheiro [restaurantesTrab=" + restaurantesTrab + "]";
+		return getNome() + " - " + getMatricula();
 	}
 
 	//gets e sets

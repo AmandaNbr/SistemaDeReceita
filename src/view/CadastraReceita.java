@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,14 +9,21 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+
+import controller.CozinheiroController;
+import controller.IngredienteController;
+import model.Cozinheiro;
+import model.Funcionario;
+import model.Ingrediente;
+import model.ReceitaCategorias;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
-import javax.swing.JTextPane;
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -23,6 +31,8 @@ import java.awt.event.ActionEvent;
 
 public class CadastraReceita extends JFrame {
 
+	private CozinheiroController cozinheiroController = new CozinheiroController();
+	private IngredienteController ingredienteController = new IngredienteController();
 	private JPanel contentPane;
 	private JTextField textFieldNome;
 	private JTextField textFieldCodigo;
@@ -31,7 +41,7 @@ public class CadastraReceita extends JFrame {
 	private JLabel lblNome;
 	private JLabel lblCodigo;
 	private JLabel lblCozinheiro;
-	private JComboBox comboBoxCozinheiro;
+	private JComboBox<Cozinheiro> comboBoxCozinheiro;
 	private JLabel lblDataDeCriacao;
 	private JLabel lblPorcoesQueRende;
 	private JButton btnAddIngrediente;
@@ -43,8 +53,15 @@ public class CadastraReceita extends JFrame {
 	private JLabel lblIngredientes;
 	private JFormattedTextField formattedTextFieldDataDeCriacao;
 	private JFormattedTextField formattedTextFieldPorcoesQueRende;
-	private JComboBox comboBox;
+	private JComboBox<ReceitaCategorias> comboBoxCategoria;
 	private JLabel lblCategoria;
+	private JPanel popUpIngrediente;
+	private JLabel lblIngredientePopUp;
+	private JComboBox<Ingrediente> comboBoxNome;
+	private JLabel lblQuantidadePopUp;
+	private JFormattedTextField formattedFieldQuantidade;
+	private JLabel lblMedidaPopUp;
+	private JTextField textFieldMedida;
 
 	public CadastraReceita() {
 		criarTela();
@@ -93,6 +110,15 @@ public class CadastraReceita extends JFrame {
 		campoModoDePreparo();
 		
 		campoIngredientes();
+		
+		if(cozinheiroController.validarCozinheiroVazio()) {
+			btnCadastrarReceita.setEnabled(false);
+		}
+		
+		if(ingredienteController.validarIngredienteVazio()) {
+			btnAddIngrediente.setEnabled(false);
+			btnCadastrarReceita.setEnabled(false);
+		}		
 	}
 	
 	private void initializeButtons() {
@@ -121,11 +147,68 @@ public class CadastraReceita extends JFrame {
 		btnAddIngrediente = new JButton("Add ingrediente");
 		btnAddIngrediente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				criarPopUp();
 			}
 		});
 		btnAddIngrediente.setBounds(416, 194, 179, 35);
 		contentPane.add(btnAddIngrediente);
 	}
+	
+	private void criarPopUp() {
+		popUpIngrediente = new JPanel(new GridLayout(0, 1));
+		
+		campoIngredientePopUp();
+		
+		campoQuantidadePopUp();
+		
+		campoMedidaPopUp();
+
+		int resultado = JOptionPane.showConfirmDialog(null, popUpIngrediente, "Adicionar Ingrediente",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		if (resultado == JOptionPane.OK_OPTION) {
+			// Guardar valores
+		} else {
+			// Nada a fazer
+		}
+	}
+	
+	private void campoIngredientePopUp() {
+		lblIngredientePopUp = new JLabel("Ingrediente:");		
+		popUpIngrediente.add(lblIngredientePopUp);
+		
+		comboBoxNome = new JComboBox<Ingrediente>();
+		popUpIngrediente.add(comboBoxNome);
+		
+		for (Ingrediente ingredienteAtual : ingredienteController.getAllIngredientes()) {
+			comboBoxNome.addItem(ingredienteAtual);
+		}
+	}
+	
+	private void campoQuantidadePopUp() {
+		lblQuantidadePopUp = new JLabel("Quantidade:");
+		popUpIngrediente.add(lblQuantidadePopUp);
+		
+		NumberFormat format = NumberFormat.getNumberInstance();
+		format.setMaximumFractionDigits(1);
+		format.setMinimumFractionDigits(1);
+		NumberFormatter formatter = new NumberFormatter(format);
+		formatter.setMinimum(1.0);
+		formatter.setMaximum(10000.0);
+		formatter.setAllowsInvalid(false);
+		formatter.setOverwriteMode(false);
+		
+		formattedFieldQuantidade = new JFormattedTextField(formatter);
+		formattedFieldQuantidade.setValue(0.0);
+		formattedFieldQuantidade.setToolTipText("Selecione o numero para modifica-lo.");
+		popUpIngrediente.add(formattedFieldQuantidade);
+	}
+	
+	private void campoMedidaPopUp() {
+		lblMedidaPopUp = new JLabel("Medida: Opcional");
+		popUpIngrediente.add(lblMedidaPopUp);
+		textFieldMedida = new JTextField();
+		popUpIngrediente.add(textFieldMedida);	
+	}	
 	
 	private void campoNome() {
 		lblNome = new JLabel("Nome");
@@ -153,9 +236,14 @@ public class CadastraReceita extends JFrame {
 		lblCozinheiro = new JLabel("Cozinheiro");
 		lblCozinheiro.setBounds(412, 24, 111, 15);
 		contentPane.add(lblCozinheiro);
-		
-		comboBoxCozinheiro = new JComboBox();
+
+		comboBoxCozinheiro = new JComboBox<Cozinheiro>();
 		comboBoxCozinheiro.setBounds(412, 43, 183, 24);
+		
+		for (Funcionario cozinheiro : cozinheiroController.getAllCozinheiros()) {
+			comboBoxCozinheiro.addItem(((Cozinheiro) cozinheiro));
+		}
+		
 		contentPane.add(comboBoxCozinheiro);
 	}
 	
@@ -183,20 +271,20 @@ public class CadastraReceita extends JFrame {
 		format.setMaximumFractionDigits(0);
 		NumberFormatter formatter = new NumberFormatter(format);
 		formatter.setMinimum(1);
-		formatter.setMaximum(10000);
+		formatter.setMaximum(10001);
 		formatter.setAllowsInvalid(false);
 		formatter.setOverwriteMode(true);	
-				
+	
 		formattedTextFieldPorcoesQueRende = new JFormattedTextField(formatter);
-		formattedTextFieldPorcoesQueRende.setBounds(43, 115, 50, 24);
+		formattedTextFieldPorcoesQueRende.setBounds(43, 115, 70, 24);
 		contentPane.add(formattedTextFieldPorcoesQueRende);
 		formattedTextFieldPorcoesQueRende.setToolTipText("Selecione o numero para modifica-lo.");
 	}
 	
 	private void campoCategoria() {
-		comboBox = new JComboBox();
-		comboBox.setBounds(416, 114, 179, 24);
-		contentPane.add(comboBox);
+		comboBoxCategoria = new JComboBox<ReceitaCategorias>(ReceitaCategorias.values());
+		comboBoxCategoria.setBounds(416, 114, 179, 24);
+		contentPane.add(comboBoxCategoria);
 		
 		lblCategoria = new JLabel("Categoria");
 		lblCategoria.setBounds(416, 96, 70, 15);

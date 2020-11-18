@@ -19,4 +19,8 @@ public enum ReceitaCategorias {
 	public String getCategoria() {
 		return categoria;
 	}
+	
+	public String toString() {
+		return getCategoria();
+	}
 }
