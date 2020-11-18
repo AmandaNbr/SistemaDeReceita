@@ -7,10 +7,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 import model.Cozinheiro;
+import utils.DataUtils;
 
 public class CozinheiroController {
 
 	private Cozinheiro cozinheiroModel = new Cozinheiro();
+	private FuncionarioController funcionarioController = new FuncionarioController();
 	
 	public void cadastraCozinheiro(String nome,
 							       String matricula,
@@ -18,29 +20,29 @@ public class CozinheiroController {
 							       char sexo,
 							       String dataDeIngresso,
 							       String salario,
-							       String restaurantesTrab) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		simpleDateFormat.setLenient(false);
-		Date dataDeIngressoFormatada = new Date();
-		try {
-			dataDeIngressoFormatada = simpleDateFormat.parse(dataDeIngresso);
-		} catch (ParseException e) {
-			// Nada a fazer
-		}
-		
-		String salarioFormatado = salario.replace(".", "").replace("R$ ", "").replace(",", ".");
-		
+							       String restaurantesTrab,
+							       boolean ehChefe) {
 
-		// TODO: trim lista restaurants
-
-		Cozinheiro cozinheiro = new Cozinheiro(nome.trim(),
+		Cozinheiro cozinheiro = new Cozinheiro(ehChefe ? "Chef " + nome.trim() : nome.trim(),
 				                               matricula.trim(), 
 				                               rg, 
 				                               sexo, 
-				                               dataDeIngressoFormatada,
-				                               Double.parseDouble(salarioFormatado), 
-				                               new ArrayList<String>(Arrays.asList(restaurantesTrab.split(","))));
+				                               DataUtils.converteData(dataDeIngresso),
+				                               funcionarioController.converterSalario(salario), 
+				                               formatarRestaurantes(restaurantesTrab));
 		
 		cozinheiroModel.cadastrarCozinheiro(cozinheiro);
+	}
+	
+	private ArrayList<String> formatarRestaurantes(String restaurantesRecebidos) {
+		String[] restaurantesSeparados = restaurantesRecebidos.split(",");
+		
+		ArrayList<String> restaurantesFormatados = new ArrayList<String>();
+		
+		for (String restaurante : restaurantesSeparados) {
+			restaurantesFormatados.add(restaurante.trim());
+		}
+		
+		return restaurantesFormatados;
 	}
 }

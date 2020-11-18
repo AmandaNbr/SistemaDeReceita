@@ -9,10 +9,13 @@ import model.Cozinheiro;
 import model.Degustador;
 import model.Empresa;
 import model.Funcionario;
+import utils.DataUtils;
 
 public class DegustadorController {
 	
-	Degustador degustadorModel = new Degustador();
+	private Degustador degustadorModel = new Degustador();
+	private FuncionarioController funcionarioController = new FuncionarioController();
+	
 	
 	public void cadastraDegustador(String nome,
                                    String matricula,
@@ -38,23 +41,13 @@ public class DegustadorController {
             						   char sexo,
             						   String dataDeIngresso,
             						   String salario) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		simpleDateFormat.setLenient(false);
-		Date dataDeIngressoFormatada = new Date();
-		try {
-			dataDeIngressoFormatada = simpleDateFormat.parse(dataDeIngresso);
-		} catch (ParseException e) {
-			// Nada a fazer
-		}
-
-		String salarioFormatado = salario.replace(".", "").replace("R$ ", "").replace(",", ".");
 	
 		Degustador degustador = new Degustador(nome.trim(), 
 					           matricula.trim(), 
 					           rg, 
 					           sexo, 
-					           dataDeIngressoFormatada,
-					           Double.parseDouble(salarioFormatado));
+					           DataUtils.converteData(dataDeIngresso),
+					           funcionarioController.converterSalario(salario));
 		
 		return degustador;
 	}

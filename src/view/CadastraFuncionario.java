@@ -51,7 +51,7 @@ public class CadastraFuncionario extends JFrame {
 	private JFormattedTextField formattedTextFieldSalario;
 	private JFormattedTextField formattedTextFieldData;
 	private JLabel lblRestaurantesTrabalhados;
-	private JCheckBox chckbxTtuloDechef;
+	private JCheckBox chckbxTituloDechef;
 	private JTextField textFieldRestaurantesTrabalhados;
 	private JButton btnVoltar;
 	private JLabel lblnomeDosRestaurantes;
@@ -151,7 +151,8 @@ public class CadastraFuncionario extends JFrame {
 		                                                         getRbtSelecionado(),
 		                                                         formattedTextFieldData.getText(),
 		                                                         formattedTextFieldSalario.getText(),
-		                                                         textFieldRestaurantesTrabalhados.getText());
+		                                                         textFieldRestaurantesTrabalhados.getText(),
+		                                                         chckbxTituloDechef.isSelected());
 						JOptionPane.showMessageDialog(null, "  Cozinheiro cadastrado com sucesso!  ");
 						MenuInicial menuInicial = new MenuInicial();
 						menuInicial.frame.setLocationRelativeTo(null);
@@ -332,10 +333,10 @@ public class CadastraFuncionario extends JFrame {
 	}
 	
 	private void campoNomeChef() {
-		chckbxTtuloDechef = new JCheckBox(" Título de 'Chef'");
-		chckbxTtuloDechef.setFont(new Font("Dialog", Font.PLAIN, 13));
-		chckbxTtuloDechef.setBounds(42, 90, 171, 23);
-		contentPane.add(chckbxTtuloDechef);
+		chckbxTituloDechef = new JCheckBox(" Título de 'Chef'");
+		chckbxTituloDechef.setFont(new Font("Dialog", Font.PLAIN, 13));
+		chckbxTituloDechef.setBounds(42, 90, 171, 23);
+		contentPane.add(chckbxTituloDechef);
 	}
 	
 	private void campoRestaurantes() {

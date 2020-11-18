@@ -78,8 +78,7 @@ public class FuncionarioController {
 	}
 	
 	public boolean validarSalario(String salario) {
-		String salarioFormatado = salario.replace(".", "").replace("R$ ", "").replace(",", ".");
-		double salarioFinal = Double.parseDouble(salarioFormatado);
+		double salarioFinal = converterSalario(salario);
 		if (salarioFinal > 1045.0) {
 			return true;
 		} else {
@@ -97,5 +96,10 @@ public class FuncionarioController {
 			return false;
 		}
 		return true;
+	}
+	
+	public double converterSalario(String salarioRecebido) {
+		String salarioFormatado = salarioRecebido.replace(".", "").replace("R$ ", "").replace(",", ".");
+		return Double.parseDouble(salarioFormatado);
 	}
 }
