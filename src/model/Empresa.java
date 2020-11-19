@@ -164,5 +164,12 @@ public class Empresa {
 		editor1.setDataDeIngresso(DataUtils.converteData("01/01/2015"));
 		funcionarios.add(editor1);
 		
+		LivroDeReceita livroDeReceita1 = new LivroDeReceita();
+		livroDeReceita1.setTitulo("O livro mais melhor");
+		livroDeReceita1.setIsbn("002-00-00-00200-2");
+		livroDeReceita1.setCodigosReceitas(new ArrayList<String>(Arrays.asList(
+																 receita1.getCodigo(), 
+																 receita2.getCodigo())));
+		livrosDeReceita.add(livroDeReceita1);
 	}
 }

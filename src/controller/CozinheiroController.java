@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import model.Cozinheiro;
 import model.Funcionario;
 import utils.DataUtils;
+import utils.StringUtils;
 
 public class CozinheiroController {
 
@@ -52,5 +53,15 @@ public class CozinheiroController {
 	
 	public ArrayList<Funcionario> getAllCozinheiros() {
 		return cozinheiroModel.getAllCozinheiros();
+	}
+	
+	public Cozinheiro getCozinheiroPorMatricula(String matriculaCozinheiro) {
+		for (Funcionario cozinheiroAtual : getAllCozinheiros()) {
+			if(StringUtils.comparaStrings(cozinheiroAtual.getMatricula(), matriculaCozinheiro)) {
+				return (Cozinheiro) cozinheiroAtual;
+			}
+		}
+		
+		return null;
 	}
 }

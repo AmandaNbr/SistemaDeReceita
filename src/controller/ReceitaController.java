@@ -2,8 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.OptionalDouble;
 
 import model.Cozinheiro;
+import model.Degustacao;
 import model.IngredienteDaReceita;
 import model.Receita;
 import model.ReceitaCategorias;
@@ -12,6 +14,9 @@ import utils.StringUtils;
 
 public class ReceitaController {
 
+	private DegustacaoController degustacaoController = new DegustacaoController();
+	private CozinheiroController cozinheiroController = new CozinheiroController();
+	private Degustacao degustacaoModel = new Degustacao();
 	private Receita receitaModel = new Receita();
 	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
 	public ReceitaController() {}
@@ -70,8 +75,6 @@ public class ReceitaController {
 			return false;
 		}
 	}
-	
-	
 	
 	public boolean validarDataDeCriacao(String dataDeCriacao) {
 		Date dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
@@ -142,12 +145,29 @@ public class ReceitaController {
 				                  " porcao(oes)\n" +
 				                  "Categoria: " +
 				                  receitaAtual.getCategoria() +
+				                  "\nInventada por: " +
+				                  cozinheiroController.getCozinheiroPorMatricula(receitaAtual.getMatriculaCozinheiro()).getNome() +
+				                  "\nData de criacao: " +
+				                  DataUtils.formataData(receitaAtual.getDataDeCriacao()) +
+				                  "\nNota: " +
+				                  mediaNotas(codigoReceitaAtual) +
 				                  "\n\nIngredientes:\n" +
 				                  ingredienteDaReceitaController.montarListaDeIngredienteDaReceita(receitaAtual.getIngredientesDaReceita()) +
-				                  "\nModo de preparo: " +
+				                  "\nModo de preparo:\n" +
 				                  receitaAtual.getModoDePreparo() +
 				                  "\n\n----------------------------\n\n";
 		
 		return receitaFormatada;
+	}
+	
+	public String mediaNotas(String codigoReceitaAtual) {
+		ArrayList<Degustacao> listaDeDegustacoes = degustacaoController.getDegustacaoPorReceita(codigoReceitaAtual);
+		
+		if(listaDeDegustacoes.isEmpty()) {
+			return "--";
+		} else {
+			return String.valueOf(listaDeDegustacoes.stream().mapToDouble(degustacaoModel -> degustacaoModel.getNota()).average().getAsDouble());
+		}
+		
 	}
 }

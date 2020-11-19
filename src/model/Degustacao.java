@@ -64,6 +64,5 @@ public class Degustacao {
 	
 	public void cadastraDegustacao(Degustacao degustacao) {
 		Empresa.addDegustacao(degustacao);
-		System.out.println(degustacao.toString());
 	}
 }

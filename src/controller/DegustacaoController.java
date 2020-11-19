@@ -1,11 +1,14 @@
 package controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.Degustacao;
 import model.Degustador;
 import model.Receita;
 import utils.DataUtils;
+import utils.StringUtils;
 
 public class DegustacaoController {
 	
@@ -32,5 +35,22 @@ public class DegustacaoController {
 				                               matriculaDegustador.getMatricula(), 
 				                               Integer.parseInt(nota));
 		degustacaoModel.cadastraDegustacao(degustacao);
+	}
+	
+	public ArrayList<Degustacao> getAllDegustacoes() {
+		return degustacaoModel.getAllDegustacoes();
+	}
+	
+	public ArrayList<Degustacao> getDegustacaoPorReceita(String codigoReceita) {
+		ArrayList<Degustacao> listaDegustacoes = new ArrayList<Degustacao>();
+		
+		for (Degustacao degustacao : getAllDegustacoes()) {
+			if(StringUtils.comparaStrings(degustacao.getCodigoReceita(), codigoReceita)) {
+				listaDegustacoes.add(degustacao);
+				
+			}
+		}
+		
+		return listaDegustacoes;
 	}
 }

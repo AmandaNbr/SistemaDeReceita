@@ -35,4 +35,8 @@ public class DataUtils {
 	public static Date dataAtual() {
 		return new Date(System.currentTimeMillis());
 	}
+	
+	public static String formataData(Date dataRecebida) {
+		return dataRecebida.toString().substring(0, 10);
+	}
 }

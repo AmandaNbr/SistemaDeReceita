@@ -2,6 +2,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import utils.StringUtils;
+
 public class Cozinheiro extends Funcionario{
 
 	private ArrayList<String> restaurantesTrab;	
@@ -40,5 +42,16 @@ public class Cozinheiro extends Funcionario{
 	
 	public void cadastrarCozinheiro(Cozinheiro cozinheiro) {
 		Empresa.addNovoFuncionario(cozinheiro);
+	}
+	
+	public Cozinheiro getCozinheiroPorMatricula(String matriculaCozinheiro) {
+
+		for (Funcionario cozinheiroAtual : getAllCozinheiros()) {
+			if(StringUtils.comparaStrings(cozinheiroAtual.getMatricula(), matriculaCozinheiro)) {
+				return (Cozinheiro) cozinheiroAtual;
+			}
+		}
+		
+		return null;
 	}
 }

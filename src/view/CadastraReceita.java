@@ -204,6 +204,7 @@ public class CadastraReceita extends JFrame {
 				
 				if(camposValidos) {
 					dispose();
+					JOptionPane.showMessageDialog(null, "   Receita cadastrada com sucesso!   ");
 					receitaController.CadastraReceita(textFieldNome.getText(),
 													  textFieldCodigo.getText(),
 													  formattedTextFieldDataDeCriacao.getText(),
