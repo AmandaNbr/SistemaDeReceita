@@ -120,6 +120,16 @@ public class Empresa {
 		cozinheiro1.setRestaurantesTrab(new ArrayList<String>(Arrays.asList("Rattatoule", "Restaurante da Esquina", "Hamburgueria Carne Boa")));
 		funcionarios.add(cozinheiro1);
 		
+		Cozinheiro cozinheiro2 = new Cozinheiro();
+		cozinheiro2.setNome("Menino Ney");
+		cozinheiro2.setRg("3.456.879");
+		cozinheiro2.setMatricula("1aBasa");
+		cozinheiro2.setSalario(2300.00);
+		cozinheiro2.setSexo('M');
+		cozinheiro2.setDataDeIngresso(DataUtils.converteData("01/01/2019"));
+		cozinheiro2.setRestaurantesTrab(new ArrayList<String>(Arrays.asList("Restaurante da Esquina", "Hamburgueria Carne Boa")));
+		funcionarios.add(cozinheiro2);
+		
 		Receita receita1 = new Receita();
 		receita1.setNome("Bolo de cake");
 		receita1.setCodigo("12345");
@@ -145,6 +155,19 @@ public class Empresa {
 		receita2.setMatriculaCozinheiro(cozinheiro1.getMatricula());
 		receita2.setModoDePreparo("Primeiro coloca na agua dps ferve e faz bolo");
 		receitas.add(receita2);
+		
+		Receita receita3 = new Receita();
+		receita3.setNome("Salmao grelhado");
+		receita3.setCodigo("54321qwq");
+		receita3.setDataDeCriacao(DataUtils.converteData("01/01/2019"));
+		receita3.setPorcoesQueRende(10);
+		receita3.setCategoria(ReceitaCategorias.FRUTOS_DO_MAR);
+		receita3.setIngredientesDaReceita(new ArrayList<IngredienteDaReceita>(Arrays.asList(
+										  new IngredienteDaReceita(ingrediente1, 27.0, ""), 
+				                          new IngredienteDaReceita(ingrediente2, 3.0, "colheres"))));
+		receita3.setMatriculaCozinheiro(cozinheiro1.getMatricula());
+		receita3.setModoDePreparo("Primeiro coloca na agua dps ferve e faz bolo adasdasdsadsadada");
+		receitas.add(receita3);
 		
 		Degustador degustador1 = new Degustador();
 		degustador1.setNome("Cleber Matos Matusalem");

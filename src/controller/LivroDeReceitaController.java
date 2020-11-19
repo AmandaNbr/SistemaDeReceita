@@ -76,4 +76,17 @@ public class LivroDeReceitaController {
 	public ArrayList<LivroDeReceita> getAllLivrosDeReceita(){
 		return livroDeReceitaModel.getAllLivrosDeReceita();
 	}
+	
+	public boolean checarReceitaPublicada(String codigoReceita) {
+		
+		for (LivroDeReceita livroDeReceita : getAllLivrosDeReceita()) {
+			for (String codigoReceitaNoLivro : livroDeReceita.getCodigosReceitas()) {
+				if(StringUtils.comparaStrings(codigoReceita, codigoReceitaNoLivro)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 }

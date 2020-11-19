@@ -20,6 +20,8 @@ import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -29,15 +31,14 @@ public class AcessarReceitas extends JFrame {
 	private CozinheiroController cozinheiroController = new CozinheiroController();
 	private JPanel contentPane;
 	private JLabel lblCozinheiro;
-	private JComboBox<Cozinheiro> comboBoxCozinheiro;
-	private JEditorPane editorPaneReceitaPorCozinheiro;
+	private JComboBox<String> comboBoxCozinheiro;
+	private JEditorPane editorPaneReceitasNaoPublicadas;
 	private JButton btnVoltar;
-	private JScrollPane scrollPaneReceita;
+	private JScrollPane scrollPaneReceitasNaoPublicadas;
 	private JEditorPane editorPaneReceitasPublicadas;
 	private JScrollPane scrollPaneReceitasPublicadas;
 	private JLabel lblReceitasPublicadas;
 	private JLabel lblReceitasNaoPublicadas;
-	private String matriculaCozinheiro;
 
 	public AcessarReceitas() {
 		criarTela();
@@ -64,7 +65,7 @@ public class AcessarReceitas extends JFrame {
 	 */
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 430);
+		setBounds(100, 100, 790, 430);
 		setTitle("Acesso a receitas");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,13 +74,16 @@ public class AcessarReceitas extends JFrame {
 		
 		initializeButton();
 
-		campoCozinheiro();
-
-		campoReceita();
-
 		campoMostrarReceitaPorCozinheiro();
 		
 		campoMostrarReceitasPublicadas();
+		
+		campoCozinheiro();
+		
+		if(cozinheiroController.validarCozinheiroVazio()) {
+			comboBoxCozinheiro.removeAllItems();
+			comboBoxCozinheiro.setEnabled(false);
+		}
 	}
 	
 	private void initializeButton() {
@@ -91,27 +95,57 @@ public class AcessarReceitas extends JFrame {
 				menuInicial.startApplication();
 			}
 		});
-		btnVoltar.setBounds(250, 329, 175, 45);
+		btnVoltar.setBounds(307, 331, 175, 45);
 		contentPane.add(btnVoltar);
 	}
 	
 	private void campoCozinheiro() {
 		lblCozinheiro = new JLabel("Cozinheiros");
-		lblCozinheiro.setBounds(304, 22, 92, 15);
+		lblCozinheiro.setBounds(338, 22, 92, 15);
 		contentPane.add(lblCozinheiro);
 		
-		comboBoxCozinheiro = new JComboBox<Cozinheiro>();
+		comboBoxCozinheiro = new JComboBox<String>();
 		comboBoxCozinheiro.setMaximumRowCount(100);
-		comboBoxCozinheiro.setBounds(127, 49, 450, 24);
+		comboBoxCozinheiro.setBounds(169, 49, 450, 24);
+		comboBoxCozinheiro.addItem("Todos");
 		
 		for (Funcionario cozinheiro : cozinheiroController.getAllCozinheiros()) {
-			comboBoxCozinheiro.addItem(((Cozinheiro) cozinheiro));
+			comboBoxCozinheiro.addItem(cozinheiro.toString());
 		}
+			
+		comboBoxCozinheiro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mostrarReceitas();
+			}
+		});
 		
 		contentPane.add(comboBoxCozinheiro);		
 	}
 	
-	private void campoReceita() {
+	private void mostrarReceitas() {
+		if(comboBoxCozinheiro.getSelectedItem() == "Todos") {
+			receitaController.identificaPublicacaoDeReceitas(receitaController.getAllReceitas());
+			editorPaneReceitasNaoPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasNaoPublicadas()));
+			editorPaneReceitasPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasPublicadas()));
+		} else {
+			receitaController.identificaPublicacaoDeReceitas(receitaController.getReceitasPorCozinheiro(comboBoxCozinheiro.getSelectedItem().toString().split(" - ")[1]));
+			editorPaneReceitasNaoPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasNaoPublicadas()));
+			editorPaneReceitasPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasPublicadas()));
+		}
+		
+		if (editorPaneReceitasNaoPublicadas.getText().isEmpty()) {
+			editorPaneReceitasNaoPublicadas.setText("Cozinheiro nao possui receitas nao publicadas!");
+		}
+		
+		if (editorPaneReceitasPublicadas.getText().isEmpty()) {
+			editorPaneReceitasPublicadas.setText("Cozinheiro nao possui receitas publicadas!");
+		}
+	}
+	
+	private String getReceitasEmString(ArrayList<Receita> receitasRecebidas) {
+		return receitasRecebidas.stream()
+								.map(receita -> receitaController.getReceitaFormatadaPorCodigo(receita.getCodigo()))
+								.collect(Collectors.joining());
 	}
 	
 	private void campoMostrarReceitaPorCozinheiro() {
@@ -119,22 +153,22 @@ public class AcessarReceitas extends JFrame {
 		lblReceitasNaoPublicadas.setBounds(23, 100, 205, 15);
 		contentPane.add(lblReceitasNaoPublicadas);
 		
-		editorPaneReceitaPorCozinheiro = new JEditorPane();
-		editorPaneReceitaPorCozinheiro.setEditable(false);
-		scrollPaneReceita = new JScrollPane(editorPaneReceitaPorCozinheiro, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneReceita.setBounds(23, 127, 315, 189);
-		contentPane.add(scrollPaneReceita);		
+		editorPaneReceitasNaoPublicadas = new JEditorPane();
+		editorPaneReceitasNaoPublicadas.setEditable(false);
+		scrollPaneReceitasNaoPublicadas = new JScrollPane(editorPaneReceitasNaoPublicadas, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneReceitasNaoPublicadas.setBounds(23, 127, 350, 189);
+		contentPane.add(scrollPaneReceitasNaoPublicadas);		
 	}
 	
 	private void campoMostrarReceitasPublicadas() {
 		lblReceitasPublicadas = new JLabel("Receitas publicadas");
-		lblReceitasPublicadas.setBounds(362, 100, 176, 15);
+		lblReceitasPublicadas.setBounds(405, 100, 176, 15);
 		contentPane.add(lblReceitasPublicadas);
 		
 		editorPaneReceitasPublicadas = new JEditorPane();
 		editorPaneReceitasPublicadas.setEditable(false);
 		scrollPaneReceitasPublicadas = new JScrollPane(editorPaneReceitasPublicadas, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneReceitasPublicadas.setBounds(362, 128, 315, 189);
+		scrollPaneReceitasPublicadas.setBounds(405, 127, 350, 189);
 		contentPane.add(scrollPaneReceitasPublicadas);
 		}
 	

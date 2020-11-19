@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.OptionalDouble;
 
 import model.Cozinheiro;
 import model.Degustacao;
@@ -16,10 +15,28 @@ public class ReceitaController {
 
 	private DegustacaoController degustacaoController = new DegustacaoController();
 	private CozinheiroController cozinheiroController = new CozinheiroController();
-	private Degustacao degustacaoModel = new Degustacao();
 	private Receita receitaModel = new Receita();
 	private IngredienteDaReceitaController ingredienteDaReceitaController = new IngredienteDaReceitaController();
+	private ArrayList<Receita> listaDeReceitasPublicadas;
+	private ArrayList<Receita> listaDeReceitasNaoPublicadas;
+	
 	public ReceitaController() {}
+	
+	public ArrayList<Receita> getListaDeReceitasPublicadas() {
+		return listaDeReceitasPublicadas;
+	}
+
+	public void setListaDeReceitasPublicadas(ArrayList<Receita> listaDeReceitasPublicadas) {
+		this.listaDeReceitasPublicadas = listaDeReceitasPublicadas;
+	}
+
+	public ArrayList<Receita> getListaDeReceitasNaoPublicadas() {
+		return listaDeReceitasNaoPublicadas;
+	}
+
+	public void setListaDeReceitasNaoPublicadas(ArrayList<Receita> listaDeReceitasNaoPublicadas) {
+		this.listaDeReceitasNaoPublicadas = listaDeReceitasNaoPublicadas;
+	}
 	
 	public boolean validarNomeVazio(String nome) {
 		if (!nome.trim().isEmpty()) {
@@ -169,5 +186,31 @@ public class ReceitaController {
 			return String.valueOf(listaDeDegustacoes.stream().mapToDouble(degustacaoModel -> degustacaoModel.getNota()).average().getAsDouble());
 		}
 		
+	}
+	
+	public ArrayList<Receita> getReceitasPorCozinheiro(String matriculaCozinheiro) {
+		ArrayList<Receita> listaDeReceitasPorCozinheiro = new ArrayList<Receita>();
+		
+		for (Receita receitaAtual : getAllReceitas()) {
+			if(StringUtils.comparaStrings(receitaAtual.getMatriculaCozinheiro(), matriculaCozinheiro)) {
+				listaDeReceitasPorCozinheiro.add(receitaAtual);
+			}
+		}
+		
+		return listaDeReceitasPorCozinheiro;
+	}
+	
+	public void identificaPublicacaoDeReceitas(ArrayList<Receita> listaDeReceitasRecebida) {
+		listaDeReceitasPublicadas = new ArrayList<Receita>();
+		listaDeReceitasNaoPublicadas = new ArrayList<Receita>();
+		LivroDeReceitaController livroDeReceitaController = new LivroDeReceitaController();
+		
+		for (Receita receitaAtual : listaDeReceitasRecebida) {
+			if(livroDeReceitaController.checarReceitaPublicada(receitaAtual.getCodigo())) {
+				listaDeReceitasPublicadas.add(receitaAtual);
+			} else {
+				listaDeReceitasNaoPublicadas.add(receitaAtual);
+			}
+		}
 	}
 }
