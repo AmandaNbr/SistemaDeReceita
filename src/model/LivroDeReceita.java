@@ -20,7 +20,7 @@ public class LivroDeReceita {
 
 	@Override
 	public String toString() {
-		return "LivroDeReceita [titulo=" + titulo + ", isbn=" + isbn + ", codigosReceitas=" + codigosReceitas + "]";
+		return titulo + " - " + isbn;
 	}
 
 	public String getTitulo() {

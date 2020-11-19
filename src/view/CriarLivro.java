@@ -228,14 +228,13 @@ private boolean checarCampos() {
 		lblEditor.setBounds(245, 88, 70, 15);
 		contentPane.add(lblEditor);
 		
-		
 		comboBoxEditor = new JComboBox<Editor>();
 		comboBoxEditor.setBounds(126, 109, 300, 24);
-		contentPane.add(comboBoxEditor);
-		
 		
 		for (Funcionario editor : editorController.getAllEditores()) {
 			comboBoxEditor.addItem(((Editor) editor));
+			
+		contentPane.add(comboBoxEditor);
 		}
 	}
 	

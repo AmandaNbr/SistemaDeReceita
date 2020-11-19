@@ -89,7 +89,8 @@ public class ReceitaController {
 			                    String porcoesQueRende,
 			                    ReceitaCategorias categoria,
 			                    ArrayList<IngredienteDaReceita> ingredientesDaReceita,
-			                    Cozinheiro matriculaCozinheiro) {
+			                    Cozinheiro matriculaCozinheiro,
+			                    String modoDePreparo) {
 		
 		Receita receita = new Receita(nome.trim(),
 									  codigo.trim(),
@@ -97,7 +98,8 @@ public class ReceitaController {
 									  ingredienteDaReceitaController.converterPorcoesQueRende(porcoesQueRende),
 									  categoria,
 									  ingredientesDaReceita,
-									  matriculaCozinheiro.getMatricula());
+									  matriculaCozinheiro.getMatricula(),
+									  modoDePreparo.trim());
 		
 		receitaModel.cadastraReceita(receita);
 	}
@@ -126,5 +128,26 @@ public class ReceitaController {
 		} else {
 			return false;
 		}
+	}
+
+	public String getReceitaFormatadaPorCodigo(String codigoReceitaAtual) {
+		Receita receitaAtual = getReceitaPorCodigo(codigoReceitaAtual);
+		
+		String receitaFormatada = receitaAtual.getNome() +
+								  " - " + 
+				                  receitaAtual.getCodigo() + 
+				                  "\n" + 
+				                  "Rende: " +
+				                  receitaAtual.getPorcoesQueRende() +
+				                  " porcao(oes)\n" +
+				                  "Categoria: " +
+				                  receitaAtual.getCategoria() +
+				                  "\n\nIngredientes:\n" +
+				                  ingredienteDaReceitaController.montarListaDeIngredienteDaReceita(receitaAtual.getIngredientesDaReceita()) +
+				                  "\nModo de preparo: " +
+				                  receitaAtual.getModoDePreparo() +
+				                  "\n\n----------------------------\n\n";
+		
+		return receitaFormatada;
 	}
 }

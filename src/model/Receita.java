@@ -13,11 +13,12 @@ public class Receita {
 	private ReceitaCategorias categoria;
 	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
 	private String matriculaCozinheiro;
+	private String modoDePreparo;
 	
 	public Receita() {};
 
 	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, ReceitaCategorias categoria,
-			ArrayList<IngredienteDaReceita> ingredientesDaReceita, String matriculaCozinheiro) {
+			ArrayList<IngredienteDaReceita> ingredientesDaReceita, String matriculaCozinheiro, String modoDePreparo) {
 		super();
 		this.nome = nome;
 		this.codigo = codigo;
@@ -26,6 +27,7 @@ public class Receita {
 		this.categoria = categoria;
 		this.ingredientesDaReceita = ingredientesDaReceita;
 		this.matriculaCozinheiro = matriculaCozinheiro;
+		this.modoDePreparo = modoDePreparo;
 	}
 
 	@Override
@@ -89,6 +91,14 @@ public class Receita {
 		this.ingredientesDaReceita = ingredientesDaReceita;
 	}
 	
+	public String getModoDePreparo() {
+		return modoDePreparo;
+	}
+
+	public void setModoDePreparo(String modoDePreparo) {
+		this.modoDePreparo = modoDePreparo;
+	}
+
 	public ArrayList<Receita> getAllReceitas(){
 		return Empresa.getReceitas();
 	}

@@ -130,6 +130,7 @@ public class Empresa {
 										  new IngredienteDaReceita(ingrediente1, 2.0, ""), 
 				                          new IngredienteDaReceita(ingrediente2, 1.0, "pitada"))));
 		receita1.setMatriculaCozinheiro(cozinheiro1.getMatricula());
+		receita1.setModoDePreparo("Nao sei nao enche o saco >:(");
 		receitas.add(receita1);
 		
 		Receita receita2 = new Receita();
@@ -142,6 +143,7 @@ public class Empresa {
 										  new IngredienteDaReceita(ingrediente1, 2.0, ""), 
 				                          new IngredienteDaReceita(ingrediente2, 1.0, "pitada"))));
 		receita2.setMatriculaCozinheiro(cozinheiro1.getMatricula());
+		receita2.setModoDePreparo("Primeiro coloca na agua dps ferve e faz bolo");
 		receitas.add(receita2);
 		
 		Degustador degustador1 = new Degustador();

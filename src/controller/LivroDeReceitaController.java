@@ -8,6 +8,7 @@ import utils.StringUtils;
 public class LivroDeReceitaController {
 	
 	private LivroDeReceita livroDeReceitaModel = new LivroDeReceita();
+	private ReceitaController receitaController = new ReceitaController();
 	
 	public boolean validarCodigoIsbnVazio(String codigoIsbn) {
 		if(!codigoIsbn.equals("000-00-00-00000-0")) {
@@ -60,6 +61,16 @@ public class LivroDeReceitaController {
 														   codigosReceitas);
 		
 		livroDeReceitaModel.cadastraLivroDeReceita(livroDeReceita);
+	}
+	
+	public String montarLivroDeReceita(LivroDeReceita livroDeReceita) {
+		String livroDeReceitaFormatado = "";
+		
+		for (String codigoReceitaAtual : livroDeReceita.getCodigosReceitas()) {
+			livroDeReceitaFormatado = livroDeReceitaFormatado.concat(receitaController.getReceitaFormatadaPorCodigo(codigoReceitaAtual));
+		}
+		
+		return livroDeReceitaFormatado;
 	}
 	
 	public ArrayList<LivroDeReceita> getAllLivrosDeReceita(){

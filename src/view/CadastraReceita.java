@@ -210,7 +210,8 @@ public class CadastraReceita extends JFrame {
 													  formattedTextFieldPorcoesQueRende.getText(),
 													  (ReceitaCategorias) comboBoxCategoria.getSelectedItem(),
 													  ingredientesDaReceita,
-													  (Cozinheiro) comboBoxCozinheiro.getSelectedItem());
+													  (Cozinheiro) comboBoxCozinheiro.getSelectedItem(),
+													  editorPaneModoDePreparo.getText());
 					MenuInicial menuInicial = new MenuInicial();
 					menuInicial.startApplication();
 				}
