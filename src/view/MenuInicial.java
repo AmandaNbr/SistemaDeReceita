@@ -153,6 +153,9 @@ public class MenuInicial {
 		btnCriarLivro.setFocusable(false);
 		btnCriarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CriarLivro criarLivro = new CriarLivro();
+				criarLivro.startCriarLivro();
 			}
 		});
 		btnCriarLivro.setBounds(38, 371, 195, 45);
@@ -163,6 +166,9 @@ public class MenuInicial {
 		btnImprimirLivro.setFocusable(false);
 		btnImprimirLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				ImprimirLivro imprimirLivro = new ImprimirLivro();
+				imprimirLivro.startImprimirLivro();
 			}
 		});
 		btnImprimirLivro.setBounds(273, 371, 195, 45);
@@ -173,6 +179,9 @@ public class MenuInicial {
 		btnAcessaReceitas.setFocusable(false);
 		btnAcessaReceitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				AcessarReceitas acessarReceitas = new AcessarReceitas();
+				acessarReceitas.startAcessarReceitas();
 			}
 		});
 		btnAcessaReceitas.setBounds(508, 371, 195, 45);
