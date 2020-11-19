@@ -103,4 +103,12 @@ public class ReceitaController {
 	public ArrayList<Receita> getAllReceitas(){
 		return receitaModel.getAllReceitas();
 	}
+	
+	public boolean validarReceitaVazia() {
+		if(receitaModel.getAllReceitas().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -8,7 +8,7 @@ public enum ReceitaCategorias {
 	AVES("Aves"),
 	PEIXES("Peixes"),
 	FRUTOS_DO_MAR("Frutos do mar"),
-	SOBREMESAS("Sobremesa");
+	SOBREMESAS("Sobremesas");
 	
 	private String categoria;
 

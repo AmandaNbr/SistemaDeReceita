@@ -29,6 +29,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 
+@SuppressWarnings("serial")
 public class CadastraFuncionario extends JFrame {
 	
 	private FuncionarioController funcionarioController = new FuncionarioController();
@@ -255,7 +256,6 @@ public class CadastraFuncionario extends JFrame {
 			contentPane.add(formattedTextFieldRG);
 			formattedTextFieldRG.setValue("0.000.000");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -301,7 +301,6 @@ public class CadastraFuncionario extends JFrame {
 			contentPane.add(formattedTextFieldData);
 			formattedTextFieldData.setValue("00/00/0000");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

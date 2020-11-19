@@ -34,6 +34,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class CadastraReceita extends JFrame {
 
 	private ReceitaController receitaController = new ReceitaController();
@@ -96,6 +97,7 @@ public class CadastraReceita extends JFrame {
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 660);
+		setTitle("Cadastro de Receita");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

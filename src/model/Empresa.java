@@ -10,6 +10,7 @@ public class Empresa {
 	protected static ArrayList<LivroDeReceita> livrosDeReceita = new ArrayList<>(); 
 	protected static ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 	protected static ArrayList<Receita> receitas = new ArrayList<>(); 
+	protected static ArrayList<Degustacao> degustacoes = new ArrayList<>();
 	
 	protected static void addNovoFuncionario(Funcionario funcionario) {
 		if(funcionarios == null) {
@@ -40,10 +41,19 @@ public class Empresa {
 	
 	protected static void addReceita(Receita receita) {
 		if(receitas == null) {
-			receitas= new ArrayList<>();
+			receitas = new ArrayList<>();
 			receitas.add(receita);
 		} else {
 			receitas.add(receita);
+		}
+	}
+	
+	protected static void addDegustacao(Degustacao degustacao) {
+		if(degustacoes == null) {
+			degustacoes = new ArrayList<>();
+			degustacoes.add(degustacao);
+		} else {
+			degustacoes.add(degustacao);
 		}
 	}
 	
@@ -75,7 +85,11 @@ public class Empresa {
 		return receitas;
 	}
 	
-	// 
+	protected static ArrayList<Degustacao> getDegustacoes() {
+		return degustacoes;
+	}
+	
+	// dados 
 	public static void popularDadosParaTestar () {
 		Ingrediente ingrediente1 = new Ingrediente();
 		ingrediente1.setNome("Ovo");
@@ -105,5 +119,27 @@ public class Empresa {
 		cozinheiro1.setDataDeIngresso(DataUtils.converteData("01/01/2019"));
 		cozinheiro1.setRestaurantesTrab(new ArrayList<String>(Arrays.asList("Rattatoule", "Restaurante da Esquina", "Hamburgueria Carne Boa")));
 		funcionarios.add(cozinheiro1);
+		
+		Receita receita1 = new Receita();
+		receita1.setNome("Bolo de cake");
+		receita1.setCodigo("12345");
+		receita1.setDataDeCriacao(DataUtils.converteData("01/12/2019"));
+		receita1.setPorcoesQueRende(2);
+		receita1.setCategoria(ReceitaCategorias.SOBREMESAS);
+		receita1.setIngredientesDaReceita(new ArrayList<IngredienteDaReceita>(Arrays.asList(
+										  new IngredienteDaReceita(ingrediente1, 2.0, ""), 
+				                          new IngredienteDaReceita(ingrediente2, 1.0, "pitada"))));
+		receita1.setMatriculaCozinheiro(cozinheiro1.getMatricula());
+		receitas.add(receita1);
+		
+		Degustador degustador1 = new Degustador();
+		degustador1.setNome("Cleber Matos Matusalem");
+		degustador1.setRg("3.456.000");
+		degustador1.setMatricula("1aBc");
+		degustador1.setSalario(2300.00);
+		degustador1.setSexo('M');
+		degustador1.setDataDeIngresso(DataUtils.converteData("01/01/2015"));
+		funcionarios.add(degustador1);
+		
 	}
 }

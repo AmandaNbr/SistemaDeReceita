@@ -11,7 +11,6 @@ public class Receita {
 	private ReceitaCategorias categoria;
 	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
 	private String matriculaCozinheiro;
-	private ArrayList<Integer> notas;
 	
 	public Receita() {};
 
@@ -78,14 +77,6 @@ public class Receita {
 
 	public void setMatriculaCozinheiro(String matriculaCozinheiro) {
 		this.matriculaCozinheiro = matriculaCozinheiro;
-	}
-
-	public ArrayList<Integer> getNotas() {
-		return notas;
-	}
-
-	public void setNotas(ArrayList<Integer> notas) {
-		this.notas = notas;
 	}
 
 	public ArrayList<IngredienteDaReceita> getIngredientesDaReceita() {

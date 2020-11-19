@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class CadastraIngrediente extends JFrame {
 
 	private IngredienteController ingredienteController = new IngredienteController();
@@ -61,6 +62,7 @@ public class CadastraIngrediente extends JFrame {
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
+		setTitle("Cadastro de ingrediente");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -196,7 +198,7 @@ public class CadastraIngrediente extends JFrame {
 	}
 	
 	private void campoDataDeValidade() {
-		JLabel lblDataDeValidade = new JLabel("Data de validade");
+		lblDataDeValidade = new JLabel("Data de validade");
 		lblDataDeValidade.setBounds(264, 158, 128, 15);
 		contentPane.add(lblDataDeValidade);
 

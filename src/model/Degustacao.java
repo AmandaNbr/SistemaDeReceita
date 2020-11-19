@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Degustacao {
@@ -56,4 +57,13 @@ public class Degustacao {
 	public void setNota(int nota) {
 		this.nota = nota;
 	}		
+	
+	public ArrayList<Degustacao> getAllDegustacoes() {
+		return Empresa.getDegustacoes();
+	}
+	
+	public void cadastraDegustacao(Degustacao degustacao) {
+		Empresa.addDegustacao(degustacao);
+		System.out.println(degustacao.toString());
+	}
 }
