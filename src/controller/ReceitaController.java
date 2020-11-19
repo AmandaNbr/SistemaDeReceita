@@ -103,6 +103,11 @@ public class ReceitaController {
 		}
 	}
 	
+	public void validarDataDaUltimaReceitaDoCozinheiro() {
+		// TODO: validar se a data de criacao da receita mais recente ultrapassa 45 dias,
+		// e migrar de Date por LocalDateTime.
+	}
+	
 	public void CadastraReceita(String nome,
 			                    String codigo,
 			                    String dataDeCriacao,
