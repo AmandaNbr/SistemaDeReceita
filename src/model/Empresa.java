@@ -193,6 +193,7 @@ public class Empresa {
 		livroDeReceita1.setCodigosReceitas(new ArrayList<String>(Arrays.asList(
 																 receita1.getCodigo(), 
 																 receita2.getCodigo())));
+		livroDeReceita1.setMatriculaEditor("1a2b");
 		livrosDeReceita.add(livroDeReceita1);
 	}
 }

@@ -149,7 +149,8 @@ public class CriarLivro extends JFrame {
 					dispose();
 					livroDeReceitaController.cadastraLivroDeReceita(textFieldTitulo.getText(),
 																    formattedTextFieldCodigoIsbn.getText(),
-																    new ArrayList<String>(listaReceitas.stream().map(Receita::getCodigo).collect(Collectors.toList())));
+																    new ArrayList<String>(listaReceitas.stream().map(Receita::getCodigo).collect(Collectors.toList())),
+																    (Editor) comboBoxEditor.getSelectedItem());
 					JOptionPane.showMessageDialog(null, "  Cheirinho de livro novo...  \n  Livro finalizado com sucesso!  ");
 					MenuInicial menuInicial = new MenuInicial();
 					menuInicial.startApplication();

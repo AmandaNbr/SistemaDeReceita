@@ -9,11 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 import controller.CozinheiroController;
 import controller.ReceitaController;
-import model.Cozinheiro;
 import model.Funcionario;
-import model.LivroDeReceita;
 import model.Receita;
-import utils.StringUtils;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;

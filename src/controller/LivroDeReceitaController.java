@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Editor;
 import model.LivroDeReceita;
 import utils.StringUtils;
 
@@ -54,18 +55,34 @@ public class LivroDeReceitaController {
 	
 	public void cadastraLivroDeReceita(String titulo,
 									   String codigoIsbn,
-									   ArrayList<String> codigosReceitas) {
+									   ArrayList<String> codigosReceitas,
+									   Editor editor) {
 		
 		LivroDeReceita livroDeReceita = new LivroDeReceita(titulo.trim(), 
 														   codigoIsbn.trim(), 
-														   codigosReceitas);
+														   codigosReceitas,
+														   editor.getMatricula().trim());
 		
 		livroDeReceitaModel.cadastraLivroDeReceita(livroDeReceita);
 	}
 	
+	public String montarCapaDoLivroDeReceita(LivroDeReceita livroDeReceita) {
+		
+		String capaFormatada = "\n\n----------------------------\n\n\t" + 
+		                       livroDeReceita.getTitulo() +
+		                       "\n\n" +
+		                       "Codigo ISBN: " +
+		                       livroDeReceita.getIsbn() +
+		                       "\n Editor: " +
+		                       livroDeReceita.getEditorPorMatricula(livroDeReceita.getMatriculaEditor()).getNome() +
+		                       "\n\n----------------------------\n\n";
+			
+		return capaFormatada;
+	}
+	
 	public String montarLivroDeReceita(LivroDeReceita livroDeReceita) {
 		String livroDeReceitaFormatado = "";
-		
+
 		for (String codigoReceitaAtual : livroDeReceita.getCodigosReceitas()) {
 			livroDeReceitaFormatado = livroDeReceitaFormatado.concat(receitaController.getReceitaFormatadaPorCodigo(codigoReceitaAtual));
 		}

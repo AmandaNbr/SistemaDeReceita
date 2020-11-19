@@ -15,8 +15,6 @@ public class Editor extends Funcionario {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return getNome() + " - " + getMatricula();

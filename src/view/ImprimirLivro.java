@@ -102,7 +102,8 @@ public class ImprimirLivro extends JFrame {
 		
 		comboBoxLivroDeReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editorPaneLivroDeReceita.setText(livroDeReceitaController.montarLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()));
+				
+				editorPaneLivroDeReceita.setText(livroDeReceitaController.montarCapaDoLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()) + livroDeReceitaController.montarLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()));
 			}
 		});
 			
