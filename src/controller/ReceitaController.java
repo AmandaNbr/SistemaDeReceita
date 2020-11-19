@@ -71,6 +71,8 @@ public class ReceitaController {
 		}
 	}
 	
+	
+	
 	public boolean validarDataDeCriacao(String dataDeCriacao) {
 		Date dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
 
@@ -98,6 +100,20 @@ public class ReceitaController {
 									  matriculaCozinheiro.getMatricula());
 		
 		receitaModel.cadastraReceita(receita);
+	}
+	
+	public Receita getReceitaPorCodigo(String codigoReceita) {
+		return receitaModel.getReceitaPorCodigo(codigoReceita);
+	}
+	
+	public String montarReceitaDoLivro(ArrayList<Receita> listaDeReceitas) {
+		String receitasFormatas = "";
+		
+		for (Receita receitaAtual : listaDeReceitas) {
+			receitasFormatas = receitasFormatas.concat(receitaAtual.getNome() + " - " + receitaAtual.getCodigo() + "\n");			
+		}
+		
+		return receitasFormatas;
 	}
 	
 	public ArrayList<Receita> getAllReceitas(){

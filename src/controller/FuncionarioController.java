@@ -53,6 +53,13 @@ public class FuncionarioController {
 		return true;
 	}
 	
+	public boolean validarRGVazio(String rg) {
+		if(!rg.equals("0.000.000")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean validarRG(String rg) {
 		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
 			if(StringUtils.comparaStrings(cozinheiroAtual.getRg(), rg)) {

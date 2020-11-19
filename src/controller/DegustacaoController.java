@@ -4,7 +4,6 @@ import java.util.Date;
 
 import model.Degustacao;
 import model.Degustador;
-import model.Funcionario;
 import model.Receita;
 import utils.DataUtils;
 
@@ -13,8 +12,6 @@ public class DegustacaoController {
 	public DegustacaoController() {}
 	
 	private Degustacao degustacaoModel = new Degustacao();
-	private Receita receitaModel = new Receita();
-	
 	public boolean validarDataDegustacaoReceita(String dataDegustacao, Receita receita) {
 		Date dataDegustacaoFormatada = DataUtils.converteData(dataDegustacao);
 

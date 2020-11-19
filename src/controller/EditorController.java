@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Editor;
+import model.Funcionario;
 import utils.DataUtils;
 
 public class EditorController {
@@ -23,5 +26,17 @@ public class EditorController {
 								   funcionarioController.converterSalario(salario));
 		
 		editorModel.cadastrarEditor(editor);
+	}
+	
+	public ArrayList<Funcionario> getAllEditores() {
+		return editorModel.getAllEditores();
+	}
+	
+	public boolean validarEditorVazio() {
+		if(editorModel.getAllEditores().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

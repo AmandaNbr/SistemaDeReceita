@@ -15,6 +15,13 @@ public class Editor extends Funcionario {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return getNome() + " - " + getMatricula();
+	}
+
 	public ArrayList<Funcionario> getAllEditores() {
 		return Empresa.getFuncionariosPorCargo(Editor.class);
 	}

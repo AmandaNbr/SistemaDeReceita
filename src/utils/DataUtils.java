@@ -24,9 +24,8 @@ public class DataUtils {
 	public static boolean validarData(String data) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		simpleDateFormat.setLenient(false);
-		Date dataFormatada;
 		try {
-			dataFormatada = simpleDateFormat.parse(data);
+			simpleDateFormat.parse(data);
 		} catch (ParseException e) {
 			return false;
 		}

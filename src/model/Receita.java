@@ -2,6 +2,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import utils.StringUtils;
+
 public class Receita {
 
 	private String nome;
@@ -93,5 +95,16 @@ public class Receita {
 	
 	public void cadastraReceita(Receita receita) {
 		Empresa.addReceita(receita);
+	}
+
+	public Receita getReceitaPorCodigo(String codigoReceita) {
+
+		for (Receita receitaAtual : getAllReceitas()) {
+			if(StringUtils.comparaStrings(receitaAtual.getCodigo(), codigoReceita)) {
+				return receitaAtual;
+			}
+		}
+		
+		return null;
 	}
 }

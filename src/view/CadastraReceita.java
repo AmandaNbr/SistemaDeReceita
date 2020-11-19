@@ -178,7 +178,7 @@ public class CadastraReceita extends JFrame {
 		
 		camposValidos = receitaController.validarIngredienteVazio(editorPaneIngredientes.getText());
 		if(!camposValidos) {
-			JOptionPane.showMessageDialog(null, "  Adicione um ingrediente!  ");
+			JOptionPane.showMessageDialog(null, "  Adicione pelo menos um ingrediente!  ");
 			return camposValidos;
 		}
 		

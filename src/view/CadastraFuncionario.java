@@ -198,6 +198,12 @@ public class CadastraFuncionario extends JFrame {
 			return camposValidos;
 		}
 		
+		camposValidos = funcionarioController.validarRGVazio(formattedTextFieldRG.getText());
+		if (!camposValidos) {
+			JOptionPane.showMessageDialog(null, "  Informe um RG valido!  ");
+			return camposValidos;
+		}
+		
 		camposValidos = funcionarioController.validarRG(formattedTextFieldRG.getText());
 		if (!camposValidos) {
 			JOptionPane.showMessageDialog(null, "  RG já cadastrado!  ");

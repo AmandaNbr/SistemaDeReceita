@@ -132,6 +132,18 @@ public class Empresa {
 		receita1.setMatriculaCozinheiro(cozinheiro1.getMatricula());
 		receitas.add(receita1);
 		
+		Receita receita2 = new Receita();
+		receita2.setNome("Churrasco");
+		receita2.setCodigo("54321");
+		receita2.setDataDeCriacao(DataUtils.converteData("01/01/2019"));
+		receita2.setPorcoesQueRende(10);
+		receita2.setCategoria(ReceitaCategorias.CARNES);
+		receita2.setIngredientesDaReceita(new ArrayList<IngredienteDaReceita>(Arrays.asList(
+										  new IngredienteDaReceita(ingrediente1, 2.0, ""), 
+				                          new IngredienteDaReceita(ingrediente2, 1.0, "pitada"))));
+		receita2.setMatriculaCozinheiro(cozinheiro1.getMatricula());
+		receitas.add(receita2);
+		
 		Degustador degustador1 = new Degustador();
 		degustador1.setNome("Cleber Matos Matusalem");
 		degustador1.setRg("3.456.000");
@@ -140,6 +152,15 @@ public class Empresa {
 		degustador1.setSexo('M');
 		degustador1.setDataDeIngresso(DataUtils.converteData("01/01/2015"));
 		funcionarios.add(degustador1);
+		
+		Editor editor1 = new Editor();
+		editor1.setNome("Clemencia Fofinha Nunes");
+		editor1.setRg("4.666.000");
+		editor1.setMatricula("1a2b");
+		editor1.setSalario(2300.00);
+		editor1.setSexo('F');
+		editor1.setDataDeIngresso(DataUtils.converteData("01/01/2015"));
+		funcionarios.add(editor1);
 		
 	}
 }
