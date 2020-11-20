@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Degustacao {
 
-
 	private String codigoReceita;
 	private Date dataDegustacao;
 	private String matriculaDegustador;
@@ -18,7 +17,6 @@ public class Degustacao {
 		this.matriculaDegustador = matriculaDegustador;
 		this.nota = nota;
 	}
-
 
 	@Override
 	public String toString() {

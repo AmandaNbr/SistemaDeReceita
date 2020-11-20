@@ -71,7 +71,7 @@ public class AcessarReceitas extends JFrame {
 		
 		initializeButton();
 
-		campoMostrarReceitaPorCozinheiro();
+		campoMostrarReceitaNaoPublicadas();
 		
 		campoMostrarReceitasPublicadas();
 		
@@ -145,7 +145,7 @@ public class AcessarReceitas extends JFrame {
 								.collect(Collectors.joining());
 	}
 	
-	private void campoMostrarReceitaPorCozinheiro() {
+	private void campoMostrarReceitaNaoPublicadas() {
 		lblReceitasNaoPublicadas = new JLabel("Receitas nao publicadas");
 		lblReceitasNaoPublicadas.setBounds(23, 100, 205, 15);
 		contentPane.add(lblReceitasNaoPublicadas);

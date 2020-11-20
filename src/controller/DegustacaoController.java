@@ -14,6 +14,7 @@ public class DegustacaoController {
 	public DegustacaoController() {}
 	
 	private Degustacao degustacaoModel = new Degustacao();
+	
 	public boolean validarDataDegustacaoReceita(String dataDegustacao, Receita receita) {
 		Date dataDegustacaoFormatada = DataUtils.converteData(dataDegustacao);
 

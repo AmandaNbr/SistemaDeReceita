@@ -108,7 +108,7 @@ public class ReceitaController {
 		// e migrar de Date por LocalDateTime.
 	}
 	
-	public void CadastraReceita(String nome,
+	public void cadastraReceita(String nome,
 			                    String codigo,
 			                    String dataDeCriacao,
 			                    String porcoesQueRende,
