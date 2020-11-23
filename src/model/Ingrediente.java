@@ -1,21 +1,28 @@
+package model;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Ingrediente {
 
 	private String nome;
+	private String descricao;
 	private Date dataDeFabricacao;
 	private Date dataDeValidade;
-	private String descricao;
 	
+	public Ingrediente() {}
 	
-	//construtor
-	public Ingrediente(String nome, Date dataDeFabricacao, Date dataDeValidade, String descricao) {
+	public Ingrediente(String nome, String descricao, Date dataDeFabricacao, Date dataDeValidade) {
+		super();
 		this.nome = nome;
+		this.descricao = descricao;
 		this.dataDeFabricacao = dataDeFabricacao;
 		this.dataDeValidade = dataDeValidade;
-		this.descricao = descricao;
 	}
-	
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 	//gets e sets
 	public String getNome() {
@@ -48,5 +55,13 @@ public class Ingrediente {
 	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public ArrayList<Ingrediente> getAllIngredientes() {
+		return Empresa.getIngredientes();
+	}
+	
+	public void cadastraIngrediente(Ingrediente ingrediente) {
+		Empresa.addIngrediente(ingrediente);
 	}
 }
