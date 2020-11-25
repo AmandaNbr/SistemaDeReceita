@@ -1,17 +1,17 @@
 package model;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Degustacao {
 
 	private String codigoReceita;
-	private Date dataDegustacao;
+	private LocalDate dataDegustacao;
 	private String matriculaDegustador;
 	private int nota;
 	
 	public Degustacao() {}
 	
-	public Degustacao(String codigoReceita, Date dataDegustacao, String matriculaDegustador, int nota) {
+	public Degustacao(String codigoReceita, LocalDate dataDegustacao, String matriculaDegustador, int nota) {
 		this.codigoReceita = codigoReceita;
 		this.dataDegustacao = dataDegustacao;
 		this.matriculaDegustador = matriculaDegustador;
@@ -32,11 +32,11 @@ public class Degustacao {
 		this.codigoReceita = codigoReceita;
 	}
 
-	public Date getDataDegustacao() {
+	public LocalDate getDataDegustacao() {
 		return dataDegustacao;
 	}
 
-	public void setDataDegustacao(Date dataDegustacao) {
+	public void setDataDegustacao(LocalDate dataDegustacao) {
 		this.dataDegustacao = dataDegustacao;
 	}
 

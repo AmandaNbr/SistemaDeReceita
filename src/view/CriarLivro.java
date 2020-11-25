@@ -101,10 +101,14 @@ public class CriarLivro extends JFrame {
 		addSeparador();
 		
 		mostrarCampos();
+		
+		if(editorController.validarEditorVazio()) {
+			comboBoxEditor.setEnabled(false);
+		}
 	}
 	
 	private void mostrarCampos() {
-		if(editorController.getAllEditores().isEmpty() || receitaController.validarReceitaVazia()) {
+		if(editorController.getAllEditores().isEmpty() || receitaController.validarReceitasVazias()) {
 			comboBoxEditor.setEnabled(false);
 			comboBoxReceita.setEnabled(false);
 			btnAdicionarReceita.setEnabled(false);
@@ -233,10 +237,10 @@ private boolean checarCampos() {
 		comboBoxEditor.setBounds(126, 109, 300, 24);
 		
 		for (Funcionario editor : editorController.getAllEditores()) {
-			comboBoxEditor.addItem(((Editor) editor));
-			
-		contentPane.add(comboBoxEditor);
+			comboBoxEditor.addItem(((Editor) editor));			
 		}
+		
+		contentPane.add(comboBoxEditor);
 	}
 	
 	private void campoReceitas() {

@@ -1,6 +1,6 @@
 package model;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import utils.StringUtils;
 
@@ -8,7 +8,7 @@ public class Receita {
 
 	private String nome;
 	private String codigo;
-	private Date dataDeCriacao;
+	private LocalDate dataDeCriacao;
 	private int porcoesQueRende;
 	private ReceitaCategorias categoria;
 	private ArrayList<IngredienteDaReceita> ingredientesDaReceita;
@@ -17,7 +17,7 @@ public class Receita {
 	
 	public Receita() {};
 
-	public Receita(String nome, String codigo, Date dataDeCriacao, int porcoesQueRende, ReceitaCategorias categoria,
+	public Receita(String nome, String codigo, LocalDate dataDeCriacao, int porcoesQueRende, ReceitaCategorias categoria,
 			ArrayList<IngredienteDaReceita> ingredientesDaReceita, String matriculaCozinheiro, String modoDePreparo) {
 		super();
 		this.nome = nome;
@@ -51,11 +51,11 @@ public class Receita {
 		this.codigo = codigo;
 	}
 
-	public Date getDataDeCriacao() {
+	public LocalDate getDataDeCriacao() {
 		return dataDeCriacao;
 	}
 
-	public void setDataDeCriacao(Date dataDeCriacao) {
+	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
 	}
 
@@ -108,7 +108,6 @@ public class Receita {
 	}
 
 	public Receita getReceitaPorCodigo(String codigoReceita) {
-
 		for (Receita receitaAtual : getAllReceitas()) {
 			if(StringUtils.comparaStrings(receitaAtual.getCodigo(), codigoReceita)) {
 				return receitaAtual;

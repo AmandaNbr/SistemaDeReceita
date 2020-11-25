@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import model.Cozinheiro;
 import model.Funcionario;
+import model.Receita;
 import utils.DataUtils;
 import utils.StringUtils;
 
@@ -63,5 +64,23 @@ public class CozinheiroController {
 		}
 		
 		return null;
+	}
+	
+	public boolean validarInatividadeReceita(Cozinheiro cozinheiro) {
+		ReceitaController receitaController = new ReceitaController();
+		
+		if(receitaController.getReceitasPorCozinheiro(cozinheiro.getMatricula()).isEmpty()) {
+			if (cozinheiro.getDataDeIngresso().plusDays(45).isAfter(DataUtils.dataAtual())) {
+				return true;
+			}
+		} else {			
+			for (Receita receitaAtual : receitaController.getReceitasPorCozinheiro(cozinheiro.getMatricula())) {
+				if (receitaAtual.getDataDeCriacao().plusDays(30).isAfter(DataUtils.dataAtual())) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

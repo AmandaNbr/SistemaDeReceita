@@ -67,6 +67,10 @@ public class ImprimirLivro extends JFrame {
 		campoLivro();
 		
 		separador();
+		
+		if(livroDeReceitaController.getAllLivrosDeReceita().isEmpty()) {
+			comboBoxLivroDeReceita.setEnabled(false);
+		}
 	}
 	
 	private void initializeButton() {
@@ -103,9 +107,13 @@ public class ImprimirLivro extends JFrame {
 		comboBoxLivroDeReceita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editorPaneLivroDeReceita.setText(livroDeReceitaController.montarCapaDoLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()) + livroDeReceitaController.montarLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()));
+				if(!livroDeReceitaController.getAllLivrosDeReceita().isEmpty() &&  !(comboBoxLivroDeReceita.getSelectedItem() == null)) {		
+					editorPaneLivroDeReceita.setText(livroDeReceitaController.montarCapaDoLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()) + livroDeReceitaController.montarLivroDeReceita((LivroDeReceita) comboBoxLivroDeReceita.getSelectedItem()));
+				}
 			}
 		});
+		
+		comboBoxLivroDeReceita.setSelectedItem(null);
 			
 		contentPane.add(comboBoxLivroDeReceita);
 	}
@@ -115,5 +123,4 @@ public class ImprimirLivro extends JFrame {
 		separator.setBounds(60, 89, 425, 2);
 		contentPane.add(separator);
 	}
-
 }

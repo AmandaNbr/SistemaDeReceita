@@ -1,5 +1,5 @@
 package model;
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Funcionario {
 
@@ -7,7 +7,7 @@ public abstract class Funcionario {
 	private String matricula;
 	private String rg;
 	private char sexo;
-	private Date dataDeIngresso;
+	private LocalDate dataDeIngresso;
 	private double salario; //coloquei o salario como double pois não vou fazer operacoes, entao nao tem risco de perder valores.
 	
 	//construtor
@@ -15,7 +15,7 @@ public abstract class Funcionario {
 					   String matricula, 
 					   String rg, 
 					   char sexo, 
-					   Date dataDeIngresso, 
+					   LocalDate dataDeIngresso, 
 					   double salario) {
 		this.nome = nome;
 		this.matricula = matricula;
@@ -61,11 +61,11 @@ public abstract class Funcionario {
 		this.sexo = sexo;	
 	}
 	
-	public Date getDataDeIngresso() {
+	public LocalDate getDataDeIngresso() {
 		return dataDeIngresso;
 	}
 	
-	public void setDataDeIngresso(Date dataDeIngresso) {
+	public void setDataDeIngresso(LocalDate dataDeIngresso) {
 		
 		this.dataDeIngresso = dataDeIngresso;
 	}

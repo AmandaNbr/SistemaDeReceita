@@ -90,7 +90,7 @@ public class MenuInicial {
 		btnCadastraDegustador.setFocusable(false);
 		btnCadastraDegustador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "  O cadastro de degustadores  \n  é feito durante a degustação!  ");
+				JOptionPane.showMessageDialog(null, "  O cadastro de degustador é feito   \n   na degustacao  ");	
 			}
 		});
 		btnCadastraDegustador.setBounds(273, 172, 195, 45);

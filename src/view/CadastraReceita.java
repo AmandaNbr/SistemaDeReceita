@@ -71,6 +71,7 @@ public class CadastraReceita extends JFrame {
 	private JFormattedTextField formattedFieldQuantidade;
 	private JLabel lblMedidaPopUp;
 	private JTextField textFieldMedida;
+	private boolean test = false;
 
 	public CadastraReceita() {
 		criarTela();
@@ -123,12 +124,15 @@ public class CadastraReceita extends JFrame {
 		
 		if(cozinheiroController.validarCozinheiroVazio()) {
 			btnCadastrarReceita.setEnabled(false);
+			comboBoxCozinheiro.setEnabled(false);
 		}
 		
 		if(ingredienteController.validarIngredienteVazio()) {
 			btnAddIngrediente.setEnabled(false);
 			btnCadastrarReceita.setEnabled(false);
-		}		
+		}
+		
+		test = true;
 	}
 	
 	private boolean checarCampos() {
@@ -184,6 +188,8 @@ public class CadastraReceita extends JFrame {
 		
 		return camposValidos;
 	}
+	
+	
 	
 	private void initializeButtons() {
 		btnVoltar = new JButton("Voltar");
@@ -319,13 +325,28 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(lblCozinheiro);
 
 		comboBoxCozinheiro = new JComboBox<Cozinheiro>();
+		comboBoxCozinheiro.setMaximumRowCount(100);
+		comboBoxCozinheiro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (test)
+					checarInatividade();
+			}
+		});
 		comboBoxCozinheiro.setBounds(366, 43, 295, 24);
 		
 		for (Funcionario cozinheiro : cozinheiroController.getAllCozinheiros()) {
 			comboBoxCozinheiro.addItem(((Cozinheiro) cozinheiro));
 		}
 		
+		comboBoxCozinheiro.setSelectedItem(null);
+		
 		contentPane.add(comboBoxCozinheiro);
+	}
+	
+	private void checarInatividade() {
+		if(!cozinheiroController.validarInatividadeReceita((Cozinheiro) comboBoxCozinheiro.getSelectedItem())) {
+			JOptionPane.showMessageDialog(null, "   O cozinheiro selecionado ultrapassou o tempo limite   \n   para criacao de novas receitas.   ");
+		}
 	}
 	
 	private void campoDataDeCriacao() {

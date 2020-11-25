@@ -1,6 +1,6 @@
 package model;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import utils.StringUtils;
 
@@ -14,7 +14,7 @@ public class Cozinheiro extends Funcionario{
 				      String matricula, 
 				      String rg, 
 				      char sexo, 
-				      Date dataDeIngresso, 
+				      LocalDate dataDeIngresso, 
 				      double salario,  
 				      ArrayList<String> restaurantesTrab) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
