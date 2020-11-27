@@ -1,7 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Ingrediente;
 import utils.DataUtils;
 import utils.StringUtils;
@@ -39,9 +39,9 @@ public class IngredienteController {
 	}
 	
 	public boolean validarVencimento(String dataDeValidade) {
-		Date dataDeValidadeFormatada = DataUtils.converteData(dataDeValidade);
+		LocalDate dataDeValidadeFormatada = DataUtils.converteData(dataDeValidade);
 
-		if(dataDeValidadeFormatada.after(DataUtils.dataAtual())) {
+		if(dataDeValidadeFormatada.isAfter(DataUtils.dataAtual())) {
 			return true;
 		} else {
 			return false;
@@ -49,11 +49,11 @@ public class IngredienteController {
 	}
 	
 	public boolean validarFabricacao(String dataDeFabricacao, String dataDeValidade) {
-		Date dataDeFabricacaoFormatada = DataUtils.converteData(dataDeFabricacao);
-		Date dataDeValidadeFormatada = DataUtils.converteData(dataDeValidade);
+		LocalDate dataDeFabricacaoFormatada = DataUtils.converteData(dataDeFabricacao);
+		LocalDate dataDeValidadeFormatada = DataUtils.converteData(dataDeValidade);
 		
-		if(dataDeFabricacaoFormatada.before(DataUtils.dataAtual()) && 
-				dataDeFabricacaoFormatada.before(dataDeValidadeFormatada)) {
+		if(dataDeFabricacaoFormatada.isBefore(DataUtils.dataAtual()) && 
+				dataDeFabricacaoFormatada.isBefore(dataDeValidadeFormatada)) {
 			return true;
 		} else {
 			return false;

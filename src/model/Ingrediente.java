@@ -1,17 +1,17 @@
 package model;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Ingrediente {
 
 	private String nome;
 	private String descricao;
-	private Date dataDeFabricacao;
-	private Date dataDeValidade;
+	private LocalDate dataDeFabricacao;
+	private LocalDate dataDeValidade;
 	
 	public Ingrediente() {}
 	
-	public Ingrediente(String nome, String descricao, Date dataDeFabricacao, Date dataDeValidade) {
+	public Ingrediente(String nome, String descricao, LocalDate dataDeFabricacao, LocalDate dataDeValidade) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
@@ -33,19 +33,19 @@ public class Ingrediente {
 		this.nome = nome;
 	}
 	
-	public Date getDataDeFabricacao() {
+	public LocalDate getDataDeFabricacao() {
 		return dataDeFabricacao;
 	}
 	
-	public void setDataDeFabricacao(Date dataDeFabricacao) {
+	public void setDataDeFabricacao(LocalDate dataDeFabricacao) {
 		this.dataDeFabricacao = dataDeFabricacao;
 	}
 	
-	public Date getDataDeValidade() {
+	public LocalDate getDataDeValidade() {
 		return dataDeValidade;
 	}
 	
-	public void setDataDeValidade(Date dataDeValidade) {
+	public void setDataDeValidade(LocalDate dataDeValidade) {
 		this.dataDeValidade = dataDeValidade;
 	}
 	

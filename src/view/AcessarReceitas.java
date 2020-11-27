@@ -71,7 +71,7 @@ public class AcessarReceitas extends JFrame {
 		
 		initializeButton();
 
-		campoMostrarReceitaPorCozinheiro();
+		campoMostrarReceitaNaoPublicadas();
 		
 		campoMostrarReceitasPublicadas();
 		
@@ -80,6 +80,11 @@ public class AcessarReceitas extends JFrame {
 		if(cozinheiroController.validarCozinheiroVazio()) {
 			comboBoxCozinheiro.removeAllItems();
 			comboBoxCozinheiro.setEnabled(false);
+		}
+		
+		if(receitaController.validarReceitasVazias()) {
+			editorPaneReceitasPublicadas.setText("Não há receitas publicadas!");
+			editorPaneReceitasNaoPublicadas.setText("Não há receitas não publicadas!");
 		}
 	}
 	
@@ -112,18 +117,26 @@ public class AcessarReceitas extends JFrame {
 			
 		comboBoxCozinheiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarReceitas();
+				if(!receitaController.validarReceitasVazias() && !(comboBoxCozinheiro.getSelectedItem() == null))
+					mostrarReceitas();
 			}
 		});
+		
+		comboBoxCozinheiro.setSelectedItem(null);
 		
 		contentPane.add(comboBoxCozinheiro);		
 	}
 	
 	private void mostrarReceitas() {
 		if(comboBoxCozinheiro.getSelectedItem() == "Todos") {
-			receitaController.identificaPublicacaoDeReceitas(receitaController.getAllReceitas());
-			editorPaneReceitasNaoPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasNaoPublicadas()));
-			editorPaneReceitasPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasPublicadas()));
+			if(receitaController.validarReceitasVazias()) {
+				editorPaneReceitasPublicadas.setText("Nao ha receitas publicadas!");
+				editorPaneReceitasNaoPublicadas.setText("Nao ha receitas não publicadas!");
+			} else {
+				receitaController.identificaPublicacaoDeReceitas(receitaController.getAllReceitas());
+				editorPaneReceitasNaoPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasNaoPublicadas()));
+				editorPaneReceitasPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasPublicadas()));
+			}
 		} else {
 			receitaController.identificaPublicacaoDeReceitas(receitaController.getReceitasPorCozinheiro(comboBoxCozinheiro.getSelectedItem().toString().split(" - ")[1]));
 			editorPaneReceitasNaoPublicadas.setText(getReceitasEmString(receitaController.getListaDeReceitasNaoPublicadas()));
@@ -131,11 +144,11 @@ public class AcessarReceitas extends JFrame {
 		}
 		
 		if (editorPaneReceitasNaoPublicadas.getText().isEmpty()) {
-			editorPaneReceitasNaoPublicadas.setText("Cozinheiro nao possui receitas nao publicadas!");
+			editorPaneReceitasNaoPublicadas.setText("Nao ha receitas nao publicadas!");
 		}
 		
 		if (editorPaneReceitasPublicadas.getText().isEmpty()) {
-			editorPaneReceitasPublicadas.setText("Cozinheiro nao possui receitas publicadas!");
+			editorPaneReceitasPublicadas.setText("Nao ha receitas publicadas!");
 		}
 	}
 	
@@ -145,7 +158,7 @@ public class AcessarReceitas extends JFrame {
 								.collect(Collectors.joining());
 	}
 	
-	private void campoMostrarReceitaPorCozinheiro() {
+	private void campoMostrarReceitaNaoPublicadas() {
 		lblReceitasNaoPublicadas = new JLabel("Receitas nao publicadas");
 		lblReceitasNaoPublicadas.setBounds(23, 100, 205, 15);
 		contentPane.add(lblReceitasNaoPublicadas);

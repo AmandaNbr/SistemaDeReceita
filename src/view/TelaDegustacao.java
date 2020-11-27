@@ -62,7 +62,7 @@ public class TelaDegustacao extends JFrame {
                           String salario) {
 		this.isDegustacaoObrigatoria = true;
 		btnCadastraDegustador.setEnabled(false);
-		if (!receitaController.validarReceitaVazia()) {			
+		if (!receitaController.validarReceitasVazias()) {			
 			btnRealizaDegustacao.setEnabled(true);
 		}
 		comboBoxDegustador.removeAllItems();
@@ -110,10 +110,18 @@ public class TelaDegustacao extends JFrame {
 		campoData();
 		
 		mostrarCampos();
+		
+		if(degustadorController.validarDegustadorVazio()) {
+			comboBoxDegustador.setEnabled(false);
+		}
+		
+		if(receitaController.validarReceitasVazias()) {
+			comboBoxReceita.setEnabled(false);
+		}
 	}
 	
 	private void mostrarCampos() {
-		if (degustadorController.validarDegustadorVazio() || receitaController.validarReceitaVazia()) {
+		if (degustadorController.validarDegustadorVazio() || receitaController.validarReceitasVazias()) {
 			btnRealizaDegustacao.setEnabled(false);
 		} else {	
 			btnRealizaDegustacao.setEnabled(true);
@@ -137,6 +145,7 @@ public class TelaDegustacao extends JFrame {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				MenuInicial menuInicial = new MenuInicial();
 				menuInicial.frame.setLocationRelativeTo(null);
 				menuInicial.frame.setVisible(true);

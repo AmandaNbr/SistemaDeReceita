@@ -55,8 +55,8 @@ public class CadastraFuncionario extends JFrame {
 	private JButton btnVoltar;
 	private JLabel lblnomeDosRestaurantes;
 	private ButtonGroup group;
-	JRadioButton rdbtnMasculino;
-	JRadioButton rdbtnFeminino;
+	private JRadioButton rdbtnMasculino;
+	private JRadioButton rdbtnFeminino;
 	
 	public CadastraFuncionario(String tipoFuncionario) {
 		this.tipoFuncionario = tipoFuncionario;
@@ -198,7 +198,7 @@ public class CadastraFuncionario extends JFrame {
 			return camposValidos;
 		}
 		
-		camposValidos = funcionarioController.validarRGVazio(formattedTextFieldRG.getText());
+		camposValidos = funcionarioController.validarRGValido(formattedTextFieldRG.getText());
 		if (!camposValidos) {
 			JOptionPane.showMessageDialog(null, "  Informe um RG valido!  ");
 			return camposValidos;

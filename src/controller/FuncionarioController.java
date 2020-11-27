@@ -53,8 +53,11 @@ public class FuncionarioController {
 		return true;
 	}
 	
-	public boolean validarRGVazio(String rg) {
-		if(!rg.equals("0.000.000")) {
+	public boolean validarRGValido(String rg) {
+		if(!rg.equals("0.000.000") && !rg.equals("1.111.111") && !rg.equals("2.222.222") && 
+		   !rg.equals("3.333.333") && !rg.equals("4.444.444") && !rg.equals("5.555.555") &&
+		   !rg.equals("6.666.666") && !rg.equals("7.777.777") && !rg.equals("8.888.888") && 
+		   !rg.equals("9.999.999")) {
 			return true;
 		}
 		return false;

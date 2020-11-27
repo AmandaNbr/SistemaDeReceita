@@ -1,42 +1,38 @@
 package utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 public class DataUtils {
 	
 	DataUtils(){}
 	
-	public static Date converteData(String dataRecebida) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		simpleDateFormat.setLenient(false);
-		Date dataFormatada = new Date();
-		try {
-			dataFormatada = simpleDateFormat.parse(dataRecebida);
-		} catch (ParseException e) {
-			// Nada a fazer
-		}
-		
-		return dataFormatada;
-	}
-	
 	public static boolean validarData(String data) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		simpleDateFormat.setLenient(false);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 		try {
-			simpleDateFormat.parse(data);
-		} catch (ParseException e) {
+			LocalDate.parse(data, formatter);
+		} catch (DateTimeParseException e) {
 			return false;
 		}
 		return true;
 	}
 	
-	public static Date dataAtual() {
-		return new Date(System.currentTimeMillis());
+	public static LocalDate converteData(String dataRecebida) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dataFormatada = LocalDate.parse(dataRecebida, formatter);
+		
+		return dataFormatada;
 	}
 	
-	public static String formataData(Date dataRecebida) {
-		return dataRecebida.toString().substring(0, 10);
+	public static LocalDate dataAtual() {
+		return LocalDate.now();
+	}
+	
+	public static String formataData(LocalDate dataRecebida) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return dataRecebida.format(formatter);
 	}
 }

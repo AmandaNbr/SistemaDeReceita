@@ -1,6 +1,6 @@
 package model;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Editor extends Funcionario {
 		
@@ -10,7 +10,7 @@ public class Editor extends Funcionario {
 			      String matricula, 
 			      String rg, 
 			      char sexo, 
-			      Date dataDeIngresso, 
+			      LocalDate dataDeIngresso, 
 			      double salario) {
 		super(nome, matricula, rg, sexo, dataDeIngresso, salario);
 	}

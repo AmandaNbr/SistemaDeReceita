@@ -1,7 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import model.Cozinheiro;
 import model.Degustacao;
@@ -94,21 +94,16 @@ public class ReceitaController {
 	}
 	
 	public boolean validarDataDeCriacao(String dataDeCriacao) {
-		Date dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
+		LocalDate dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
 
-		if(dataDeCriacaoFormatada.before(DataUtils.dataAtual())) {
+		if(dataDeCriacaoFormatada.isBefore(DataUtils.dataAtual())) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public void validarDataDaUltimaReceitaDoCozinheiro() {
-		// TODO: validar se a data de criacao da receita mais recente ultrapassa 45 dias,
-		// e migrar de Date por LocalDateTime.
-	}
-	
-	public void CadastraReceita(String nome,
+	public void cadastraReceita(String nome,
 			                    String codigo,
 			                    String dataDeCriacao,
 			                    String porcoesQueRende,
@@ -147,7 +142,7 @@ public class ReceitaController {
 		return receitaModel.getAllReceitas();
 	}
 	
-	public boolean validarReceitaVazia() {
+	public boolean validarReceitasVazias() {
 		if(receitaModel.getAllReceitas().isEmpty()) {
 			return true;
 		} else {

@@ -1,7 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import model.Degustacao;
 import model.Degustador;
@@ -14,10 +14,11 @@ public class DegustacaoController {
 	public DegustacaoController() {}
 	
 	private Degustacao degustacaoModel = new Degustacao();
+	
 	public boolean validarDataDegustacaoReceita(String dataDegustacao, Receita receita) {
-		Date dataDegustacaoFormatada = DataUtils.converteData(dataDegustacao);
+		LocalDate dataDegustacaoFormatada = DataUtils.converteData(dataDegustacao);
 
-		if(!dataDegustacaoFormatada.before(receita.getDataDeCriacao())) {
+		if(!dataDegustacaoFormatada.isBefore(receita.getDataDeCriacao())) {
 			return true;
 		} else {
 			return false;
