@@ -13,8 +13,7 @@ public class FuncionarioController {
 	private Editor editorModel = new Editor();
 
 	
-	public FuncionarioController() {
-	}
+	public FuncionarioController() {}
 	
 	public boolean validarNome(String nome) {
 		if (!nome.trim().isEmpty()) {
@@ -63,7 +62,7 @@ public class FuncionarioController {
 		return false;
 	}
 	
-	public boolean validarRG(String rg) {
+	public boolean validarRGRepetido(String rg) {
 		for (Funcionario cozinheiroAtual : cozinheiroModel.getAllCozinheiros()) {
 			if(StringUtils.comparaStrings(cozinheiroAtual.getRg(), rg)) {
 				return false;
