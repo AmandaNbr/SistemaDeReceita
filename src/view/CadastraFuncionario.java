@@ -29,6 +29,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 
+/**
+ * Cria a tela de cadastro de funcionarios pegando e guardando dados nas controllers
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class CadastraFuncionario extends JFrame {
 	
@@ -64,7 +69,7 @@ public class CadastraFuncionario extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a apicacao
 	 */
 	public void startCadastraFuncionario() {
 		EventQueue.invokeLater(new Runnable() {
@@ -80,7 +85,7 @@ public class CadastraFuncionario extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */
 	public void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,6 +117,9 @@ public class CadastraFuncionario extends JFrame {
 		}
 	}
 
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void initializeButtons() {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -178,6 +186,10 @@ public class CadastraFuncionario extends JFrame {
 		contentPane.add(btnVoltar);
 	}
 	
+	/**
+	 * Verifica se cada validacao é verdadeira 
+	 * @return se todas as validacoes forem validas retorna verdadeiro, se não, retorna a mensagem de erro especifica
+	 */
 	private boolean checarCampos() {
 		
 		boolean camposValidos = funcionarioController.validarNome(textFieldNome.getText());
@@ -226,6 +238,9 @@ public class CadastraFuncionario extends JFrame {
 		return camposValidos;
 	}
 	
+	/**
+	 * Componentes visuais para o campo nome
+	 */
 	private void campoNome() {
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -238,6 +253,9 @@ public class CadastraFuncionario extends JFrame {
 		contentPane.add(textFieldNome);
 	}
 	
+	/**
+	 * Componentes visuais para o campo matricula
+	 */
 	private void campoMatricula() {
 		lblMatricula = new JLabel("Matricula");
 		lblMatricula.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -250,6 +268,9 @@ public class CadastraFuncionario extends JFrame {
 		textFieldMatricula.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo rg
+	 */
 	private void campoRG() {
 		lblRG = new JLabel("RG");
 		lblRG.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -266,6 +287,9 @@ public class CadastraFuncionario extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo sexo
+	 */
 	private void campoSexo() {
 		lblSexo = new JLabel("Sexo");
 		lblSexo.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -287,6 +311,10 @@ public class CadastraFuncionario extends JFrame {
 		
 	}
 	
+	/**
+	 * Pega qual opcao está selecionada do campo sexo
+	 * @return char 'M' ou 'F'
+	 */
 	private char getRbtSelecionado() {
 		if(rdbtnMasculino.isSelected()) {
 			return 'M';
@@ -295,6 +323,9 @@ public class CadastraFuncionario extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo data de ingresso
+	 */
 	private void campoDataDeIngresso() {
 		lblDataDeIngresso = new JLabel("Data de Ingresso");
 		lblDataDeIngresso.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -311,6 +342,9 @@ public class CadastraFuncionario extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo salario
+	 */
 	private void campoSalario() {
 		lblSalario = new JLabel("Salario");
 		lblSalario.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -331,6 +365,9 @@ public class CadastraFuncionario extends JFrame {
 		formattedTextFieldSalario.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o checkbox de titulo de chef
+	 */
 	private void campoNomeChef() {
 		chckbxTituloDechef = new JCheckBox(" Título de 'Chef'");
 		chckbxTituloDechef.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -338,6 +375,9 @@ public class CadastraFuncionario extends JFrame {
 		contentPane.add(chckbxTituloDechef);
 	}
 	
+	/**
+	 * Componentes visuais para o campo restaurantes
+	 */
 	private void campoRestaurantes() {
 		lblRestaurantesTrabalhados = new JLabel("Restaurantes trabalhados (opcional)");
 		lblRestaurantesTrabalhados.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -357,6 +397,10 @@ public class CadastraFuncionario extends JFrame {
 
 	}
 
+	/**
+	 * Atribui a variavel tipoFuncionario o tipo do funcionario pelo botao que ele clicou para acessar essa tela
+	 * @param string do tipo do funcionario
+	 */
 	public void setTipoFuncionario(String tipoFuncionario) {
 		this.tipoFuncionario = tipoFuncionario;
 	}

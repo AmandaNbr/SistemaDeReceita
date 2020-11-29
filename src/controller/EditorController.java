@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Editor;
 import model.Funcionario;
 import utils.DataUtils;
+import utils.StringUtils;
 
 /**
  * Valida os dados do degustador que vem da interface do usuario (view) e cadastra (model)
@@ -41,6 +42,23 @@ public class EditorController {
 								   funcionarioController.converterSalario(salario));
 		
 		editorModel.cadastrarEditor(editor);
+	}
+	
+	/**
+	 * Pega editor por matricula
+	 * @param string da matricula do editor
+	 * @return objeto editor
+	 */
+	public Editor getEditorPorMatricula(String matriculaEditor) {
+		Editor editor = new Editor();
+		
+		for (Funcionario editorAtual : editor.getAllEditores()) {
+			if(StringUtils.comparaStrings(editorAtual.getMatricula(), matriculaEditor)) {
+				return (Editor) editorAtual;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**

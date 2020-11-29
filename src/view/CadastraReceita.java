@@ -34,6 +34,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+/**
+ * Cria a tela de cadastro de receitas pegando e guardando dados nas controllers
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class CadastraReceita extends JFrame {
 
@@ -77,7 +82,7 @@ public class CadastraReceita extends JFrame {
 		criarTela();
 	}
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startCadastraReceita() {
 		EventQueue.invokeLater(new Runnable() {
@@ -93,7 +98,7 @@ public class CadastraReceita extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */	
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,11 +127,17 @@ public class CadastraReceita extends JFrame {
 		
 		campoIngredientes();
 		
+		/*
+		 * Coloca certos campos como disabled para nao dar nullpointer
+		 */
 		if(cozinheiroController.validarCozinheiroVazio()) {
 			btnCadastrarReceita.setEnabled(false);
 			comboBoxCozinheiro.setEnabled(false);
 		}
 		
+		/*
+		 * Coloca certos campos como disabled para nao dar nullpointer
+		 */
 		if(ingredienteController.validarIngredienteVazio()) {
 			btnAddIngrediente.setEnabled(false);
 			btnCadastrarReceita.setEnabled(false);
@@ -135,6 +146,10 @@ public class CadastraReceita extends JFrame {
 		test = true;
 	}
 	
+	/**
+	 * Verifica se cada validacao é verdadeira 
+	 * @return se todas as validacoes forem validas retorna verdadeiro, se não, retorna a mensagem de erro especifica
+	 */
 	private boolean checarCampos() {
 		
 		boolean camposValidos = receitaController.validarNomeVazio(textFieldNome.getText());
@@ -189,8 +204,9 @@ public class CadastraReceita extends JFrame {
 		return camposValidos;
 	}
 	
-	
-	
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void initializeButtons() {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -237,6 +253,9 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(btnAddIngrediente);
 	}
 	
+	/**
+	 * Cria um popup para escolher os ingredientes da receita e colocar a medida e quantidade
+	 */
 	private void criarPopUp() {
 		popUpIngrediente = new JPanel(new GridLayout(0, 1));
 		
@@ -259,6 +278,9 @@ public class CadastraReceita extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo ingrediente do popup
+	 */
 	private void campoIngredientePopUp() {
 		lblIngredientePopUp = new JLabel("Ingrediente:");		
 		popUpIngrediente.add(lblIngredientePopUp);
@@ -271,6 +293,9 @@ public class CadastraReceita extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo quantidade do popup
+	 */
 	private void campoQuantidadePopUp() {
 		lblQuantidadePopUp = new JLabel("Quantidade:");
 		popUpIngrediente.add(lblQuantidadePopUp);
@@ -290,6 +315,9 @@ public class CadastraReceita extends JFrame {
 		popUpIngrediente.add(formattedFieldQuantidade);
 	}
 	
+	/**
+	 * Componentes visuais para o campo medida popup
+	 */
 	private void campoMedidaPopUp() {
 		lblMedidaPopUp = new JLabel("Medida: Opcional");
 		popUpIngrediente.add(lblMedidaPopUp);
@@ -297,6 +325,9 @@ public class CadastraReceita extends JFrame {
 		popUpIngrediente.add(textFieldMedida);	
 	}	
 	
+	/**
+	 * Componentes visuais para o campo nome
+	 */
 	private void campoNome() {
 		lblNome = new JLabel("Nome");
 		lblNome.setBounds(43, 24, 70, 15);
@@ -308,6 +339,9 @@ public class CadastraReceita extends JFrame {
 		textFieldNome.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo codigo
+	 */
 	private void campoCodigo() {
 		lblCodigo = new JLabel("Codigo");
 		lblCodigo.setBounds(547, 96, 70, 15);
@@ -319,6 +353,9 @@ public class CadastraReceita extends JFrame {
 		textFieldCodigo.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo cozinheiro
+	 */
 	private void campoCozinheiro() {
 		lblCozinheiro = new JLabel("Cozinheiro");
 		lblCozinheiro.setBounds(366, 24, 111, 15);
@@ -343,12 +380,18 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(comboBoxCozinheiro);
 	}
 	
+	/**
+	 * Confere se o cozinheiro esta dentro do prazo de criacao de receita
+	 */
 	private void checarInatividade() {
 		if(!cozinheiroController.validarInatividadeReceita((Cozinheiro) comboBoxCozinheiro.getSelectedItem())) {
 			JOptionPane.showMessageDialog(null, "   O cozinheiro selecionado ultrapassou o tempo limite   \n   para criacao de novas receitas.   ");
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo data de criacao
+	 */
 	private void campoDataDeCriacao() {
 		lblDataDeCriacao = new JLabel("Data de criacao");
 		lblDataDeCriacao.setBounds(209, 96, 114, 15);
@@ -364,6 +407,9 @@ public class CadastraReceita extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo porcoes que rende
+	 */
 	private void campoPorcoesQueRende() {
 		lblPorcoesQueRende = new JLabel("Porcoes que rende");
 		lblPorcoesQueRende.setBounds(43, 96, 152, 15);
@@ -384,6 +430,9 @@ public class CadastraReceita extends JFrame {
 		formattedTextFieldPorcoesQueRende.setToolTipText("Selecione o numero para modifica-lo.");
 	}
 	
+	/**
+	 * Componentes visuais para o campo categoria
+	 */
 	private void campoCategoria() {
 		comboBoxCategoria = new JComboBox<ReceitaCategorias>(ReceitaCategorias.values());
 		comboBoxCategoria.setBounds(366, 114, 142, 24);
@@ -394,6 +443,9 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(lblCategoria);
 	}
 	
+	/**
+	 * Componentes visuais para o campo modo de preparo
+	 */
 	private void campoModoDePreparo() {
 		lblModoDePreparo = new JLabel("Modo de preparo");
 		lblModoDePreparo.setBounds(43, 171, 142, 15);
@@ -405,6 +457,9 @@ public class CadastraReceita extends JFrame {
 		contentPane.add(scrollPaneModoDePreparo);
 	}
 	
+	/**
+	 * Componentes visuais para o campo ingredientes
+	 */
 	private void campoIngredientes() {
 		editorPaneIngredientes = new JEditorPane();
 		editorPaneIngredientes.setEditable(false);

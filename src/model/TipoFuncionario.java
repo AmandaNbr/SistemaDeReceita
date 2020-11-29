@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Enum dos cargos de funcionario
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public enum TipoFuncionario {
 	COZINHEIRO("cozinheiro"),
 	EDITOR("editor"),

@@ -2,6 +2,11 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Modelo de degustacao, recebe dados da controller e cadastra na Empresa (banco de dados)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class Degustacao {
 
 	private String codigoReceita;
@@ -56,10 +61,18 @@ public class Degustacao {
 		this.nota = nota;
 	}		
 	
+	/**
+	 * Chama um metodo da Empresa que retorna uma arraylist do objeto degustacao
+	 * @return arraylist de degustacao
+	 */
 	public ArrayList<Degustacao> getAllDegustacoes() {
 		return Empresa.getDegustacoes();
 	}
 	
+	/**
+	 * Chama um metodo da Empresa para cadastrar degustacao
+	 * @param objeto degustacao
+	 */
 	public void cadastraDegustacao(Degustacao degustacao) {
 		Empresa.addDegustacao(degustacao);
 	}

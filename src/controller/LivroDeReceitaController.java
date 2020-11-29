@@ -15,6 +15,7 @@ public class LivroDeReceitaController {
 	
 	private LivroDeReceita livroDeReceitaModel = new LivroDeReceita();
 	private ReceitaController receitaController = new ReceitaController();
+	private EditorController editorController = new EditorController();
 	
 	/**
 	 * Valida se o codigo isbn está vazia
@@ -116,7 +117,7 @@ public class LivroDeReceitaController {
 		                       "Codigo ISBN: " +
 		                       livroDeReceita.getIsbn() +
 		                       "\n Editor: " +
-		                       livroDeReceita.getEditorPorMatricula(livroDeReceita.getMatriculaEditor()).getNome() +
+		                       editorController.getEditorPorMatricula(livroDeReceita.getMatriculaEditor()).getNome() +
 		                       "\n\n----------------------------\n\n";
 			
 		return capaFormatada;

@@ -29,6 +29,11 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
+/**
+ * Cria a tela de degustacao pegando e guardando dados nas controllers
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class TelaDegustacao extends JFrame {
 
@@ -54,6 +59,15 @@ public class TelaDegustacao extends JFrame {
 		criarTela();
 	}
 	
+	/**
+	 * Faz a degustacao ser obrigatoria para um degustador recem contratado
+	 * @param nome do degustador
+	 * @param matricula do degustador
+	 * @param rg do degustador
+	 * @param sexo do degustador
+	 * @param dataDeIngresso do degustador
+	 * @param salario do degustador
+	 */
 	public void degustacaoObrigatoria(String nome,
             			  String matricula,
                           String rg,
@@ -71,7 +85,7 @@ public class TelaDegustacao extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startTelaDegustacao() {
 		EventQueue.invokeLater(new Runnable() {
@@ -87,7 +101,7 @@ public class TelaDegustacao extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,15 +125,24 @@ public class TelaDegustacao extends JFrame {
 		
 		mostrarCampos();
 		
+		/*
+		 * Coloca o campo como disabled para nao dar nullpointer
+		 */
 		if(degustadorController.validarDegustadorVazio()) {
 			comboBoxDegustador.setEnabled(false);
 		}
 		
+		/*
+		 * Coloca o campo como disabled para nao dar nullpointer
+		 */
 		if(receitaController.validarReceitasVazias()) {
 			comboBoxReceita.setEnabled(false);
 		}
 	}
 	
+	/**
+	 * Desabilita o botao da degustacao se o degustador ou receita estiverem vazios
+	 */
 	private void mostrarCampos() {
 		if (degustadorController.validarDegustadorVazio() || receitaController.validarReceitasVazias()) {
 			btnRealizaDegustacao.setEnabled(false);
@@ -128,6 +151,9 @@ public class TelaDegustacao extends JFrame {
 		}
 	}
 	
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void initializeButtons(){		
 		btnCadastraDegustador = new JButton("Cadastrar Degustador");
 		btnCadastraDegustador.setFont(new Font("Dialog", Font.BOLD, 11));
@@ -187,6 +213,10 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(btnRealizaDegustacao);
 	}
 	
+	/**
+	 * Verifica se cada validacao é verdadeira 
+	 * @return se todas as validacoes forem validas retorna verdadeiro, se não, retorna a mensagem de erro especifica
+	 */
 	private boolean checarCampos() {
 		
 		boolean camposValidos = DataUtils.validarData(formattedTextFieldData.getText());
@@ -205,6 +235,9 @@ public class TelaDegustacao extends JFrame {
 		return camposValidos;
 		}
 	
+	/**
+	 * Componentes visuais para o campo degustador
+	 */
 	private void campoDegustador() {
 		comboBoxDegustador = new JComboBox<Degustador>();
 		comboBoxDegustador.setBounds(29, 57, 251, 24);
@@ -220,6 +253,9 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(lblDegustador);
 	}
 
+	/**
+	 * Componentes visuais para o campo receita
+	 */
 	private void campoReceita() {
 		lblReceita = new JLabel("Receita");
 		lblReceita.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -236,6 +272,9 @@ public class TelaDegustacao extends JFrame {
 		contentPane.add(comboBoxReceita);
 	}
 	
+	/**
+	 * Componentes visuais para o campo nota
+	 */
 	private void campoNota() {
 		lblNota = new JLabel("Nota");
 		lblNota.setFont(new Font("Dialog", Font.BOLD, 15));
@@ -258,6 +297,9 @@ public class TelaDegustacao extends JFrame {
 		formattedTextFieldNota.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo data
+	 */
 	private void campoData() {
 		lblData = new JLabel("Data");
 		lblData.setFont(new Font("Dialog", Font.BOLD, 15));
