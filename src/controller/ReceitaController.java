@@ -11,6 +11,11 @@ import model.ReceitaCategorias;
 import utils.DataUtils;
 import utils.StringUtils;
 
+/**
+ * Valida os dados da receita que vem da interface do usuario (view) e cadastra (model)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class ReceitaController {
 
 	private DegustacaoController degustacaoController = new DegustacaoController();
@@ -38,6 +43,11 @@ public class ReceitaController {
 		this.listaDeReceitasNaoPublicadas = listaDeReceitasNaoPublicadas;
 	}
 	
+	/**
+	 * Valida se o nome está vazio
+	 * @param string do nome da receita
+	 * @return verdadeiro se tiver algo escrito ou falso se for uma string vazia
+	 */
 	public boolean validarNomeVazio(String nome) {
 		if (!nome.trim().isEmpty()) {
 			return true;
@@ -46,6 +56,12 @@ public class ReceitaController {
 		}
 	}
 	
+	/**
+	 * Valida se o nome da receita é repetido
+	 * @param string nome da receita
+	 * @param objeto cozinheiro
+	 * @return verdadeiro se não for repetida ou falso se for
+	 */
 	public boolean validarNomeRepetido(String nomeDaReceita, Cozinheiro cozinheiro) {
 		
 		for (Receita receitaAtual : getAllReceitas()) {
@@ -59,6 +75,11 @@ public class ReceitaController {
 		return true;
 	}
 	
+	/**
+	 * Valida se o codigo da receita está vazio
+	 * @param string do codigo da receita
+	 * @return verdadeiro se tiver algo escrito ou falso se for uma string vazia
+	 */
 	public boolean validarCodigoVazio(String codigo) {
 		if (!codigo.trim().isEmpty()) {
 			return true;
@@ -67,6 +88,11 @@ public class ReceitaController {
 		}
 	}
 	
+	/**
+	 * Valida se o codigo da receita é repetido
+	 * @param string do codigo da receita
+	 * @return verdadeiro se não for repetida ou falso se for
+	 */
 	public boolean validarCodigoRepetido(String codigo) {		
 		for (Receita receitaAtual : receitaModel.getAllReceitas()) {
 			if(StringUtils.comparaStrings(receitaAtual.getCodigo(), codigo)) {
@@ -77,6 +103,11 @@ public class ReceitaController {
 		return true;
 	}
 	
+	/**
+	 * Valida se o modo de preparo está vazio
+	 * @param string do modo de preparo da receita
+	 * @return verdadeiro se tiver algo escrito ou falso se for uma string vazia
+	 */
 	public boolean validarModoDePreparoVazio(String modoDePreparo) {
 		if (!modoDePreparo.trim().isEmpty()) {
 			return true;
@@ -85,6 +116,11 @@ public class ReceitaController {
 		}
 	}
 	
+	/**
+	 * Valida se ha algum ingrediente na receita
+	 * @param string da lista de ingredientes da receita
+	 * @return verdadeiro se tiver ingrediente ou falso nao tiver
+	 */
 	public boolean validarIngredienteVazio(String listaDeIngredientes) {
 		if(!listaDeIngredientes.isEmpty()) {
 			return true;
@@ -93,6 +129,11 @@ public class ReceitaController {
 		}
 	}
 	
+	/**
+	 * Valida se a data de criacao é antes da data atual
+	 * @param data de criacao
+	 * @return verdadeiro se for valida ou falso se nao for
+	 */
 	public boolean validarDataDeCriacao(String dataDeCriacao) {
 		LocalDate dataDeCriacaoFormatada = DataUtils.converteData(dataDeCriacao);
 
@@ -103,6 +144,26 @@ public class ReceitaController {
 		}
 	}
 	
+	/**
+	 * Converte de string para inteiro e troca ponto por string vazia
+	 * @param string porcoes que rende
+	 * @return int porcoes que rende
+	 */
+	public int converterPorcoesQueRende(String porcoesQueRendeRecebida) {
+		return Integer.parseInt(porcoesQueRendeRecebida.replace(".", ""));
+	}
+	
+	/**
+	 * Cadastra receita
+	 * @param string nome
+	 * @param string codigo
+	 * @param string dataDeCriacao
+	 * @param string porcoesQueRende
+	 * @param enum categoria
+	 * @param arraylist ingredientesDaReceita
+	 * @param objeto cozinheiro
+	 * @param string modoDePreparo
+	 */
 	public void cadastraReceita(String nome,
 			                    String codigo,
 			                    String dataDeCriacao,
@@ -115,7 +176,7 @@ public class ReceitaController {
 		Receita receita = new Receita(nome.trim(),
 									  codigo.trim(),
 									  DataUtils.converteData(dataDeCriacao),
-									  ingredienteDaReceitaController.converterPorcoesQueRende(porcoesQueRende),
+									  converterPorcoesQueRende(porcoesQueRende),
 									  categoria,
 									  ingredientesDaReceita,
 									  matriculaCozinheiro.getMatricula(),
@@ -124,24 +185,42 @@ public class ReceitaController {
 		receitaModel.cadastraReceita(receita);
 	}
 	
+	/**
+	 * Chama um metodo da model que retorna uma instancia do objeto receita
+	 * @param codigo receita
+	 * @return objeto receita
+	 */
 	public Receita getReceitaPorCodigo(String codigoReceita) {
 		return receitaModel.getReceitaPorCodigo(codigoReceita);
 	}
 	
+	/**
+	 * Cria a string receita do livro
+	 * @param objeto receita
+	 * @return string receita formatada
+	 */
 	public String montarReceitaDoLivro(ArrayList<Receita> listaDeReceitas) {
-		String receitasFormatas = "";
+		String receitasFormatadas = "";
 		
 		for (Receita receitaAtual : listaDeReceitas) {
-			receitasFormatas = receitasFormatas.concat(receitaAtual.getNome() + " - " + receitaAtual.getCodigo() + "\n");			
+			receitasFormatadas = receitasFormatadas.concat(receitaAtual.getNome() + " - " + receitaAtual.getCodigo() + "\n");			
 		}
 		
-		return receitasFormatas;
+		return receitasFormatadas;
 	}
 	
+	/**
+	 * Chama um metodo da model que retorna uma arraylist do objeto receita
+	 * @return arraylist de receitas
+	 */
 	public ArrayList<Receita> getAllReceitas(){
 		return receitaModel.getAllReceitas();
 	}
 	
+	/**
+	 * Verifica se há alguma receita cadastrada
+	 * @return verdadeiro se não houver receita cadastrada ou falso se houver
+	 */
 	public boolean validarReceitasVazias() {
 		if(receitaModel.getAllReceitas().isEmpty()) {
 			return true;
@@ -150,6 +229,11 @@ public class ReceitaController {
 		}
 	}
 
+	/**
+	 * Cria a string receita formatada com as devidas informacoes
+	 * @param string codigo da receita
+	 * @return string receita formatada
+	 */
 	public String getReceitaFormatadaPorCodigo(String codigoReceitaAtual) {
 		Receita receitaAtual = getReceitaPorCodigo(codigoReceitaAtual);
 		
@@ -177,6 +261,11 @@ public class ReceitaController {
 		return receitaFormatada;
 	}
 	
+	/**
+	 * Calcula a media das degustacoes
+	 * @param string codigo receita
+	 * @return string media notas
+	 */
 	public String mediaNotas(String codigoReceitaAtual) {
 		ArrayList<Degustacao> listaDeDegustacoes = degustacaoController.getDegustacaoPorReceita(codigoReceitaAtual);
 		
@@ -188,6 +277,11 @@ public class ReceitaController {
 		
 	}
 	
+	/**
+	 * Pega as receitas de um determinado cozinheiro
+	 * @param string matricula do cozinheiro
+	 * @return arraylist do objeto receita
+	 */
 	public ArrayList<Receita> getReceitasPorCozinheiro(String matriculaCozinheiro) {
 		ArrayList<Receita> listaDeReceitasPorCozinheiro = new ArrayList<Receita>();
 		
@@ -200,6 +294,10 @@ public class ReceitaController {
 		return listaDeReceitasPorCozinheiro;
 	}
 	
+	/**
+	 * Cria e preenche duas arraylists: receitas publicadas e receitas nao publicadas
+	 * @param lista de receitas
+	 */
 	public void identificaPublicacaoDeReceitas(ArrayList<Receita> listaDeReceitasRecebida) {
 		listaDeReceitasPublicadas = new ArrayList<Receita>();
 		listaDeReceitasNaoPublicadas = new ArrayList<Receita>();

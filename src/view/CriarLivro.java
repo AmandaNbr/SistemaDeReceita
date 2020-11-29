@@ -196,8 +196,6 @@ private boolean checarCampos() {
 			JOptionPane.showMessageDialog(null, "  Adicione pelo menos uma receita!  ");
 			return camposValidos;
 		}
-		
-		
 				
 		return camposValidos;
 		}
