@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import utils.StringUtils;
 
+/**
+ * Modelo de cozinheiro, recebe dados da controller e cadastra na Empresa (banco de dados)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class Cozinheiro extends Funcionario{
 
 	private ArrayList<String> restaurantesTrab;	
@@ -27,7 +32,6 @@ public class Cozinheiro extends Funcionario{
 		return getNome() + " - " + getMatricula();
 	}
 
-	//gets e sets
 	public ArrayList<String> getRestaurantesTrab() {
 		return restaurantesTrab;
 	}
@@ -36,14 +40,27 @@ public class Cozinheiro extends Funcionario{
 		this.restaurantesTrab = restaurantesTrab;
 	}
 	
+	/**
+	 * Chama um metodo da Empresa que retorna uma arraylist do objeto funcionario do tipo receita
+	 * @return arraylist de cozinheiros
+	 */
 	public ArrayList<Funcionario> getAllCozinheiros() {
 		return Empresa.getFuncionariosPorCargo(Cozinheiro.class);
 	}
 	
+	/**
+	 * Chama um metodo da Empresa para cadastrar cozinheiro
+	 * @param objeto cozinheiro
+	 */
 	public void cadastrarCozinheiro(Cozinheiro cozinheiro) {
 		Empresa.addNovoFuncionario(cozinheiro);
 	}
 	
+	/**
+	 * Pega um determinado cozinheiro pela matricula
+	 * @param string da matricula do cozinheiro
+	 * @return objeto cozinheiro
+	 */
 	public Cozinheiro getCozinheiroPorMatricula(String matriculaCozinheiro) {
 
 		for (Funcionario cozinheiroAtual : getAllCozinheiros()) {

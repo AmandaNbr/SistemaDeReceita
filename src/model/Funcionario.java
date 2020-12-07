@@ -1,6 +1,11 @@
 package model;
 import java.time.LocalDate;
 
+/**
+ * Classe abstrata modelo de funcionario
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public abstract class Funcionario {
 
 	private String nome;
@@ -8,9 +13,8 @@ public abstract class Funcionario {
 	private String rg;
 	private char sexo;
 	private LocalDate dataDeIngresso;
-	private double salario; //coloquei o salario como double pois não vou fazer operacoes, entao nao tem risco de perder valores.
+	private double salario; 
 	
-	//construtor
 	public Funcionario(String nome, 
 					   String matricula, 
 					   String rg, 
@@ -27,8 +31,6 @@ public abstract class Funcionario {
 	
 	public Funcionario() {};
 	
-	
-	//gets e sets
 	public String getNome() {
 		return nome;
 	}

@@ -18,6 +18,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Cria a tela de acesso a livros pegando dados do livroDeReceitaController
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class ImprimirLivro extends JFrame {
 
@@ -35,7 +40,7 @@ public class ImprimirLivro extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startImprimirLivro() {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,7 +56,7 @@ public class ImprimirLivro extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,13 +71,19 @@ public class ImprimirLivro extends JFrame {
 		
 		campoLivro();
 		
-		separador();
+		addSeparador();
 		
+		/*
+		 * Coloca o campo como disabled para nao dar nullpointer
+		 */
 		if(livroDeReceitaController.getAllLivrosDeReceita().isEmpty()) {
 			comboBoxLivroDeReceita.setEnabled(false);
 		}
 	}
 	
+	/**
+	 * Botao e acoes do botao
+	 */
 	private void initializeButton() {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -86,6 +97,9 @@ public class ImprimirLivro extends JFrame {
 		contentPane.add(btnVoltar);
 	}
 	
+	/**
+	 * Componentes visuais para o campo livro
+	 */
 	private void campoLivro() {
 		lblLivros = new JLabel("Livros");
 		lblLivros.setBounds(246, 12, 70, 15);
@@ -118,7 +132,10 @@ public class ImprimirLivro extends JFrame {
 		contentPane.add(comboBoxLivroDeReceita);
 	}
 	
-	private void separador() {
+	/**
+	 * Adiciona o componente visual separador
+	 */
+	private void addSeparador() {
 		separator = new JSeparator();
 		separator.setBounds(60, 89, 425, 2);
 		contentPane.add(separator);

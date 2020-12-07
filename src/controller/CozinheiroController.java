@@ -7,11 +7,29 @@ import model.Receita;
 import utils.DataUtils;
 import utils.StringUtils;
 
+/**
+ * Valida os dados do cozinheiro que vem da interface do usuario (view) e cadastra (model)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
+
 public class CozinheiroController {
 
 	private Cozinheiro cozinheiroModel = new Cozinheiro();
+	
 	private FuncionarioController funcionarioController = new FuncionarioController();
 	
+	/**
+	 * Cadastra cozinheiro
+	 * @param string de nome do cozinheiro
+	 * @param string de matricula do cozinheiro
+	 * @param string de rg do cozinheiro
+	 * @param char do sexo do cozinheiro 
+	 * @param string de data de ingresso do cozinheiro
+	 * @param string salario do cozinheiro
+	 * @param string de restaurantes trabalhados
+	 * @param booleano que informa se o cozinheiro deseja ser chamado de chefe
+	 */
 	public void cadastraCozinheiro(String nome,
 							       String matricula,
 							       String rg,
@@ -32,6 +50,12 @@ public class CozinheiroController {
 		cozinheiroModel.cadastrarCozinheiro(cozinheiro);
 	}
 	
+	/**
+	 * Separa a string dos restaurantes por virgula e transforma em uma arraylist de strings,
+	 * cada string é um restaurante
+	 * @param string de restaurantes trabalhados
+	 * @return arrayList de string dos restaurantes trabalhados
+	 */
 	private ArrayList<String> formatarRestaurantes(String restaurantesRecebidos) {
 		String[] restaurantesSeparados = restaurantesRecebidos.split(",");
 		
@@ -44,6 +68,10 @@ public class CozinheiroController {
 		return restaurantesFormatados;
 	}
 	
+	/**
+	 * Verifica se há algum cozinheiro cadastrado
+	 * @return verdadeiro se não houver cozinheiro cadastrado ou falso se houver
+	 */
 	public boolean validarCozinheiroVazio() {
 		if(cozinheiroModel.getAllCozinheiros().isEmpty()) {
 			return true;
@@ -52,10 +80,19 @@ public class CozinheiroController {
 		}
 	}
 	
+	/**
+	 * Chama um metodo da model que retorna uma arraylist do objeto funcionario do tipo cozinheiro
+	 * @return arraylist de funcionarios do tipo cozinheiro
+	 */
 	public ArrayList<Funcionario> getAllCozinheiros() {
 		return cozinheiroModel.getAllCozinheiros();
 	}
 	
+	/**
+	 * Pega o cozinheiro pela matricula
+	 * @param matricula do cozinheiro
+	 * @return objeto cozinheiro da matricula dada
+	 */
 	public Cozinheiro getCozinheiroPorMatricula(String matriculaCozinheiro) {
 		for (Funcionario cozinheiroAtual : getAllCozinheiros()) {
 			if(StringUtils.comparaStrings(cozinheiroAtual.getMatricula(), matriculaCozinheiro)) {
@@ -66,6 +103,12 @@ public class CozinheiroController {
 		return null;
 	}
 	
+	/**
+	 * Valida se o cozinheiro recém-contratado publicou alguma receita no prazo de 45 dias 
+	 * e se o cozinheiro esta cumprindo a regra de pelo menos uma receita publicada por mês.
+	 * @param objeto cozinheiro
+	 * @return verdadeiro se o cozinheiro está dentro do prazo ou falso se não publicou nenhuma receita no prazo
+	 */
 	public boolean validarInatividadeReceita(Cozinheiro cozinheiro) {
 		ReceitaController receitaController = new ReceitaController();
 		

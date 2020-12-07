@@ -20,6 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * Cria a tela de cadastro de ingredientes pegando e guardando dados nas controllers
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class CadastraIngrediente extends JFrame {
 
@@ -41,7 +46,7 @@ public class CadastraIngrediente extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startCadastraIngrediente() {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +62,7 @@ public class CadastraIngrediente extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */	
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,6 +84,10 @@ public class CadastraIngrediente extends JFrame {
 		campoDataDeValidade();
 	}
 	
+	/**
+	 * Verifica se cada validacao é verdadeira 
+	 * @return se todas as validacoes forem validas retorna verdadeiro, se não, retorna a mensagem de erro especifica
+	 */
 	private boolean checarCampos() {
 		
 		boolean camposValidos = ingredienteController.validarNome(textFieldNome.getText());
@@ -127,6 +136,9 @@ public class CadastraIngrediente extends JFrame {
 		return camposValidos;
 	}
 	
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void inicializeButtons() {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -160,6 +172,9 @@ public class CadastraIngrediente extends JFrame {
 		contentPane.add(btnCadastrarIngrediente);
 	}
 	
+	/**
+	 * Componentes visuais para o campo nome
+	 */
 	private void campoNome() {
 		lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 40, 70, 15);
@@ -171,6 +186,9 @@ public class CadastraIngrediente extends JFrame {
 		textFieldNome.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo descricao
+	 */
 	private void campoDescricao() {
 		lblDescricao = new JLabel("Descricao");
 		lblDescricao.setBounds(264, 40, 70, 15);
@@ -182,6 +200,9 @@ public class CadastraIngrediente extends JFrame {
 		textFieldDescricao.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo data de fabricacao
+	 */
 	private void campoDataDeFabricacao() {
 		lblDataDeFabricacao = new JLabel("Data de fabricacao");
 		lblDataDeFabricacao.setBounds(50, 158, 160, 15);
@@ -197,6 +218,9 @@ public class CadastraIngrediente extends JFrame {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo data de validade
+	 */
 	private void campoDataDeValidade() {
 		lblDataDeValidade = new JLabel("Data de validade");
 		lblDataDeValidade.setBounds(264, 158, 128, 15);

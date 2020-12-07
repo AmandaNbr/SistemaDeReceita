@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Enum das categorias das receitas
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public enum ReceitaCategorias {
 	SOPAS("Sopas"),
 	MASSAS("Massas"),

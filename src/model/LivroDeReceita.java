@@ -1,10 +1,11 @@
 package model;
 import java.util.ArrayList;
-import java.util.Date;
 
-import utils.StringUtils;
-
-@SuppressWarnings("unused")
+/**
+ * Modelo de livro de receita, recebe dados da controller e cadastra na Empresa (banco de dados)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class LivroDeReceita {
 
 	private String titulo;
@@ -59,22 +60,18 @@ public class LivroDeReceita {
 		this.codigosReceitas = codigosReceitas;
 	}
 	
-	public Editor getEditorPorMatricula(String matriculaEditor) {
-		Editor editor = new Editor();
-		
-		for (Funcionario editorAtual : editor.getAllEditores()) {
-			if(StringUtils.comparaStrings(editorAtual.getMatricula(), matriculaEditor)) {
-				return (Editor) editorAtual;
-			}
-		}
-		
-		return null;
-	}
-	
+	/**
+	 * Chama um metodo da Empresa que retorna uma arraylist do objeto livro de receita
+	 * @return arraylist de livros de receita
+	 */
 	public ArrayList<LivroDeReceita> getAllLivrosDeReceita() {
 		return Empresa.getLivrosDeReceita();
 	}
 	
+	/**
+	 * Chama um metodo da Empresa para cadastrar livro de receita
+	 * @param objeto livro de receita
+	 */
 	public void cadastraLivroDeReceita(LivroDeReceita livroDeReceita) {
 		Empresa.addNovoLivroDeReceita(livroDeReceita);
 	}

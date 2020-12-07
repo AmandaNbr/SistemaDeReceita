@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
+/**
+ * Cria a tela de acesso a receitas pegando dados da receitaController
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class AcessarReceitas extends JFrame {
 
@@ -42,7 +47,7 @@ public class AcessarReceitas extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startAcessarReceitas() {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,7 +63,7 @@ public class AcessarReceitas extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame.
 	 */
 	private void criarTela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,17 +82,26 @@ public class AcessarReceitas extends JFrame {
 		
 		campoCozinheiro();
 		
+		/*
+		 * Coloca certos campos como disabled para nao dar nullpointer
+		 */
 		if(cozinheiroController.validarCozinheiroVazio()) {
 			comboBoxCozinheiro.removeAllItems();
 			comboBoxCozinheiro.setEnabled(false);
 		}
 		
+		/*
+		 * Coloca certos campos como disabled para nao dar nullpointer
+		 */
 		if(receitaController.validarReceitasVazias()) {
 			editorPaneReceitasPublicadas.setText("Não há receitas publicadas!");
 			editorPaneReceitasNaoPublicadas.setText("Não há receitas não publicadas!");
 		}
 	}
 	
+	/**
+	 * Botao e acoes do botao
+	 */
 	private void initializeButton() {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -101,6 +115,9 @@ public class AcessarReceitas extends JFrame {
 		contentPane.add(btnVoltar);
 	}
 	
+	/**
+	 * Componentes visuais para o campo cozinheiro
+	 */
 	private void campoCozinheiro() {
 		lblCozinheiro = new JLabel("Cozinheiros");
 		lblCozinheiro.setBounds(338, 22, 92, 15);
@@ -127,6 +144,9 @@ public class AcessarReceitas extends JFrame {
 		contentPane.add(comboBoxCozinheiro);		
 	}
 	
+	/**
+	 * Componentes visuais para mostrar receitas
+	 */
 	private void mostrarReceitas() {
 		if(comboBoxCozinheiro.getSelectedItem() == "Todos") {
 			if(receitaController.validarReceitasVazias()) {
@@ -152,12 +172,18 @@ public class AcessarReceitas extends JFrame {
 		}
 	}
 	
+	/**
+	 * Converte a arraylist de string em uma unica string
+	 */
 	private String getReceitasEmString(ArrayList<Receita> receitasRecebidas) {
 		return receitasRecebidas.stream()
 								.map(receita -> receitaController.getReceitaFormatadaPorCodigo(receita.getCodigo()))
 								.collect(Collectors.joining());
 	}
 	
+	/**
+	 * Componentes visuais para mostrar receitas nao publicadas
+	 */
 	private void campoMostrarReceitaNaoPublicadas() {
 		lblReceitasNaoPublicadas = new JLabel("Receitas nao publicadas");
 		lblReceitasNaoPublicadas.setBounds(23, 100, 205, 15);
@@ -170,6 +196,9 @@ public class AcessarReceitas extends JFrame {
 		contentPane.add(scrollPaneReceitasNaoPublicadas);		
 	}
 	
+	/**
+	 * Componentes visuais para mostrar receitas publicadas
+	 */
 	private void campoMostrarReceitasPublicadas() {
 		lblReceitasPublicadas = new JLabel("Receitas publicadas");
 		lblReceitasPublicadas.setBounds(405, 100, 176, 15);

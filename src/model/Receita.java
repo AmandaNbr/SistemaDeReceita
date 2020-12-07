@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import utils.StringUtils;
 
+/**
+ * Modelo de receita, recebe dados da controller e cadastra na Empresa (banco de dados)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class Receita {
 
 	private String nome;
@@ -99,14 +104,27 @@ public class Receita {
 		this.modoDePreparo = modoDePreparo;
 	}
 
+	/**
+	 * Chama um metodo da Empresa que retorna uma arraylist do objeto receita
+	 * @return arraylist de receitas
+	 */
 	public ArrayList<Receita> getAllReceitas(){
 		return Empresa.getReceitas();
 	}
 	
+	/**
+	 * Chama um metodo da Empresa para cadastrar receita
+	 * @param objeto receita
+	 */
 	public void cadastraReceita(Receita receita) {
 		Empresa.addReceita(receita);
 	}
 
+	/**
+	 * Pega uma determinada receita pelo codigo
+	 * @param string do codigo da receita
+	 * @return 
+	 */
 	public Receita getReceitaPorCodigo(String codigoReceita) {
 		for (Receita receitaAtual : getAllReceitas()) {
 			if(StringUtils.comparaStrings(receitaAtual.getCodigo(), codigoReceita)) {

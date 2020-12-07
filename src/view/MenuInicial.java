@@ -13,6 +13,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Cria a tela de menu inicial
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class MenuInicial {
 
 	protected JFrame frame;
@@ -28,7 +33,7 @@ public class MenuInicial {
 	private JButton btnAcessaReceitas;
 
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */	
 	public void startApplication() {
 		EventQueue.invokeLater(new Runnable() {
@@ -45,14 +50,14 @@ public class MenuInicial {
 	}
 
 	/**
-	 * Create the application.
+	 * Chama o inicializador da tela
 	 */
 	public MenuInicial() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Cria a tela
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -70,6 +75,9 @@ public class MenuInicial {
 	
 	}
 	
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void initializeButtons() {
 		
 		// COZINHEIRO

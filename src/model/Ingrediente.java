@@ -2,6 +2,11 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Modelo de ingrediente, recebe dados da controller e cadastra na Empresa (banco de dados)
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class Ingrediente {
 
 	private String nome;
@@ -24,7 +29,6 @@ public class Ingrediente {
 		return nome;
 	}
 	
-	//gets e sets
 	public String getNome() {
 		return nome;
 	}
@@ -57,10 +61,18 @@ public class Ingrediente {
 		this.descricao = descricao;
 	}
 	
+	/**
+	 * Chama um metodo da Empresa que retorna uma arraylist do objeto ingrediente
+	 * @return arraylist de ingredientes
+	 */
 	public ArrayList<Ingrediente> getAllIngredientes() {
 		return Empresa.getIngredientes();
 	}
 	
+	/**
+	 * Chama um metodo da Empresa para cadastrar ingrediente
+	 * @param objeto ingrediente
+	 */
 	public void cadastraIngrediente(Ingrediente ingrediente) {
 		Empresa.addIngrediente(ingrediente);
 	}

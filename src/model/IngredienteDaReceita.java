@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Modelo de ingrediente dentro da receita, com quantidade e medida
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 public class IngredienteDaReceita {
 	
 	private Ingrediente ingrediente;

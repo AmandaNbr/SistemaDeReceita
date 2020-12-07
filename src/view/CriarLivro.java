@@ -29,6 +29,11 @@ import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 
+/**
+ * Cria a tela de criacao de livros pegando e guardando dados nas controllers
+ * @author Amanda Nobre
+ * @version 1.0 (Nov 2020)
+ */
 @SuppressWarnings("serial")
 public class CriarLivro extends JFrame {
 
@@ -58,7 +63,7 @@ public class CriarLivro extends JFrame {
 	}
 	
 	/**
-	 * Launch the application.
+	 * Cria a aplicacao
 	 */
 	public void startCriarLivro() {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,7 +79,7 @@ public class CriarLivro extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o frame
 	 */
 	
 	private void criarTela() {
@@ -101,14 +106,14 @@ public class CriarLivro extends JFrame {
 		addSeparador();
 		
 		mostrarCampos();
-		
-		if(editorController.validarEditorVazio()) {
-			comboBoxEditor.setEnabled(false);
-		}
 	}
 	
+	/**
+	 * Valida se ha editores ou receitas vazias, se sim coloca os botoes e alguns campos como disabled 
+	 * para nao dar nullpointer
+	 */
 	private void mostrarCampos() {
-		if(editorController.getAllEditores().isEmpty() || receitaController.validarReceitasVazias()) {
+		if(editorController.validarEditorVazio() || receitaController.validarReceitasVazias()) {
 			comboBoxEditor.setEnabled(false);
 			comboBoxReceita.setEnabled(false);
 			btnAdicionarReceita.setEnabled(false);
@@ -116,6 +121,9 @@ public class CriarLivro extends JFrame {
 		}
 	}
 
+	/**
+	 * Botoes e acoes dos botoes
+	 */
 	private void initializeButtons() {
 		btnAdicionarReceita = new JButton("Adicionar receita");
 		btnAdicionarReceita.addActionListener(new ActionListener() {
@@ -165,7 +173,11 @@ public class CriarLivro extends JFrame {
 		contentPane.add(btnCriarLivro);
 	}
 	
-private boolean checarCampos() {
+	/**
+	 * Verifica se cada validacao é verdadeira 
+	 * @return se todas as validacoes forem validas retorna verdadeiro, se não, retorna a mensagem de erro especifica
+	 */
+	private boolean checarCampos() {
 	
 		boolean camposValidos = livroDeReceitaController.validarTituloVazio(textFieldTitulo.getText());
 		if(!camposValidos) {
@@ -196,12 +208,13 @@ private boolean checarCampos() {
 			JOptionPane.showMessageDialog(null, "  Adicione pelo menos uma receita!  ");
 			return camposValidos;
 		}
-		
-		
 				
 		return camposValidos;
-		}
+	}
 	
+	/**
+	 * Componentes visuais para o campo titulo
+	 */
 	private void campoTitulo() {
 		lblTituloLivro = new JLabel("Titulo");
 		lblTituloLivro.setBounds(38, 24, 70, 15);
@@ -213,6 +226,9 @@ private boolean checarCampos() {
 		textFieldTitulo.setColumns(10);
 	}
 	
+	/**
+	 * Componentes visuais para o campo codigo isbn
+	 */
 	private void campoCodigoIsbn() {
 		lblCodigoIsbn = new JLabel("Codigo ISBN");
 		lblCodigoIsbn.setBounds(297, 24, 129, 15);
@@ -228,6 +244,9 @@ private boolean checarCampos() {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o campo editor
+	 */
 	private void campoEditor() {
 		lblEditor = new JLabel("Editor");
 		lblEditor.setBounds(245, 88, 70, 15);
@@ -243,6 +262,9 @@ private boolean checarCampos() {
 		contentPane.add(comboBoxEditor);
 	}
 	
+	/**
+	 * Componentes visuais para o campo receitas
+	 */
 	private void campoReceitas() {
 		lblReceitas = new JLabel("Receitas");
 		lblReceitas.setBounds(240, 175, 70, 15);
@@ -257,6 +279,9 @@ private boolean checarCampos() {
 		}
 	}
 	
+	/**
+	 * Componentes visuais para o receitas adicionadas
+	 */
 	private void campoReceitasAdicionadas() {
 		lblReceitasAdicionadas = new JLabel("Receitas adicionadas");
 		lblReceitasAdicionadas.setBounds(200, 292, 169, 15);
@@ -269,6 +294,9 @@ private boolean checarCampos() {
 		contentPane.add(scrollPaneReceitas);
 	}
 	
+	/**
+	 * Adiciona o componente visual separador
+	 */
 	private void addSeparador() {
 		separator = new JSeparator();
 		separator.setBounds(50, 154, 450, 2);
